@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Акжар Таов](https://up.htmlacademy.ru/react/6/user/490939).
-* Наставник: `Неизвестно`.
+* Наставник: [Роман Отставнов](https://htmlacademy.ru/profile/id1617127).
 
 ---
 
