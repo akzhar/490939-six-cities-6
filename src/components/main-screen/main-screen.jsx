@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {offerShape} from '../../prop-types/prop-types.jsx';
+
 import OfferCard from '../offer-card/offer-card.jsx';
 
 const MainScreen = (props) => (
@@ -108,8 +110,6 @@ const MainScreen = (props) => (
   </React.Fragment>
 );
 
-MainScreen.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired
-};
+MainScreen.propTypes = PropTypes.arrayOf(PropTypes.shape(offerShape)).isRequired;
 
 export default MainScreen;
