@@ -4,8 +4,8 @@ import {offerShape} from '../../prop-types/prop-types.jsx';
 
 import MainScreen from '../main-screen/main-screen.jsx';
 
-const App = ({data}) => (
-  <MainScreen offers={data}/>
+const App = ({offers}) => (
+  <MainScreen offers={offers}/>
 );
 
 App.propTypes = PropTypes.arrayOf(PropTypes.shape(offerShape)).isRequired;
