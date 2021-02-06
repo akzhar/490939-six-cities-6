@@ -8,6 +8,8 @@ const App = ({offers}) => (
   <MainScreen offers={offers}/>
 );
 
-App.propTypes = PropTypes.arrayOf(PropTypes.shape(offerShape)).isRequired;
+App.propTypes = {
+  offers: PropTypes.arrayOf(offerShape).isRequired
+};
 
 export default App;

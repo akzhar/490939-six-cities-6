@@ -90,12 +90,10 @@ const MainScreen = (props) => (
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {props.offers.map((card) => (
+                {props.offers.map((offer) => (
                   <OfferCard
-                    key={card.id}
-                    header={card.header}
-                    isPremium={card.isPremium}
-                    costEuro={card.costEuro}
+                    key={offer.id}
+                    offer={offer}
                   />
                 ))}
               </div>
@@ -110,6 +108,8 @@ const MainScreen = (props) => (
   </React.Fragment>
 );
 
-MainScreen.propTypes = PropTypes.arrayOf(offerShape).isRequired;
+MainScreen.propTypes = {
+  offers: PropTypes.arrayOf(offerShape).isRequired
+};
 
 export default MainScreen;
