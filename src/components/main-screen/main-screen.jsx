@@ -110,6 +110,6 @@ const MainScreen = (props) => (
   </React.Fragment>
 );
 
-MainScreen.propTypes = PropTypes.arrayOf(PropTypes.shape(offerShape)).isRequired;
+MainScreen.propTypes = PropTypes.arrayOf(offerShape).isRequired;
 
 export default MainScreen;

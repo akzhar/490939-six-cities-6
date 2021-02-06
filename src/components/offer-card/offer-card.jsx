@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {offerShape} from '../../prop-types/prop-types.jsx';
 
 const OfferCard = ({isPremium, header, costEuro}) => {
@@ -44,6 +43,6 @@ const OfferCard = ({isPremium, header, costEuro}) => {
   </article>;
 };
 
-OfferCard.propTypes = PropTypes.shape(offerShape).isRequired;
+OfferCard.propTypes = offerShape.isRequired;
 
 export default OfferCard;
