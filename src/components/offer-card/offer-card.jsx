@@ -1,9 +1,9 @@
 import React from 'react';
 import {offerShape} from '../../prop-types/prop-types.jsx';
 
-const OfferCard = (offer) => {
+const STARS_COUNT = 5;
 
-  const {isPremium, header, costEuro} = offer;
+const OfferCard = (offer) => {
 
   const PremiumMark = () => (
     <div className="place-card__mark">
@@ -12,16 +12,16 @@ const OfferCard = (offer) => {
   );
 
   return <article className="cities__place-card place-card">
-    { isPremium ? <PremiumMark/> : ``}
+    { offer.isPremium ? <PremiumMark/> : ``}
     <div className="cities__image-wrapper place-card__image-wrapper">
       <a href="#">
-        <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image" />
+        <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
       </a>
     </div>
     <div className="place-card__info">
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
-          <b className="place-card__price-value">&euro;{costEuro}</b>
+          <b className="place-card__price-value">&euro;{offer.price}</b>
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
         <button className="place-card__bookmark-button button" type="button">
@@ -33,14 +33,14 @@ const OfferCard = (offer) => {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: `80%`}}></span>
+          <span style={{width: `${Math.round(offer.rating) * 100 / STARS_COUNT}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#">{header}</a>
+        <a href="#">{offer.title}</a>
       </h2>
-      <p className="place-card__type">Apartment</p>
+      <p className="place-card__type">{offer.type}</p>
     </div>
   </article>;
 };

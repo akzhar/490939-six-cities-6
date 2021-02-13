@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {offerShape} from '../../prop-types/prop-types.jsx';
+import {offerShape, reviewShape} from '../../prop-types/prop-types.jsx';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import MainScreen from '../main-screen/main-screen.jsx';
@@ -9,11 +9,11 @@ import FavoritesScreen from '../favorites-screen/favorites-screen.jsx';
 import RoomScreen from '../room-screen/room-screen.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 
-const App = ({offers}) => (
+const App = ({offers, reviews}) => (
   <BrowserRouter>
     <Switch>
       <Route path="/" exact>
-        <MainScreen offers={offers}/>
+        <MainScreen offers={offers} reviews={reviews}/>
       </Route>
       <Route path="/login" exact>
         <LoginScreen/>
@@ -30,7 +30,8 @@ const App = ({offers}) => (
 );
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(offerShape).isRequired
+  offers: PropTypes.arrayOf(offerShape).isRequired,
+  reviews: PropTypes.arrayOf(reviewShape).isRequired
 };
 
 export default App;
