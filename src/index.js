@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
 
-import offers from './data/offers.json';
+import offers from './mocks/offers.json';
 
 ReactDOM.render(
     <App offers={offers}/>,
