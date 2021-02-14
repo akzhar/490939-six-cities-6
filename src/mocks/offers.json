@@ -8,7 +8,7 @@
         "longitude": 4.895168,
         "zoom": 10
       },
-      "name": "Amsterdam"
+      "name": "Paris"
     },
     "description": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.",
     "goods": ["Heating", "Kitchen", "Cable TV", "Washing machine", "Coffee machine", "Dishwasher"],
@@ -31,7 +31,7 @@
     "price": 120,
     "rating": 4.8,
     "title": "Beautiful & luxurious studio at great location",
-    "type": "apartment"
+    "type": "Apartment"
   },
   {
     "id": 2,
@@ -65,7 +65,7 @@
     "price": 80,
     "rating": 4.2,
     "title": "Wood and stone place",
-    "type": "room"
+    "type": "Room"
   },
   {
     "id": 3,
@@ -99,7 +99,7 @@
     "price": 132,
     "rating": 3.8,
     "title": "Canal view Princengracht",
-    "type": "apartment"
+    "type": "Apartment"
   },
   {
     "id": 4,
@@ -110,7 +110,7 @@
         "longitude": 4.895168,
         "zoom": 10
       },
-      "name": "Amsterdam"
+      "name": "Hamburg"
     },
     "description": "Nice, cozy, warm big bed apartment",
     "goods": ["Heating", "Coffee machine", "Dishwasher"],
@@ -133,7 +133,7 @@
     "price": 180,
     "rating": 4.6,
     "title": "Nice, cozy, warm big bed apartment",
-    "type": "apartment"
+    "type": "Apartment"
   },
   {
     "id": 5,
@@ -167,6 +167,6 @@
     "price": 80,
     "rating": 4.1,
     "title": "Wood and stone place",
-    "type": "room"
+    "type": "Room"
   }
 ]

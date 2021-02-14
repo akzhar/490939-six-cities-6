@@ -19,7 +19,7 @@ const App = ({offers, reviews}) => (
         <LoginScreen/>
       </Route>
       <Route path="/favorites" exact>
-        <FavoritesScreen/>
+        <FavoritesScreen offers={offers}/>
       </Route>
       <Route path="/room/:id" exact render={() => (
         <RoomScreen offers={offers} reviews={reviews}/>
