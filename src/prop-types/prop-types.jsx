@@ -7,7 +7,7 @@ const locationShape = PropTypes.shape({
 });
 
 const cityShape = PropTypes.shape({
-  location: PropTypes.shapeOf(locationShape),
+  location: locationShape.isRequired,
   name: PropTypes.string.isRequired
 });
 
@@ -18,17 +18,17 @@ const userShape = PropTypes.shape({
   name: PropTypes.string.isRequired
 });
 
-export const offerShape = PropTypes.shape({
+const offerShape = PropTypes.shape({
   id: PropTypes.number.isRequired,
   bedrooms: PropTypes.number.isRequired,
-  city: PropTypes.shapeOf(PropTypes.shape(cityShape)).isRequired,
+  city: cityShape.isRequired,
   description: PropTypes.string.isRequired,
   goods: PropTypes.arrayOf(PropTypes.string).isRequired,
-  host: PropTypes.shapeOf(PropTypes.shape(userShape)).isRequired,
+  host: userShape.isRequired,
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
-  isFavourite: PropTypes.bool.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
   isPremium: PropTypes.bool.isRequired,
-  location: PropTypes.shapeOf(PropTypes.shape(locationShape)).isRequired,
+  location: locationShape.isRequired,
   maxAdults: PropTypes.number.isRequired,
   previewImage: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
@@ -37,10 +37,12 @@ export const offerShape = PropTypes.shape({
   type: PropTypes.string.isRequired
 });
 
-export const reviewShape = PropTypes.shape({
+const reviewShape = PropTypes.shape({
   comment: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,
-  user: PropTypes.shapeOf(PropTypes.shape(userShape)).isRequired
+  user: userShape.isRequired
 });
+
+export {offerShape, reviewShape};

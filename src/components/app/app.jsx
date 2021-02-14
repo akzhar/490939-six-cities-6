@@ -13,7 +13,7 @@ const App = ({offers, reviews}) => (
   <BrowserRouter>
     <Switch>
       <Route path="/" exact>
-        <MainScreen offers={offers} reviews={reviews}/>
+        <MainScreen offers={offers}/>
       </Route>
       <Route path="/login" exact>
         <LoginScreen/>
@@ -21,7 +21,9 @@ const App = ({offers, reviews}) => (
       <Route path="/favorites" exact>
         <FavoritesScreen/>
       </Route>
-      <Route path="/room/:id" exact component={RoomScreen}/>
+      <Route path="/room/:id" exact render={() => (
+        <RoomScreen offers={offers} reviews={reviews}/>
+      )}/>
       <Route>
         <NotFoundScreen/>
       </Route>

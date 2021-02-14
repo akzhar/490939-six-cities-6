@@ -13,12 +13,12 @@
     "description": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.",
     "goods": ["Heating", "Kitchen", "Cable TV", "Washing machine", "Coffee machine", "Dishwasher"],
     "host": {
-      "avatarUrl": "img/1.png",
+      "avatarUrl": "img/avatar-angelina.jpg",
       "id": 3,
       "isPro": true,
       "name": "Angelina"
     },
-    "images": ["img/1.png", "img/2.png"],
+    "images": ["img/apartment-01.jpg", "img/apartment-02.jpg"],
     "isFavorite": false,
     "isPremium": true,
     "location": {
@@ -27,7 +27,7 @@
       "zoom": 8
     },
     "maxAdults": 4,
-    "previewImage": "img/1.png",
+    "previewImage": "img/apartment-01.jpg",
     "price": 120,
     "rating": 4.8,
     "title": "Beautiful & luxurious studio at great location",
@@ -47,12 +47,12 @@
     "description": "Wood and stone place",
     "goods": ["Heating", "Kitchen", "Washing machine"],
     "host": {
-      "avatarUrl": "img/1.png",
+      "avatarUrl": "img/avatar-angelina.jpg",
       "id": 3,
       "isPro": true,
       "name": "Angelina"
     },
-    "images": ["img/3.png", "img/4.png"],
+    "images": ["img/apartment-01.jpg", "img/apartment-02.jpg"],
     "isFavorite": false,
     "isPremium": false,
     "location": {
@@ -61,7 +61,7 @@
       "zoom": 8
     },
     "maxAdults": 4,
-    "previewImage": "img/3.png",
+    "previewImage": "img/apartment-02.jpg",
     "price": 80,
     "rating": 4.2,
     "title": "Wood and stone place",
@@ -81,12 +81,12 @@
     "description": "Canal view Princengracht",
     "goods": ["Heating", "Kitchen"],
     "host": {
-      "avatarUrl": "img/1.png",
+      "avatarUrl": "img/avatar-angelina.jpg",
       "id": 3,
       "isPro": true,
       "name": "Angelina"
     },
-    "images": ["img/5.png", "img/6.png"],
+    "images": ["img/apartment-01.jpg", "img/apartment-02.jpg"],
     "isFavorite": false,
     "isPremium": false,
     "location": {
@@ -95,7 +95,7 @@
       "zoom": 8
     },
     "maxAdults": 1,
-    "previewImage": "img/5.png",
+    "previewImage": "img/apartment-02.jpg",
     "price": 132,
     "rating": 3.8,
     "title": "Canal view Princengracht",
@@ -115,12 +115,12 @@
     "description": "Nice, cozy, warm big bed apartment",
     "goods": ["Heating", "Coffee machine", "Dishwasher"],
     "host": {
-      "avatarUrl": "img/1.png",
+      "avatarUrl": "img/avatar-angelina.jpg",
       "id": 3,
       "isPro": true,
       "name": "Angelina"
     },
-    "images": ["img/7.png", "img/8.png"],
+    "images": ["img/apartment-03.jpg", "img/apartment-01.jpg"],
     "isFavorite": false,
     "isPremium": true,
     "location": {
@@ -129,7 +129,7 @@
       "zoom": 8
     },
     "maxAdults": 3,
-    "previewImage": "img/7.png",
+    "previewImage": "img/apartment-01.jpg",
     "price": 180,
     "rating": 4.6,
     "title": "Nice, cozy, warm big bed apartment",
@@ -149,12 +149,12 @@
     "description": "Wood and stone place",
     "goods": ["Washing machine", "Coffee machine", "Dishwasher"],
     "host": {
-      "avatarUrl": "img/1.png",
+      "avatarUrl": "img/avatar-angelina.jpg",
       "id": 3,
       "isPro": true,
       "name": "Angelina"
     },
-    "images": ["img/9.png", "img/10.png"],
+    "images": ["img/apartment-01.jpg", "img/apartment-03.jpg"],
     "isFavorite": false,
     "isPremium": true,
     "location": {
@@ -163,7 +163,7 @@
       "zoom": 8
     },
     "maxAdults": 2,
-    "previewImage": "img/9.png",
+    "previewImage": "img/apartment-03.jpg",
     "price": 80,
     "rating": 4.1,
     "title": "Wood and stone place",

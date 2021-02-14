@@ -5,10 +5,10 @@
     "id": 1,
     "rating": 4,
     "user": {
-      "avatarUrl": "img/1.png",
-      "id": 4,
-      "isPro": false,
-      "name": "Max"
+      "avatarUrl": "img/avatar-angelina.jpg",
+      "id": 3,
+      "isPro": true,
+      "name": "Angelina"
     }
   },
   {
@@ -17,10 +17,10 @@
     "id": 1,
     "rating": 5,
     "user": {
-      "avatarUrl": "img/1.png",
-      "id": 4,
-      "isPro": false,
-      "name": "Max"
+      "avatarUrl": "img/avatar-angelina.jpg",
+      "id": 3,
+      "isPro": true,
+      "name": "Angelina"
     }
   },
   {
@@ -29,10 +29,10 @@
     "id": 3,
     "rating": 2,
     "user": {
-      "avatarUrl": "img/1.png",
-      "id": 4,
-      "isPro": false,
-      "name": "Max"
+      "avatarUrl": "img/avatar-angelina.jpg",
+      "id": 3,
+      "isPro": true,
+      "name": "Angelina"
     }
   },
   {
@@ -41,10 +41,10 @@
     "id": 2,
     "rating": 4,
     "user": {
-      "avatarUrl": "img/1.png",
-      "id": 4,
-      "isPro": false,
-      "name": "Max"
+      "avatarUrl": "img/avatar-angelina.jpg",
+      "id": 3,
+      "isPro": true,
+      "name": "Angelina"
     }
   }
 ]

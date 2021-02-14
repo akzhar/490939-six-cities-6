@@ -3,7 +3,7 @@ import {offerShape} from '../../prop-types/prop-types.jsx';
 
 const STARS_COUNT = 5;
 
-const OfferCard = (offer) => {
+const OfferCard = ({offer}) => {
 
   const PremiumMark = () => (
     <div className="place-card__mark">
