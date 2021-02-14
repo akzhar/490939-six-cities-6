@@ -1,10 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Link, useParams} from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {offerShape, reviewShape} from '../../prop-types/prop-types.jsx';
 
 import CommentForm from '../comment-form/comment-form.jsx';
 
+// TODO: move to config
 const STARS_COUNT = 5;
 
 const RoomScreen = ({offers, reviews}) => {
@@ -13,7 +14,8 @@ const RoomScreen = ({offers, reviews}) => {
 
   const offer = offers.filter((room) => room.id.toString() === id)[0];
 
-  reviews = reviews.filter((review) => review.id === offer.id); // TODO: separate var
+  // TODO: separate var
+  reviews = reviews.filter((review) => review.id === offer.id);
 
   const PremiumMark = () => (
     <div className="property__mark">
@@ -23,6 +25,7 @@ const RoomScreen = ({offers, reviews}) => {
 
   const addProUserClass = (user) => user.isPro ? `property__avatar-wrapper--pro` : ``;
 
+  // TODO: move to utils
   const getRatingValue = (rating) => Math.round(rating) * 100 / STARS_COUNT;
 
   return <React.Fragment>

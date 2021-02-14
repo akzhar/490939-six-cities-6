@@ -7,6 +7,7 @@ import FavoritesOfferCard from '../favorites-offer-card/favorites-offer-card.jsx
 
 const FavoritesScreen = ({offers}) => { // сейчас выводятся не favorites, а все offers подряд
 
+  // TODO: move to utils
   // получаем список имеющихся городов
   const cities = offers.map((offer) => offer.city.name)
                 .filter((value, index, self) => self.indexOf(value) === index);
