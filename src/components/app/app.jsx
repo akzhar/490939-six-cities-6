@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {offerShape, reviewShape} from '../../prop-types/prop-types.jsx';
+import {offerTypes, reviewTypes} from '../../prop-types/prop-types.jsx';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import MainScreen from '../main-screen/main-screen.jsx';
@@ -40,8 +40,8 @@ const App = ({offers, reviews}) => {
 };
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(offerShape).isRequired,
-  reviews: PropTypes.arrayOf(reviewShape).isRequired
+  offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.shape(reviewTypes)).isRequired
 };
 
 export default App;

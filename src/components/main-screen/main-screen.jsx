@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {offerShape} from '../../prop-types/prop-types.jsx';
+import {offerTypes} from '../../prop-types/prop-types.jsx';
 
 import OffersList from '../offers-list/offers-list.jsx';
 
@@ -83,7 +83,7 @@ const MainScreen = ({offers}) => (
 );
 
 MainScreen.propTypes = {
-  offers: PropTypes.arrayOf(offerShape).isRequired
+  offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired
 };
 
 export default MainScreen;

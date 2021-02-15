@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {offerShape} from '../../prop-types/prop-types.jsx';
+import {offerTypes} from '../../prop-types/prop-types.jsx';
 
 // TODO: move to config
 const STARS_COUNT = 5;
@@ -52,7 +52,7 @@ const OfferCard = ({offer, dataId, handleOfferCardHover, handleOfferCardBlur}) =
 };
 
 OfferCard.propTypes = {
-  offer: offerShape.isRequired,
+  offer: PropTypes.shape(offerTypes),
   dataId: PropTypes.number.isRequired,
   handleOfferCardHover: PropTypes.func.isRequired,
   handleOfferCardBlur: PropTypes.func.isRequired

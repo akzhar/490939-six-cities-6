@@ -1,7 +1,7 @@
 import React from 'react';
 const {useState} = React;
 import PropTypes from 'prop-types';
-import {offerShape} from '../../prop-types/prop-types.jsx';
+import {offerTypes} from '../../prop-types/prop-types.jsx';
 
 import OfferCard from '../offer-card/offer-card.jsx';
 
@@ -50,7 +50,7 @@ const OffersList = ({offers}) => {
 };
 
 OffersList.propTypes = {
-  offers: PropTypes.arrayOf(offerShape).isRequired
+  offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired
 };
 
 export default OffersList;

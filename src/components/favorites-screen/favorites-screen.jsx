@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {offerShape} from '../../prop-types/prop-types.jsx';
+import {offerTypes} from '../../prop-types/prop-types.jsx';
 
 import FavoritesOfferCard from '../favorites-offer-card/favorites-offer-card.jsx';
 
@@ -70,7 +70,7 @@ const FavoritesScreen = ({offers, cities}) => { // сейчас выводятс
 };
 
 FavoritesScreen.propTypes = {
-  offers: PropTypes.arrayOf(offerShape).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 

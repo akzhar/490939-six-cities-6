@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {offerShape} from '../../prop-types/prop-types.jsx';
+import PropTypes from 'prop-types';
+import {offerTypes} from '../../prop-types/prop-types.jsx';
 
 // TODO: move to config
 const STARS_COUNT = 5;
@@ -44,7 +45,7 @@ const FavoritesOfferCard = ({offer}) => {
 };
 
 FavoritesOfferCard.propTypes = {
-  offer: offerShape.isRequired
+  offer: PropTypes.shape(offerTypes)
 };
 
 export default FavoritesOfferCard;

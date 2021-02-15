@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {offerShape, reviewShape} from '../../prop-types/prop-types.jsx';
+import {offerTypes, reviewTypes} from '../../prop-types/prop-types.jsx';
 
 import CommentForm from '../comment-form/comment-form.jsx';
 
@@ -265,8 +265,8 @@ const RoomScreen = ({offer, reviews}) => {
 };
 
 RoomScreen.propTypes = {
-  offer: offerShape.isRequired,
-  reviews: PropTypes.arrayOf(reviewShape).isRequired
+  offer: PropTypes.shape(offerTypes),
+  reviews: PropTypes.arrayOf(PropTypes.shape(reviewTypes)).isRequired
 };
 
 export default RoomScreen;
