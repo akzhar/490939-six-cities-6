@@ -33,13 +33,12 @@ const OffersList = ({offers}) => {
     </form>
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
-        <article className="cities__place-card place-card"
+        <OfferCard
           key={offer.id}
-          data-id={offer.id}
-          onPointerEnter={hoverHandler}
-        >
-          <OfferCard offer={offer}/>
-        </article>
+          offer={offer}
+          dataId={offer.id}
+          hoverHandler={hoverHandler}
+        />
       ))}
     </div>
   </section>;

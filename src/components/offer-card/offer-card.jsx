@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {offerShape} from '../../prop-types/prop-types.jsx';
 
 // TODO: move to config
 const STARS_COUNT = 5;
 
-const OfferCard = ({offer}) => {
+const OfferCard = ({offer, dataId, hoverHandler}) => {
 
   const PremiumMark = () => (
     <div className="place-card__mark">
@@ -16,7 +17,7 @@ const OfferCard = ({offer}) => {
   // TODO: move to utils
   const getRatingValue = (rating) => Math.round(rating) * 100 / STARS_COUNT;
 
-  return <React.Fragment>
+  return <article className="cities__place-card place-card" data-id={dataId} onMouseEnter={hoverHandler}>
     {offer.isPremium ? <PremiumMark/> : ``}
     <div className="cities__image-wrapper place-card__image-wrapper">
       <Link to={`/room/${offer.id}`}>
@@ -47,11 +48,13 @@ const OfferCard = ({offer}) => {
       </h2>
       <p className="place-card__type">{offer.type}</p>
     </div>
-  </React.Fragment>;
+  </article>;
 };
 
 OfferCard.propTypes = {
-  offer: offerShape.isRequired
+  offer: offerShape.isRequired,
+  dataId: PropTypes.number.isRequired,
+  hoverHandler: PropTypes.func.isRequired
 };
 
 export default OfferCard;
