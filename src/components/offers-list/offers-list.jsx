@@ -9,7 +9,7 @@ const OffersList = ({offers}) => {
 
   const [, setActive] = useState(null);
 
-  function hoverHandler(evt) {
+  function handlerOfferCardHover(evt) {
     setActive(evt.currentTarget.dataset.id);
   }
 
@@ -37,7 +37,7 @@ const OffersList = ({offers}) => {
           key={offer.id}
           offer={offer}
           dataId={offer.id}
-          hoverHandler={hoverHandler}
+          handlerOfferCardHover={handlerOfferCardHover}
         />
       ))}
     </div>
