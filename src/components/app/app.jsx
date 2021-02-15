@@ -9,8 +9,14 @@ import FavoritesScreen from '../favorites-screen/favorites-screen.jsx';
 import RoomScreen from '../room-screen/room-screen.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 
-const App = ({offers, reviews}) => (
-  <BrowserRouter>
+const App = ({offers, reviews}) => {
+
+  // TODO: move to utils
+  // получаем массив из имеющихся городов
+  const cities = offers.map((offer) => offer.city.name)
+                .filter((value, index, self) => self.indexOf(value) === index);
+
+  return <BrowserRouter>
     <Switch>
       <Route path="/" exact>
         <MainScreen offers={offers}/>
@@ -19,7 +25,7 @@ const App = ({offers, reviews}) => (
         <LoginScreen/>
       </Route>
       <Route path="/favorites" exact>
-        <FavoritesScreen offers={offers}/>
+        <FavoritesScreen offers={offers} cities={cities}/>
       </Route>
       <Route path="/room/:id" exact render={() => (
         <RoomScreen offers={offers} reviews={reviews}/>
@@ -28,8 +34,8 @@ const App = ({offers, reviews}) => (
         <NotFoundScreen/>
       </Route>
     </Switch>
-  </BrowserRouter>
-);
+  </BrowserRouter>;
+};
 
 App.propTypes = {
   offers: PropTypes.arrayOf(offerShape).isRequired,
