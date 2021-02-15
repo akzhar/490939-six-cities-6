@@ -6,7 +6,7 @@ import {offerShape} from '../../prop-types/prop-types.jsx';
 // TODO: move to config
 const STARS_COUNT = 5;
 
-const OfferCard = ({offer, dataId, handlerOfferCardHover}) => {
+const OfferCard = ({offer, dataId, handleOfferCardHover, handleOfferCardBlur}) => {
 
   const PremiumMark = () => (
     <div className="place-card__mark">
@@ -17,7 +17,7 @@ const OfferCard = ({offer, dataId, handlerOfferCardHover}) => {
   // TODO: move to utils
   const getRatingValue = (rating) => Math.round(rating) * 100 / STARS_COUNT;
 
-  return <article className="cities__place-card place-card" data-id={dataId} onMouseEnter={handlerOfferCardHover}>
+  return <article className="cities__place-card place-card" data-id={dataId} onMouseEnter={handleOfferCardHover} onMouseLeave={handleOfferCardBlur}>
     {offer.isPremium ? <PremiumMark/> : ``}
     <div className="cities__image-wrapper place-card__image-wrapper">
       <Link to={`/room/${offer.id}`}>
@@ -54,7 +54,8 @@ const OfferCard = ({offer, dataId, handlerOfferCardHover}) => {
 OfferCard.propTypes = {
   offer: offerShape.isRequired,
   dataId: PropTypes.number.isRequired,
-  handlerOfferCardHover: PropTypes.func.isRequired
+  handleOfferCardHover: PropTypes.func.isRequired,
+  handleOfferCardBlur: PropTypes.func.isRequired
 };
 
 export default OfferCard;

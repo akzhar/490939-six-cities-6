@@ -9,8 +9,12 @@ const OffersList = ({offers}) => {
 
   const [, setActive] = useState(null);
 
-  function handlerOfferCardHover(evt) {
+  function handleOfferCardHover(evt) {
     setActive(evt.currentTarget.dataset.id);
+  }
+
+  function handleOfferCardBlur() {
+    setActive(null);
   }
 
   return <section className="cities__places places">
@@ -37,7 +41,8 @@ const OffersList = ({offers}) => {
           key={offer.id}
           offer={offer}
           dataId={offer.id}
-          handlerOfferCardHover={handlerOfferCardHover}
+          handleOfferCardHover={handleOfferCardHover}
+          handleOfferCardBlur={handleOfferCardBlur}
         />
       ))}
     </div>
