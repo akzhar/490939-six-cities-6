@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, useParams} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {offerShape, reviewShape} from '../../prop-types/prop-types.jsx';
 
@@ -8,14 +8,7 @@ import CommentForm from '../comment-form/comment-form.jsx';
 // TODO: move to config
 const STARS_COUNT = 5;
 
-const RoomScreen = ({offers, reviews}) => {
-
-  const {id} = useParams();
-
-  const offer = offers.filter((room) => room.id.toString() === id)[0];
-
-  // TODO: separate var
-  reviews = reviews.filter((review) => review.id === offer.id);
+const RoomScreen = ({offer, reviews}) => {
 
   const PremiumMark = () => (
     <div className="property__mark">
@@ -272,7 +265,7 @@ const RoomScreen = ({offers, reviews}) => {
 };
 
 RoomScreen.propTypes = {
-  offers: PropTypes.arrayOf(offerShape).isRequired,
+  offer: offerShape.isRequired,
   reviews: PropTypes.arrayOf(reviewShape).isRequired
 };
 

@@ -27,9 +27,11 @@ const App = ({offers, reviews}) => {
       <Route path="/favorites" exact>
         <FavoritesScreen offers={offers} cities={cities}/>
       </Route>
-      <Route path="/room/:id" exact render={() => (
-        <RoomScreen offers={offers} reviews={reviews}/>
-      )}/>
+      <Route path="/room/:id" exact render={(routeProps) => {
+        const offer = offers.find((room) => room.id.toString() === routeProps.match.params.id);
+        const offerReviews = offer ? reviews.filter((review) => review.id === offer.id) : [];
+        return offer ? <RoomScreen offer={offer} reviews={offerReviews}/> : <NotFoundScreen/>;
+      }}/>
       <Route>
         <NotFoundScreen/>
       </Route>
