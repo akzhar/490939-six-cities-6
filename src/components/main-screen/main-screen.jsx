@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
 
 import OffersList from '../offers-list/offers-list.jsx';
+import Map from '../map/map.jsx';
 
 const MainScreen = ({offers}) => (
   <React.Fragment>
@@ -73,7 +74,20 @@ const MainScreen = ({offers}) => (
           <div className="cities__places-container container">
             <OffersList offers={offers}/>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map
+                  city={offers[0].city.location}
+                  points={
+                    offers.map((offer) => {
+                      return {
+                        lat: offer.city.location.latitude,
+                        lng: offer.city.location.longitude,
+                        title: offer.title
+                      };
+                    })
+                  }
+                />
+              </section>
             </div>
           </div>
         </div>
