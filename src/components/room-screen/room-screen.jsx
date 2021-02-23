@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {offerTypes, reviewTypes} from '../../prop-types/prop-types.jsx';
 
 import CommentForm from '../comment-form/comment-form.jsx';
+import ReviewsList from '../reviews-list/reviews-list.jsx';
 
 // TODO: move to config
 const STARS_COUNT = 5;
@@ -121,36 +122,7 @@ const RoomScreen = ({offer, reviews}) => {
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ul className="reviews__list">
-                  {reviews.map((review) => (
-                    <li className="reviews__item" key={review.date}>
-                      <div className="reviews__user user">
-                        <div className="property__avatar-wrapper user__avatar-wrapper">
-                          <img className="reviews__avatar user__avatar" src={review.user.avatarUrl} width="74" height="74" alt="Reviews avatar" />
-                        </div>
-                        <span className="reviews__user-name">
-                          {review.user.name}
-                        </span>
-                      </div>
-                      <div className="reviews__info">
-                        <div className="reviews__rating rating">
-                          <div className="reviews__stars rating__stars">
-                            <span style={{width: `${getRatingValue(review.rating)}%`}}></span>
-                            <span className="visually-hidden">Rating</span>
-                          </div>
-                        </div>
-                        <p className="reviews__text">
-                          {review.comment}
-                        </p>
-                        <time className="reviews__time" dateTime={
-                          `${new Date(review.date).getFullYear()}-${new Date(review.date).getMonth()}-${new Date(review.date).getDate()}`
-                        }>
-                          {`April ${new Date(review.date).getFullYear()}`}
-                        </time>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <ReviewsList reviews={reviews}/>
                 <CommentForm/>
               </section>
             </div>
