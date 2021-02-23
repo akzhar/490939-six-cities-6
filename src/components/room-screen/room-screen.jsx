@@ -6,7 +6,7 @@ import {offerTypes, reviewTypes} from '../../prop-types/prop-types.jsx';
 import CommentForm from '../comment-form/comment-form.jsx';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
 import Map from '../map/map.jsx';
-import OfferCard from '../offer-card/offer-card.jsx';
+import OffersList from '../offers-list/offers-list.jsx';
 
 // TODO: move to config
 const STARS_COUNT = 5;
@@ -147,17 +147,7 @@ const RoomScreen = ({offer, reviews, offersNear}) => {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              {offersNear.map((offerNear) => (
-                <OfferCard
-                  key={offerNear.id}
-                  offer={offerNear}
-                  dataId={offerNear.id}
-                  // handleOfferCardHover={handleOfferCardHover}
-                  // handleOfferCardBlur={handleOfferCardBlur}
-                />
-              ))}
-            </div>
+            <OffersList offers={offersNear} className="near-places__list"/>
           </section>
         </div>
       </main>
