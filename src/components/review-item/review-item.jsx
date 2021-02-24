@@ -1,46 +1,48 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import {reviewTypes} from '../../prop-types/prop-types.jsx';
 
 // TODO: move to config
 const STARS_COUNT = 5;
 
-const ReviewItem = ({review}) => {
+const ReviewItem = ({user, comment, rating, date}) => {
 
   // TODO: move to utils
-  const getRatingValue = (rating) => Math.round(rating) * 100 / STARS_COUNT;
+  const getRatingValue = (ratingValue) => Math.round(ratingValue) * 100 / STARS_COUNT;
 
   return <li className="reviews__item">
     <div className="reviews__user user">
       <div className="property__avatar-wrapper user__avatar-wrapper">
-        <img className="reviews__avatar user__avatar" src={review.user.avatarUrl} width="74" height="74" alt="Reviews avatar" />
+        <img className="reviews__avatar user__avatar" src={user.avatarUrl} width="74" height="74" alt="Reviews avatar" />
       </div>
       <span className="reviews__user-name">
-        {review.user.name}
+        {user.name}
       </span>
     </div>
     <div className="reviews__info">
       <div className="reviews__rating rating">
         <div className="reviews__stars rating__stars">
-          <span style={{width: `${getRatingValue(review.rating)}%`}}></span>
+          <span style={{width: `${getRatingValue(rating)}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
       <p className="reviews__text">
-        {review.comment}
+        {comment}
       </p>
       <time className="reviews__time" dateTime={
-        `${new Date(review.date).getFullYear()}-${new Date(review.date).getMonth()}-${new Date(review.date).getDate()}`
+        `${new Date(date).getFullYear()}-${new Date(date).getMonth()}-${new Date(date).getDate()}`
       }>
-        {`April ${new Date(review.date).getFullYear()}`}
+        {`April ${new Date(date).getFullYear()}`}
       </time>
     </div>
   </li>;
 };
 
 ReviewItem.propTypes = {
-  review: PropTypes.shape(reviewTypes)
+  user: reviewTypes.user,
+  comment: reviewTypes.comment,
+  rating: reviewTypes.rating,
+  date: reviewTypes.date
 };
 
 export default ReviewItem;
