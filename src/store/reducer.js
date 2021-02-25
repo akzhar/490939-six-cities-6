@@ -1,3 +1,4 @@
+import {ActionType} from './actions.js';
 import offers from '../mocks/offers.json';
 
 const initialState = {
@@ -7,11 +8,11 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case `city/change`:
+    case ActionType.CITY_CHANGE:
       const newCity = action.payload;
       const newCityOffers = state.offers.filter((offer) => offer.city.name === newCity);
       return {...state, city: newCity, offers: newCityOffers};
-    case `offers/ready`:
+    case ActionType.OFFERS_READY:
       return {...state};
     default:
       return {...initialState};
