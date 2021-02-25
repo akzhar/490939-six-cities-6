@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {offerTypes, reviewTypes} from '../../prop-types/prop-types.jsx';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
@@ -40,9 +41,14 @@ const App = ({offers, reviews}) => {
   </BrowserRouter>;
 };
 
+const mapStateToProps = (state) => ({
+  offers: state.offers
+});
+
 App.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
   reviews: PropTypes.arrayOf(PropTypes.shape(reviewTypes)).isRequired
 };
 
-export default App;
+export {App};
+export default connect(mapStateToProps, null)(App);
