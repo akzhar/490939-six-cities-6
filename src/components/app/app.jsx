@@ -30,7 +30,8 @@ const App = ({offers, reviews}) => {
       <Route path="/room/:id" exact render={(routeProps) => {
         const offer = offers.find((room) => room.id.toString() === routeProps.match.params.id);
         const offerReviews = offer ? reviews.filter((review) => review.id === offer.id) : [];
-        return offer ? <RoomScreen offer={offer} reviews={offerReviews}/> : <NotFoundScreen/>;
+        // offersNear - в будущем данные об объявлениях неподалёку будут приходить с сервера
+        return offer ? <RoomScreen offer={offer} reviews={offerReviews} offersNear={offers.slice(0, 3)}/> : <NotFoundScreen/>;
       }}/>
       <Route>
         <NotFoundScreen/>

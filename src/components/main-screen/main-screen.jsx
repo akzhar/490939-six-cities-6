@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
 
-import OffersList from '../offers-list/offers-list.jsx';
 import Map from '../map/map.jsx';
+import PlacesMain from '../places-main/places-main.jsx';
 
 const MainScreen = ({offers}) => (
   <React.Fragment>
@@ -72,7 +72,7 @@ const MainScreen = ({offers}) => (
         </div>
         <div className="cities">
           <div className="cities__places-container container">
-            <OffersList offers={offers}/>
+            <PlacesMain offers={offers}/>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
