@@ -45,19 +45,7 @@ const MainScreen = ({offers, sixSities}) => {
           {offers.length ? <PlacesMain/> : <PlacesMainEmpty/>}
           <div className="cities__right-section">
             <section className="cities__map map">
-              {offers.length ?
-                <Map
-                  city={offers[0].city.location}
-                  points={
-                    offers.map((offer) => {
-                      return {
-                        lat: offer.city.location.latitude,
-                        lng: offer.city.location.longitude,
-                        title: offer.title
-                      };
-                    })
-                  }
-                /> : ``}
+              {offers.length ? <Map/> : ``}
             </section>
           </div>
         </div>

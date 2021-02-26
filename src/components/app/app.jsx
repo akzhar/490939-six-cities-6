@@ -10,13 +10,15 @@ import FavoritesScreen from '../favorites-screen/favorites-screen.jsx';
 import RoomScreen from '../room-screen/room-screen.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 
+const SIX_SITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+
 const App = ({offers, reviews}) => {
 
   // TODO: move to utils
   // получаем массив из имеющихся городов, пока нет связи с сервером список статичен
   // const sixSities = offers.map((offer) => offer.city.name)
   //               .filter((value, index, self) => self.indexOf(value) === index);
-  const sixSities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+  const sixSities = SIX_SITIES;
 
   return <BrowserRouter>
     <Switch>

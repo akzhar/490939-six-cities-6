@@ -4,8 +4,8 @@
     "bedrooms": 3,
     "city": {
       "location": {
-        "latitude": 52.38333,
-        "longitude": 4.9,
+        "latitude": 50.51,
+        "longitude": 4.2,
         "zoom": 12
       },
       "name": "Brussels"
@@ -106,8 +106,8 @@
     "bedrooms": 7,
     "city": {
       "location": {
-        "latitude": 52.3809553943508,
-        "longitude": 4.939309666406198,
+        "latitude": 53.55,
+        "longitude": 9.99,
         "zoom": 10
       },
       "name": "Hamburg"
