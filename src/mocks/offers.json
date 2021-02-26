@@ -4,11 +4,11 @@
     "bedrooms": 3,
     "city": {
       "location": {
-        "latitude": 52.38333,
-        "longitude": 4.9,
+        "latitude": 50.51,
+        "longitude": 4.2,
         "zoom": 12
       },
-      "name": "Amsterdam"
+      "name": "Brussels"
     },
     "description": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.",
     "goods": ["Heating", "Kitchen", "Cable TV", "Washing machine", "Coffee machine", "Dishwasher"],
@@ -106,11 +106,11 @@
     "bedrooms": 7,
     "city": {
       "location": {
-        "latitude": 52.3809553943508,
-        "longitude": 4.939309666406198,
+        "latitude": 53.55,
+        "longitude": 9.99,
         "zoom": 10
       },
-      "name": "Amsterdam"
+      "name": "Hamburg"
     },
     "description": "Nice, cozy, warm big bed apartment",
     "goods": ["Heating", "Coffee machine", "Dishwasher"],

@@ -130,18 +130,7 @@ const RoomScreen = ({offer, reviews, offersNear}) => {
             </div>
           </div>
           <section className="property__map map">
-            <Map
-              city={offersNear[0].city.location}
-              points={
-                offersNear.map((offerNear) => {
-                  return {
-                    lat: offerNear.city.location.latitude,
-                    lng: offerNear.city.location.longitude,
-                    title: offerNear.title
-                  };
-                })
-              }
-            />
+            <Map/>
           </section>
         </section>
         <div className="container">
