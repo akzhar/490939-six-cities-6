@@ -8,7 +8,7 @@
         "longitude": 4.9,
         "zoom": 12
       },
-      "name": "Amsterdam"
+      "name": "Brussels"
     },
     "description": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.",
     "goods": ["Heating", "Kitchen", "Cable TV", "Washing machine", "Coffee machine", "Dishwasher"],
@@ -110,7 +110,7 @@
         "longitude": 4.939309666406198,
         "zoom": 10
       },
-      "name": "Amsterdam"
+      "name": "Hamburg"
     },
     "description": "Nice, cozy, warm big bed apartment",
     "goods": ["Heating", "Coffee machine", "Dishwasher"],

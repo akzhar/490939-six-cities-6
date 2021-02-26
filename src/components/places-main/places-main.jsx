@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
 
 import OffersList from '../offers-list/offers-list.jsx';
+import {connect} from 'react-redux';
 
-const PlacesMain = ({offers}) => (
+const PlacesMain = ({city, offers}) => (
   <section className="cities__places places">
     <h2 className="visually-hidden">Places</h2>
-    <b className="places__found">{offers.length} places to stay in {offers[0].city.name}</b>
+    <b className="places__found">{offers.length} places to stay in {city}</b>
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex="0">
@@ -27,8 +28,16 @@ const PlacesMain = ({offers}) => (
   </section>
 );
 
+const mapStateToProps = (state) => ({
+  city: state.city,
+  offers: state.offers.filter((offer) => offer.city.name === state.city)
+});
+
+
 PlacesMain.propTypes = {
+  city: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired
 };
 
-export default PlacesMain;
+export {PlacesMain};
+export default connect(mapStateToProps, null)(PlacesMain);

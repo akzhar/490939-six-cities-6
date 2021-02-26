@@ -20,7 +20,7 @@ const App = ({offers, reviews}) => {
   return <BrowserRouter>
     <Switch>
       <Route path="/" exact>
-        <MainScreen offers={offers}/>
+        <MainScreen/>
       </Route>
       <Route path="/login" exact>
         <LoginScreen/>
