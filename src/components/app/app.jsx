@@ -13,20 +13,21 @@ import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 const App = ({offers, reviews}) => {
 
   // TODO: move to utils
-  // получаем массив из имеющихся городов
-  const cities = offers.map((offer) => offer.city.name)
-                .filter((value, index, self) => self.indexOf(value) === index);
+  // получаем массив из имеющихся городов, пока нет связи с сервером список статичен
+  // const sixSities = offers.map((offer) => offer.city.name)
+  //               .filter((value, index, self) => self.indexOf(value) === index);
+  const sixSities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
   return <BrowserRouter>
     <Switch>
       <Route path="/" exact>
-        <MainScreen/>
+        <MainScreen sixSities={sixSities}/>
       </Route>
       <Route path="/login" exact>
         <LoginScreen/>
       </Route>
       <Route path="/favorites" exact>
-        <FavoritesScreen offers={offers} cities={cities}/>
+        <FavoritesScreen offers={offers} sixSities={sixSities}/>
       </Route>
       <Route path="/room/:id" exact render={(routeProps) => {
         const offer = offers.find((room) => room.id.toString() === routeProps.match.params.id);

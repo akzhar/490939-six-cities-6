@@ -1,6 +1,7 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {ActionCreator} from '../../store/actions.js';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
 
@@ -8,19 +9,7 @@ import Map from '../map/map.jsx';
 import PlacesMainEmpty from '../places-main-empty/places-main-empty.jsx';
 import PlacesMain from '../places-main/places-main.jsx';
 
-const MainScreen = ({city, offers, onCityChange}) => {
-
-  const tabsListRef = useRef();
-
-  // TODO: move css classes to const
-  const handleCityTabClick = (evt) => {
-    const activeTab = evt.currentTarget;
-    const newCity = activeTab.querySelector(`span`).textContent;
-    onCityChange(newCity);
-    const tabs = tabsListRef.current.querySelectorAll(`.tabs__item`);
-    tabs.forEach((tab) => tab.classList.remove(`tabs__item--active`));
-    activeTab.classList.add(`tabs__item--active`);
-  };
+const MainScreen = ({city, offers, onCityChange, sixSities}) => {
 
   return <div className="page page--gray page--main">
     <header className="header">
@@ -34,10 +23,10 @@ const MainScreen = ({city, offers, onCityChange}) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
+                <Link className="header__nav-link header__nav-link--profile" to="/favorites">
                   <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                   <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -48,10 +37,13 @@ const MainScreen = ({city, offers, onCityChange}) => {
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <ul className="locations__list tabs__list" ref={tabsListRef}>
-            {[`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`].map((cityName) => (
+          <ul className="locations__list tabs__list">
+            {sixSities.map((cityName) => (
               <li className="locations__item" key={cityName}>
-                <a className={`locations__item-link tabs__item ${(cityName === city) ? `tabs__item--active` : ``}`} onClick={handleCityTabClick}>
+                <a
+                  className={`locations__item-link tabs__item ${(cityName === city) ? `tabs__item--active` : ``}`}
+                  onClick={() => onCityChange(cityName)}
+                >
                   <span>{cityName}</span>
                 </a>
               </li>
@@ -99,7 +91,8 @@ const mapDispatchToProps = (dispatch) => ({
 MainScreen.propTypes = {
   city: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
-  onCityChange: PropTypes.func.isRequired
+  onCityChange: PropTypes.func.isRequired,
+  sixSities: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export {MainScreen};

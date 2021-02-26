@@ -5,7 +5,7 @@ import {offerTypes} from '../../prop-types/prop-types.jsx';
 
 import FavoritesOfferCard from '../favorites-offer-card/favorites-offer-card.jsx';
 
-const FavoritesScreen = ({offers, cities}) => { // сейчас выводятся не favorites, а все offers подряд
+const FavoritesScreen = ({offers, sixSities}) => { // сейчас выводятся не favorites, а все offers подряд
 
   return <React.Fragment>
     <div className="page">
@@ -37,7 +37,7 @@ const FavoritesScreen = ({offers, cities}) => { // сейчас выводятс
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {cities.map((city) => (
+              {sixSities.map((city) => (
                 <li className="favorites__locations-items" key={city}>
                   <div className="favorites__locations locations locations--current">
                     <div className="locations__item">
@@ -71,7 +71,7 @@ const FavoritesScreen = ({offers, cities}) => { // сейчас выводятс
 
 FavoritesScreen.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
-  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  sixSities: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default FavoritesScreen;
