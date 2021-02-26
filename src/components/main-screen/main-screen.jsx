@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {ActionCreator} from '../../store/actions.js';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
 
 import Map from '../map/map.jsx';
+import CitiesList from '../cities-list/cities-list.jsx';
 import PlacesMainEmpty from '../places-main-empty/places-main-empty.jsx';
 import PlacesMain from '../places-main/places-main.jsx';
 
-const MainScreen = ({city, offers, onCityChange, sixSities}) => {
+const MainScreen = ({offers, sixSities}) => {
 
   return <div className="page page--gray page--main">
     <header className="header">
@@ -37,18 +37,7 @@ const MainScreen = ({city, offers, onCityChange, sixSities}) => {
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <ul className="locations__list tabs__list">
-            {sixSities.map((cityName) => (
-              <li className="locations__item" key={cityName}>
-                <a
-                  className={`locations__item-link tabs__item ${(cityName === city) ? `tabs__item--active` : ``}`}
-                  onClick={() => onCityChange(cityName)}
-                >
-                  <span>{cityName}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
+          <CitiesList sixSities={sixSities}/>
         </section>
       </div>
       <div className="cities">
@@ -78,22 +67,13 @@ const MainScreen = ({city, offers, onCityChange, sixSities}) => {
 };
 
 const mapStateToProps = (state) => ({
-  city: state.city,
   offers: state.offers.filter((offer) => offer.city.name === state.city)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onCityChange(newCity) {
-    dispatch(ActionCreator.changeCity(newCity));
-  },
-});
-
 MainScreen.propTypes = {
-  city: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
-  onCityChange: PropTypes.func.isRequired,
   sixSities: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export {MainScreen};
-export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);
+export default connect(mapStateToProps, null)(MainScreen);
