@@ -2,7 +2,7 @@ import {ActionType} from './actions.js';
 import offers from '../mocks/offers.json';
 
 const initialState = {
-  city: `Amsterdam`,
+  city: `Paris`,
   offers
 };
 
