@@ -12,6 +12,7 @@ const initialState = {
   cities: CITIES,
   city: `Paris`,
   sort: `Popular`,
+  activeOffer: null,
   offers,
   reviews
 };
@@ -22,6 +23,8 @@ const reducer = (state, action) => {
       return {...state, city: action.payload};
     case ActionType.SORT_CHANGE:
       return {...state, sort: action.payload};
+    case ActionType.OFFER_SET_ACTIVE:
+      return {...state, activeOffer: action.payload};
     default:
       return {...initialState};
   }

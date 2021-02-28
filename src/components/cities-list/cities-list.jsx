@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
 
-const CitiesList = ({cities, city, onCityChange}) => (
+const CitiesList = ({cities, city, changeCity}) => (
   <ul className="locations__list tabs__list">
     {cities.map((cityName) => (
       <li className="locations__item" key={cityName}>
         <a
           className={`locations__item-link tabs__item ${(cityName === city) ? `tabs__item--active` : ``}`}
-          onClick={() => onCityChange(cityName)}
+          onClick={() => changeCity(cityName)}
         >
           <span>{cityName}</span>
         </a>
@@ -24,7 +24,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCityChange(newCity) {
+  changeCity(newCity) {
     dispatch(ActionCreator.changeCity(newCity));
   },
 });
@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch) => ({
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   city: PropTypes.string.isRequired,
-  onCityChange: PropTypes.func.isRequired
+  changeCity: PropTypes.func.isRequired
 };
 
 export {CitiesList};

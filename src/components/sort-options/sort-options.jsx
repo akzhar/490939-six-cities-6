@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator}  from '../../store/actions.js';
+import {ActionCreator} from '../../store/actions.js';
 import {SORT_OPTIONS} from '../../const.json';
 
 // TODO: move to const
@@ -10,7 +10,7 @@ const Class = {
   OPTION_ACTIVE: `places__option--active`
 };
 
-const SortOptions = ({sort, onSortChange}) => {
+const SortOptions = ({sort, changeSort}) => {
 
   const sortTypeRef = useRef();
   const sortOptionsListRef = useRef();
@@ -21,7 +21,7 @@ const SortOptions = ({sort, onSortChange}) => {
 
   const handleSortOptionsListClick = (evt) => {
     const newSort = evt.target.textContent;
-    onSortChange(newSort);
+    changeSort(newSort);
     sortTypeRef.current.querySelector(`span`).textContent = newSort;
     sortOptionsListRef.current.classList.remove(Class.LIST_OPENED);
   };
@@ -53,14 +53,14 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSortChange: (newSort) => {
+  changeSort: (newSort) => {
     dispatch(ActionCreator.changeSort(newSort));
   }
 });
 
 SortOptions.propTypes = {
   sort: PropTypes.string.isRequired,
-  onSortChange: PropTypes.func.isRequired
+  changeSort: PropTypes.func.isRequired
 };
 
 export {SortOptions};
