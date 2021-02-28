@@ -11,6 +11,7 @@ import {CITIES} from '../const.json';
 const initialState = {
   cities: CITIES,
   city: `Paris`,
+  sort: `Popular`,
   offers,
   reviews
 };
@@ -19,6 +20,8 @@ const reducer = (state, action) => {
   switch (action.type) {
     case ActionType.CITY_CHANGE:
       return {...state, city: action.payload};
+    case ActionType.SORT_CHANGE:
+      return {...state, sort: action.payload};
     default:
       return {...initialState};
   }
