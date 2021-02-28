@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
-import {getRatingValue} from '../../utils.js';
+import RatingStars from '../rating-stars/rating-start.jsx';
 
 const FavoritesOfferCard = ({offer}) => {
 
@@ -26,10 +26,7 @@ const FavoritesOfferCard = ({offer}) => {
         </button>
       </div>
       <div className="place-card__rating rating">
-        <div className="place-card__stars rating__stars">
-          <span style={{width: `${getRatingValue(offer.rating)}%`}}></span>
-          <span className="visually-hidden">Rating</span>
-        </div>
+        <RatingStars rating={offer.rating} className="place-card__stars"/>
       </div>
       <h2 className="place-card__name">
         <a href="#">{offer.title}</a>

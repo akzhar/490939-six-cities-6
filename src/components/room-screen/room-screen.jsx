@@ -7,7 +7,7 @@ import CommentForm from '../comment-form/comment-form.jsx';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
 import Map from '../map/map.jsx';
 import PlacesNear from '../places-near/places-near.jsx';
-import {getRatingValue} from '../../utils.js';
+import RatingStars from '../rating-stars/rating-start.jsx';
 
 const RoomScreen = ({offer, reviews, offersNear}) => {
 
@@ -70,10 +70,7 @@ const RoomScreen = ({offer, reviews, offersNear}) => {
                 </button>
               </div>
               <div className="property__rating rating">
-                <div className="property__stars rating__stars">
-                  <span style={{width: `${getRatingValue(offer.rating)}%`}}></span>
-                  <span className="visually-hidden">Rating</span>
-                </div>
+                <RatingStars rating={offer.rating} className="property__stars"/>
                 <span className="property__rating-value rating__value">{offer.rating}</span>
               </div>
               <ul className="property__features">

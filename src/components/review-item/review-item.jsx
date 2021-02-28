@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {reviewTypes} from '../../prop-types/prop-types.jsx';
-import {getRatingValue} from '../../utils.js';
+import RatingStars from '../rating-stars/rating-start.jsx';
 
 const ReviewItem = ({user, comment, rating, date}) => {
 
@@ -16,10 +16,7 @@ const ReviewItem = ({user, comment, rating, date}) => {
     </div>
     <div className="reviews__info">
       <div className="reviews__rating rating">
-        <div className="reviews__stars rating__stars">
-          <span style={{width: `${getRatingValue(rating)}%`}}></span>
-          <span className="visually-hidden">Rating</span>
-        </div>
+        <RatingStars rating={rating} className="reviews__stars"/>
       </div>
       <p className="reviews__text">
         {comment}
