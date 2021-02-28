@@ -6,7 +6,7 @@ import leaflet from 'leaflet';
 import "leaflet/dist/leaflet.css";
 
 // ф-ция возвращает новый слой карты: `voyager`
-const mapLayer =  leaflet.tileLayer(
+const mapLayer = leaflet.tileLayer(
     `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
     {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
