@@ -1,11 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
 
 import FavoritesOfferCard from '../favorites-offer-card/favorites-offer-card.jsx';
 
-const FavoritesScreen = ({offers, sixSities}) => { // сейчас выводятся не favorites, а все offers подряд
+const FavoritesScreen = ({offers, cities}) => { // сейчас выводятся не favorites, а все offers подряд
 
   return <React.Fragment>
     <div className="page">
@@ -37,7 +38,7 @@ const FavoritesScreen = ({offers, sixSities}) => { // сейчас выводя�
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {sixSities.map((city) => (
+              {cities.map((city) => (
                 <li className="favorites__locations-items" key={city}>
                   <div className="favorites__locations locations locations--current">
                     <div className="locations__item">
@@ -69,9 +70,15 @@ const FavoritesScreen = ({offers, sixSities}) => { // сейчас выводя�
   </React.Fragment>;
 };
 
+const mapStateToProps = (state) => ({
+  offers: state.offers.filter((offer) => offer.city.name === state.city),
+  cities: state.cities
+});
+
 FavoritesScreen.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
-  sixSities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  cities: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
-export default FavoritesScreen;
+export {FavoritesScreen};
+export default connect(mapStateToProps, null)(FavoritesScreen);

@@ -9,7 +9,7 @@ import CitiesList from '../cities-list/cities-list.jsx';
 import PlacesMainEmpty from '../places-main-empty/places-main-empty.jsx';
 import PlacesMain from '../places-main/places-main.jsx';
 
-const MainScreen = ({offers, sixSities}) => {
+const MainScreen = ({offers, cities}) => {
 
   return <div className="page page--gray page--main">
     <header className="header">
@@ -37,7 +37,7 @@ const MainScreen = ({offers, sixSities}) => {
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <CitiesList sixSities={sixSities}/>
+          <CitiesList cities={cities}/>
         </section>
       </div>
       <div className="cities">
@@ -55,12 +55,13 @@ const MainScreen = ({offers, sixSities}) => {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers.filter((offer) => offer.city.name === state.city)
+  offers: state.offers.filter((offer) => offer.city.name === state.city),
+  cities: state.cities
 });
 
 MainScreen.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
-  sixSities: PropTypes.arrayOf(PropTypes.string).isRequired
+  cities: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export {MainScreen};
