@@ -7,9 +7,7 @@ import CommentForm from '../comment-form/comment-form.jsx';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
 import Map from '../map/map.jsx';
 import PlacesNear from '../places-near/places-near.jsx';
-
-// TODO: move to config
-const STARS_COUNT = 5;
+import {getRatingValue} from '../../utils.js';
 
 const RoomScreen = ({offer, reviews, offersNear}) => {
 
@@ -20,9 +18,6 @@ const RoomScreen = ({offer, reviews, offersNear}) => {
   );
 
   const addProUserClass = (user) => user.isPro ? `property__avatar-wrapper--pro` : ``;
-
-  // TODO: move to utils
-  const getRatingValue = (rating) => Math.round(rating) * 100 / STARS_COUNT;
 
   return <React.Fragment>
     <div className="page">

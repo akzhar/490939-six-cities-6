@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
-
-// TODO: move to config
-const STARS_COUNT = 5;
+import {getRatingValue} from '../../utils.js';
 
 const OfferCard = ({offer, dataId, handleOfferCardHover, handleOfferCardBlur}) => {
 
@@ -13,9 +11,6 @@ const OfferCard = ({offer, dataId, handleOfferCardHover, handleOfferCardBlur}) =
       <span>Premium</span>
     </div>
   );
-
-  // TODO: move to utils
-  const getRatingValue = (rating) => Math.round(rating) * 100 / STARS_COUNT;
 
   return <article className="cities__place-card place-card" data-id={dataId} onMouseEnter={handleOfferCardHover} onMouseLeave={handleOfferCardBlur}>
     {offer.isPremium ? <PremiumMark/> : ``}

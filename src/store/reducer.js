@@ -1,13 +1,12 @@
 import {ActionType} from './actions.js';
 import offers from '../mocks/offers.json';
 import reviews from '../mocks/reviews.json';
+import {CITIES} from '../const.json';
 
 // TODO: move to utils
 // получаем массив из имеющихся городов, пока нет связи с сервером список статичен
 // const cities = offers.map((offer) => offer.city.name)
 //               .filter((value, index, self) => self.indexOf(value) === index);
-
-const CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 const initialState = {
   cities: CITIES,

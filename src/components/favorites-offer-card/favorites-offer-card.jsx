@@ -2,14 +2,9 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
-
-// TODO: move to config
-const STARS_COUNT = 5;
+import {getRatingValue} from '../../utils.js';
 
 const FavoritesOfferCard = ({offer}) => {
-
-  // TODO: move to utils
-  const getRatingValue = (rating) => Math.round(rating) * 100 / STARS_COUNT;
 
   return <article className="favorites__card place-card">
     <div className="favorites__image-wrapper place-card__image-wrapper">

@@ -1,14 +1,9 @@
 import React from 'react';
 
 import {reviewTypes} from '../../prop-types/prop-types.jsx';
-
-// TODO: move to config
-const STARS_COUNT = 5;
+import {getRatingValue} from '../../utils.js';
 
 const ReviewItem = ({user, comment, rating, date}) => {
-
-  // TODO: move to utils
-  const getRatingValue = (ratingValue) => Math.round(ratingValue) * 100 / STARS_COUNT;
 
   return <li className="reviews__item">
     <div className="reviews__user user">
