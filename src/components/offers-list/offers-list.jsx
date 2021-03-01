@@ -1,28 +1,40 @@
 import React from 'react';
-const {useState} = React;
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/actions.js';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
 
 import OfferCard from '../offer-card/offer-card.jsx';
 
-const OffersList = ({offers, className = ``}) => {
+const OffersList = ({sort, offers, setActiveOffer, className = ``}) => {
 
-  const [, setActive] = useState(null);
+  const getSortedOffers = () => {
+    switch (sort) {
+      case `Price: low to high`:
+        return offers.sort((a, b) => a.price - b.price);
+      case `Price: high to low`:
+        return offers.sort((a, b) => b.price - a.price);
+      case `Top rated first`:
+        return offers.sort((a, b) => b.rating - a.rating);
+      default:
+        return offers;
+    }
+  };
 
   function handleOfferCardHover(evt) {
-    setActive(evt.currentTarget.dataset.id);
+    setActiveOffer(evt.currentTarget.dataset.id);
   }
 
   function handleOfferCardBlur() {
-    setActive(null);
+    setActiveOffer(null);
   }
 
   return <div className={`places__list cities__places-list tabs__content ${className}`}>
-    {offers.map((offer) => (
+    {getSortedOffers().map((offer) => (
       <OfferCard
         key={offer.id}
-        offer={offer}
         dataId={offer.id}
+        offer={offer}
         handleOfferCardHover={handleOfferCardHover}
         handleOfferCardBlur={handleOfferCardBlur}
       />
@@ -30,9 +42,23 @@ const OffersList = ({offers, className = ``}) => {
   </div>;
 };
 
+const mapStateToProps = (state) => ({
+  sort: state.sort,
+  offers: state.offers.filter((offer) => offer.city.name === state.city)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setActiveOffer: (activeOffer) => {
+    dispatch(ActionCreator.setActiveOffer(activeOffer));
+  }
+});
+
 OffersList.propTypes = {
+  sort: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
+  setActiveOffer: PropTypes.func.isRequired,
   className: PropTypes.string
 };
 
-export default OffersList;
+export {OffersList};
+export default connect(mapStateToProps, mapDispatchToProps)(OffersList);

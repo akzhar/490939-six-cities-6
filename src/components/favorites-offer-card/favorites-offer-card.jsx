@@ -2,14 +2,9 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
-
-// TODO: move to config
-const STARS_COUNT = 5;
+import RatingStars from '../rating-stars/rating-start.jsx';
 
 const FavoritesOfferCard = ({offer}) => {
-
-  // TODO: move to utils
-  const getRatingValue = (rating) => Math.round(rating) * 100 / STARS_COUNT;
 
   return <article className="favorites__card place-card">
     <div className="favorites__image-wrapper place-card__image-wrapper">
@@ -31,10 +26,7 @@ const FavoritesOfferCard = ({offer}) => {
         </button>
       </div>
       <div className="place-card__rating rating">
-        <div className="place-card__stars rating__stars">
-          <span style={{width: `${getRatingValue(offer.rating)}%`}}></span>
-          <span className="visually-hidden">Rating</span>
-        </div>
+        <RatingStars rating={offer.rating} className="place-card__stars"/>
       </div>
       <h2 className="place-card__name">
         <a href="#">{offer.title}</a>
