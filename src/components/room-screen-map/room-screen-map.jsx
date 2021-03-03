@@ -16,9 +16,7 @@ const RoomScreenMap = ({offers}) => {
     };
   });
 
-  return <section className="property__map map">
-    <Map city={city} points={points}/>
-  </section>;
+  return <Map city={city} points={points}/>;
 };
 
 RoomScreenMap.propTypes = {

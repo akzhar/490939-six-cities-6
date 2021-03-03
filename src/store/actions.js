@@ -1,4 +1,5 @@
 export const ActionType = {
+  OFFERS_IS_LOADED: `offers/loaded`,
   OFFERS_LOAD: `offers/load`,
   CITY_CHANGE: `city/change`,
   SORT_CHANGE: `sort/change`,
@@ -6,6 +7,9 @@ export const ActionType = {
 };
 
 export const ActionCreator = {
+  finishOffersLoading: () => ({
+    type: ActionType.OFFERS_IS_LOADED
+  }),
   setOffers: (offers) => ({
     type: ActionType.OFFERS_LOAD,
     payload: offers

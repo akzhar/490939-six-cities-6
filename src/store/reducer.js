@@ -6,6 +6,7 @@ const initialState = {
   activeCity: CITIES[0],
   activeSort: SORT_OPTIONS[0],
   activeOfferId: null,
+  offersIsLoaded: false,
   offers: []
 };
 
@@ -19,6 +20,8 @@ const reducer = (state, action) => {
       return {...state, activeOfferId: action.payload};
     case ActionType.OFFERS_LOAD:
       return {...state, offers: action.payload};
+    case ActionType.OFFERS_IS_LOADED:
+      return {...state, offersIsLoaded: true};
     default:
       return {...initialState};
   }

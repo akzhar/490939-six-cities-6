@@ -108,7 +108,9 @@ const RoomScreen = ({offer}) => {
               </section>
             </div>
           </div>
-          {offersNear.length && <RoomScreenMap offers={offersNear}/>}
+          <section className="property__map map">
+            {offersNear.length && <RoomScreenMap offers={offersNear}/>}
+          </section>
         </section>
         <div className="container">
           {offersNear.length && <PlacesNear offers={offersNear}/>}

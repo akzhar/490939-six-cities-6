@@ -16,17 +16,15 @@ const store = createStore(
     )
 );
 
-const setOffers = (offers) => {
-  store.dispatch(ActionCreator.setOffers(offers));
-};
-
 api.get(`/hotels`)
-  .then((response) => setOffers(response.data))
-  .then(() => {
-    ReactDOM.render(
-        <Provider store={store}>
-          <App/>
-        </Provider>,
-        document.querySelector(`#root`)
-    );
+  .then((response) => {
+    store.dispatch(ActionCreator.finishOffersLoading());
+    store.dispatch(ActionCreator.setOffers(response.data));
   });
+
+ReactDOM.render(
+    <Provider store={store}>
+      <App/>
+    </Provider>,
+    document.querySelector(`#root`)
+);

@@ -6,9 +6,7 @@ import {connect} from 'react-redux';
 import Map from '../map/map.jsx';
 
 const MainScreenMap = ({city, points, activeOfferId}) => (
-  <section className="cities__map map">
-    <Map city={city} points={points} activeOfferId={activeOfferId}/>
-  </section>
+  <Map city={city} points={points} activeOfferId={activeOfferId}/>
 );
 
 const mapStateToProps = (state) => ({
