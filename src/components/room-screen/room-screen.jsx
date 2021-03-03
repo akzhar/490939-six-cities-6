@@ -10,13 +10,19 @@ import Map from '../map/map.jsx';
 import PlacesNear from '../places-near/places-near.jsx';
 import RatingStars from '../rating-stars/rating-start.jsx';
 
-const RoomScreen = ({offer, reviews}) => {
+const RoomScreen = ({offer}) => {
 
   const [offersNear, setOffersNear] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    api.get(`/hotels/${offer.id}/nearby`)
-      .then((response) => setOffersNear(response.data));
+    const offersNearPromise = api.get(`/hotels/${offer.id}/nearby`);
+    const reviewsPromise = api.get(`/comments/${offer.id}`);
+    Promise.all([offersNearPromise, reviewsPromise])
+      .then((responses) => {
+        setOffersNear(responses[0].data);
+        setReviews(responses[1].data);
+      });
   }, []);
 
   const PremiumMark = () => (
@@ -142,8 +148,7 @@ const RoomScreen = ({offer, reviews}) => {
 };
 
 RoomScreen.propTypes = {
-  offer: PropTypes.shape(offerTypes),
-  reviews: PropTypes.arrayOf(PropTypes.shape(reviewTypes)).isRequired
+  offer: PropTypes.shape(offerTypes)
 };
 
 export default RoomScreen;

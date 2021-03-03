@@ -11,8 +11,7 @@ const initialState = {
   city: `Paris`,
   sort: `Popular`,
   activeOfferId: null,
-  offers: [],
-  reviews: []
+  offers: []
 };
 
 const reducer = (state, action) => {

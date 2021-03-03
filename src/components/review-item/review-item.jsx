@@ -8,7 +8,7 @@ const ReviewItem = ({user, comment, rating, date}) => {
   return <li className="reviews__item">
     <div className="reviews__user user">
       <div className="property__avatar-wrapper user__avatar-wrapper">
-        <img className="reviews__avatar user__avatar" src={user.avatarUrl} width="74" height="74" alt="Reviews avatar" />
+        <img className="reviews__avatar user__avatar" src={user[`avatar_url`]} width="74" height="74" alt="Reviews avatar" />
       </div>
       <span className="reviews__user-name">
         {user.name}

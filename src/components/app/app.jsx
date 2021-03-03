@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {offerTypes, reviewTypes} from '../../prop-types/prop-types.jsx';
+import {offerTypes} from '../../prop-types/prop-types.jsx';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import MainScreen from '../main-screen/main-screen.jsx';
@@ -10,7 +10,7 @@ import FavoritesScreen from '../favorites-screen/favorites-screen.jsx';
 import RoomScreen from '../room-screen/room-screen.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 
-const App = ({offers, reviews}) => {
+const App = ({offers}) => {
 
   return <BrowserRouter>
     <Switch>
@@ -28,11 +28,7 @@ const App = ({offers, reviews}) => {
         exact
         render={(routeProps) => {
           const offer = offers.find((room) => room.id.toString() === routeProps.match.params.id);
-          if (offer) {
-            const offerReviews = reviews.filter((review) => review.id === offer.id);
-            return <RoomScreen offer={offer} reviews={offerReviews}/>;
-          }
-          return <NotFoundScreen/>;
+          return offer ? <RoomScreen offer={offer}/> : <NotFoundScreen/>;
         }}
       />
       <Route>
@@ -43,13 +39,11 @@ const App = ({offers, reviews}) => {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
-  reviews: state.reviews
+  offers: state.offers
 });
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape(reviewTypes)).isRequired
+  offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired
 };
 
 export {App};
