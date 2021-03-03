@@ -18,8 +18,8 @@ export const ActionCreator = {
     type: ActionType.SORT_CHANGE,
     payload: newSort
   }),
-  setActiveOffer: (activeOffer) => ({
+  setActiveOfferId: (activeOfferId) => ({
     type: ActionType.OFFER_SET_ACTIVE,
-    payload: activeOffer
+    payload: activeOfferId
   })
 };

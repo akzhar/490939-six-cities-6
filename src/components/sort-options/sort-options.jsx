@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
-import {SORT_OPTIONS} from '../../const.json';
+import {SORT_OPTIONS} from '../../const.js';
 
 // TODO: move to const
 const Class = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {RATING_STARS_COUNT} from '../../const.json';
+import {RATING_STARS_COUNT} from '../../const.js';
 
 const RatingStars = ({rating, className = ``}) => {
 

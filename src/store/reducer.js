@@ -1,5 +1,5 @@
 import {ActionType} from './actions.js';
-import {CITIES} from '../const.json';
+import {CITIES} from '../const.js';
 
 // TODO: move to utils
 // получаем массив из имеющихся городов, пока нет связи с сервером список статичен

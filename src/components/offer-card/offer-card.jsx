@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
 import RatingStars from '../rating-stars/rating-start.jsx';
 
-const OfferCard = ({offer, dataId, handleOfferCardHover, handleOfferCardBlur}) => {
+const OfferCard = ({offer, handleHover = null, handleBlur = null}) => {
 
   const PremiumMark = () => (
     <div className="place-card__mark">
@@ -12,7 +12,7 @@ const OfferCard = ({offer, dataId, handleOfferCardHover, handleOfferCardBlur}) =
     </div>
   );
 
-  return <article className="cities__place-card place-card" data-id={dataId} onMouseEnter={handleOfferCardHover} onMouseLeave={handleOfferCardBlur}>
+  return <article className="cities__place-card place-card" data-id={offer.id} onMouseEnter={handleHover} onMouseLeave={handleBlur}>
     {offer.isPremium ? <PremiumMark/> : ``}
     <div className="cities__image-wrapper place-card__image-wrapper">
       <Link to={`/room/${offer.id}`}>
@@ -44,10 +44,9 @@ const OfferCard = ({offer, dataId, handleOfferCardHover, handleOfferCardBlur}) =
 };
 
 OfferCard.propTypes = {
-  offer: PropTypes.shape(offerTypes),
-  dataId: PropTypes.number.isRequired,
-  handleOfferCardHover: PropTypes.func.isRequired,
-  handleOfferCardBlur: PropTypes.func.isRequired
+  offer: PropTypes.shape(offerTypes).isRequired,
+  handleHover: PropTypes.func,
+  handleBlur: PropTypes.func
 };
 
 export default OfferCard;
