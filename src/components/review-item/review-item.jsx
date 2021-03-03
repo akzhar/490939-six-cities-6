@@ -1,14 +1,14 @@
 import React from 'react';
-
 import {reviewTypes} from '../../prop-types/prop-types.jsx';
-import RatingStars from '../rating-stars/rating-start.jsx';
+import {getMonthName, getYearNo, getTimeStamp} from '../../utils.js';
 
-const ReviewItem = ({user, comment, rating, date}) => {
+import RatingStars from '../rating-stars/rating-stars.jsx';
 
-  return <li className="reviews__item">
+const ReviewItem = ({user, comment, rating, date}) => (
+  <li className="reviews__item">
     <div className="reviews__user user">
       <div className="property__avatar-wrapper user__avatar-wrapper">
-        <img className="reviews__avatar user__avatar" src={user[`avatar_url`]} width="74" height="74" alt="Reviews avatar" />
+        <img className="reviews__avatar user__avatar" src={user[`avatar_url`]} width="74" height="74" alt="Reviews avatar"/>
       </div>
       <span className="reviews__user-name">
         {user.name}
@@ -21,14 +21,12 @@ const ReviewItem = ({user, comment, rating, date}) => {
       <p className="reviews__text">
         {comment}
       </p>
-      <time className="reviews__time" dateTime={
-        `${new Date(date).getFullYear()}-${new Date(date).getMonth()}-${new Date(date).getDate()}`
-      }>
-        {`April ${new Date(date).getFullYear()}`}
+      <time className="reviews__time" dateTime={getTimeStamp(date)}>
+        {`${getMonthName(date)} ${getYearNo(date)}`}
       </time>
     </div>
-  </li>;
-};
+  </li>
+);
 
 ReviewItem.propTypes = {
   user: reviewTypes.user,

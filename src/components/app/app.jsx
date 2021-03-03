@@ -27,7 +27,8 @@ const App = ({offers}) => {
         path="/room/:id"
         exact
         render={(routeProps) => {
-          const offer = offers.find((room) => room.id.toString() === routeProps.match.params.id);
+          const roomId = +routeProps.match.params.id;
+          const offer = offers.find((room) => room.id === roomId);
           return offer ? <RoomScreen offer={offer}/> : <NotFoundScreen/>;
         }}
       />

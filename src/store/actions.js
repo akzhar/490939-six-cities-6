@@ -10,13 +10,13 @@ export const ActionCreator = {
     type: ActionType.OFFERS_LOAD,
     payload: offers
   }),
-  changeCity: (newCity) => ({
+  changeActiveCity: (newActiveCity) => ({
     type: ActionType.CITY_CHANGE,
-    payload: newCity
+    payload: newActiveCity
   }),
-  changeSort: (newSort) => ({
+  changeActiveSort: (newActiveSort) => ({
     type: ActionType.SORT_CHANGE,
-    payload: newSort
+    payload: newActiveSort
   }),
   setActiveOfferId: (activeOfferId) => ({
     type: ActionType.OFFER_SET_ACTIVE,

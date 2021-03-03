@@ -4,9 +4,8 @@ import {offerTypes} from '../../prop-types/prop-types.jsx';
 
 import OfferCard from '../offer-card/offer-card.jsx';
 
-const OffersList = ({offers, handleHover = null, handleBlur = null}) => {
-
-  return <React.Fragment>
+const OffersList = ({offers, handleHover = null, handleBlur = null}) => (
+  <React.Fragment>
     {offers.map((offer) => (
       <OfferCard
         key={offer.id}
@@ -15,8 +14,8 @@ const OffersList = ({offers, handleHover = null, handleBlur = null}) => {
         handleBlur={handleBlur}
       />
     ))}
-  </React.Fragment>;
-};
+  </React.Fragment>
+);
 
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,

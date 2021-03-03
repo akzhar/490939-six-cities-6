@@ -80,8 +80,8 @@ const Map = ({city, points, activeOfferId}) => {
 };
 
 const mapStateToProps = (state) => ({
-  city: state.offers.find((offer) => offer.city.name === state.city).city.location,
-  points: state.offers.filter((offer) => offer.city.name === state.city)
+  city: state.offers.find((offer) => offer.city.name === state.activeCity).city.location,
+  points: state.offers.filter((offer) => offer.city.name === state.activeCity)
   .map((offer) => {
     return {
       id: offer.id,

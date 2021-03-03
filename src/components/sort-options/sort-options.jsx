@@ -2,43 +2,37 @@ import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
-import {SORT_OPTIONS} from '../../const.js';
+import {SORT_OPTIONS, Class} from '../../const.js';
 
-// TODO: move to const
-const Class = {
-  LIST_OPENED: `places__options--opened`,
-  OPTION_ACTIVE: `places__option--active`
-};
+const SortOptions = ({activeSort, changeActiveSort}) => {
 
-const SortOptions = ({sort, changeSort}) => {
+  const sortListRef = useRef();
+  const optionsListRef = useRef();
 
-  const sortTypeRef = useRef();
-  const sortOptionsListRef = useRef();
-
-  const handleSortTypeClick = () => {
-    sortOptionsListRef.current.classList.toggle(Class.LIST_OPENED);
+  const handleListClick = () => {
+    optionsListRef.current.classList.toggle(Class.LIST_OPENED);
   };
 
-  const handleSortOptionsListClick = (evt) => {
-    const newSort = evt.target.textContent;
-    changeSort(newSort);
-    sortTypeRef.current.querySelector(`span`).textContent = newSort;
-    sortOptionsListRef.current.classList.remove(Class.LIST_OPENED);
+  const handleOptionsListClick = (evt) => {
+    const newActiveSort = evt.target.textContent;
+    changeActiveSort(newActiveSort);
+    sortListRef.current.querySelector(`span`).textContent = newActiveSort;
+    optionsListRef.current.classList.remove(Class.LIST_OPENED);
   };
 
   return <form className="places__sorting" action="#" method="get">
     <span className="places__sorting-caption">Sort by</span>
-    <span className="places__sorting-type" tabIndex="0" ref={sortTypeRef} onClick={handleSortTypeClick}>
-      <span style={{margin: `0 0 0 5px`}}>{sort}</span>
+    <span className="places__sorting-type" tabIndex="0" ref={sortListRef} onClick={handleListClick}>
+      <span style={{margin: `0 0 0 5px`}}>{activeSort}</span>
       <svg className="places__sorting-arrow" width="7" height="4">
         <use xlinkHref="#icon-arrow-select"></use>
       </svg>
     </span>
-    <ul className="places__options places__options--custom" ref={sortOptionsListRef} onClick={handleSortOptionsListClick}>
+    <ul className="places__options places__options--custom" ref={optionsListRef} onClick={handleOptionsListClick}>
       {SORT_OPTIONS.map((option) => (
         <li
           key={option}
-          className={`places__option ${(option === sort) ? Class.OPTION_ACTIVE : ``}`}
+          className={`places__option ${(option === activeSort) && Class.OPTION_ACTIVE}`}
           tabIndex="0"
         >
           {option}
@@ -49,18 +43,18 @@ const SortOptions = ({sort, changeSort}) => {
 };
 
 const mapStateToProps = (state) => ({
-  sort: state.sort
+  activeSort: state.activeSort
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeSort: (newSort) => {
-    dispatch(ActionCreator.changeSort(newSort));
+  changeActiveSort: (newActiveSort) => {
+    dispatch(ActionCreator.changeActiveSort(newActiveSort));
   }
 });
 
 SortOptions.propTypes = {
-  sort: PropTypes.string.isRequired,
-  changeSort: PropTypes.func.isRequired
+  activeSort: PropTypes.string.isRequired,
+  changeActiveSort: PropTypes.func.isRequired
 };
 
 export {SortOptions};
