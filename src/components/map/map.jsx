@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {mapCityTypes, mapPointTypes} from '../../prop-types/prop-types.jsx';
 import leaflet from 'leaflet';
-
 import "leaflet/dist/leaflet.css";
 
 // ф-ция возвращает новый слой карты: `voyager`
@@ -79,33 +78,10 @@ const Map = ({city, points, activeOfferId}) => {
   />;
 };
 
-const mapStateToProps = (state) => ({
-  city: state.offers.find((offer) => offer.city.name === state.activeCity).city.location,
-  points: state.offers.filter((offer) => offer.city.name === state.activeCity)
-  .map((offer) => {
-    return {
-      id: offer.id,
-      lat: offer.location.latitude,
-      lng: offer.location.longitude,
-      title: offer.title
-    };
-  }),
-  activeOfferId: state.activeOfferId
-});
-
 Map.propTypes = {
-  city: PropTypes.shape({
-    latitude: PropTypes.number.isRequired,
-    longitude: PropTypes.number.isRequired,
-    zoom: PropTypes.number.isRequired,
-  }),
-  points: PropTypes.arrayOf(PropTypes.shape({
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-  })),
+  city: PropTypes.shape(mapCityTypes).isRequired,
+  points: PropTypes.arrayOf(PropTypes.shape(mapPointTypes)).isRequired,
   activeOfferId: PropTypes.string
 };
 
-export {Map};
-export default connect(mapStateToProps, null)(Map);
+export default Map;

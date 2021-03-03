@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Class} from '../../const.js';
 
 import Header from '../header/header.jsx';
-import Map from '../map/map.jsx';
+import MainScreenMap from '../main-screen-map/main-screen-map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 import PlacesMainEmpty from '../places-main-empty/places-main-empty.jsx';
 import PlacesMain from '../places-main/places-main.jsx';
@@ -23,9 +23,7 @@ const MainScreen = ({hasOffers}) => (
         <div className={`cities__places-container container ${hasOffers && Class.PLACES_EMPTY}`}>
           {hasOffers ? <PlacesMain/> : <PlacesMainEmpty/>}
           <div className="cities__right-section">
-            <section className="cities__map map">
-              {hasOffers && <Map/>}
-            </section>
+            {hasOffers && <MainScreenMap/>}
           </div>
         </div>
       </div>

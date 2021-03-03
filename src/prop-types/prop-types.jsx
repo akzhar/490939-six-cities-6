@@ -45,4 +45,16 @@ const reviewTypes = {
   user: PropTypes.shape(userTypes).isRequired
 };
 
-export {offerTypes, reviewTypes};
+const mapCityTypes = {
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
+  zoom: PropTypes.number.isRequired,
+};
+
+const mapPointTypes = {
+  lat: PropTypes.number.isRequired,
+  lng: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+};
+
+export {offerTypes, reviewTypes, mapCityTypes, mapPointTypes};

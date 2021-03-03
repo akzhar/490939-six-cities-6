@@ -8,7 +8,7 @@ import Header from '../header/header.jsx';
 import ToBookMarksBtn from '../to-bookmarks-btn/to-bookmarks-btn.jsx';
 import CommentForm from '../comment-form/comment-form.jsx';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
-import Map from '../map/map.jsx';
+import RoomScreenMap from '../room-screen-map/room-screen-map.jsx';
 import PlacesNear from '../places-near/places-near.jsx';
 import RatingStars from '../rating-stars/rating-stars.jsx';
 
@@ -108,9 +108,7 @@ const RoomScreen = ({offer}) => {
               </section>
             </div>
           </div>
-          <section className="property__map map">
-            {offersNear.length && <Map/>}
-          </section>
+          {offersNear.length && <RoomScreenMap offers={offersNear}/>}
         </section>
         <div className="container">
           {offersNear.length && <PlacesNear offers={offersNear}/>}
