@@ -31,7 +31,7 @@ const Map = ({city, points, activeOfferId}) => {
 
   const createMap = () => {
     const leafletMap = leaflet.map(`map`, {center, zoom, zoomControl: true});
-
+    mapLayer.addTo(leafletMap);
     setMap(leafletMap);
     updateMap(leafletMap);
   };
@@ -43,7 +43,6 @@ const Map = ({city, points, activeOfferId}) => {
           layer.remove();
         }
       });
-      mapLayer.addTo(map);
       map.setView(center, zoom);
       points.forEach((point) => {
         leaflet.marker(point, {icon: iconDefault, alt: point.id}).addTo(map).bindPopup(point.title);
@@ -86,8 +85,8 @@ const mapStateToProps = (state) => ({
   .map((offer) => {
     return {
       id: offer.id,
-      lat: offer.city.location.latitude,
-      lng: offer.city.location.longitude,
+      lat: offer.location.latitude,
+      lng: offer.location.longitude,
       title: offer.title
     };
   }),

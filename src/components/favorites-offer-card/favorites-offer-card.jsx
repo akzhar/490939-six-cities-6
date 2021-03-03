@@ -9,7 +9,7 @@ const FavoritesOfferCard = ({offer}) => {
   return <article className="favorites__card place-card">
     <div className="favorites__image-wrapper place-card__image-wrapper">
       <Link to={`/room/${offer.id}`}>
-        <img className="place-card__image" src={offer.previewImage} width="150" height="110" alt="Place image" />
+        <img className="place-card__image" src={offer[`preview_image`]} width="150" height="110" alt="Place image" />
       </Link>
     </div>
     <div className="favorites__card-info place-card__info">

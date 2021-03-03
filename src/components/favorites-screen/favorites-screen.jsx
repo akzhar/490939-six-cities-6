@@ -48,7 +48,9 @@ const FavoritesScreen = ({offers, cities}) => { // сейчас выводятс
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {offers.map((offer) => {
+                    {offers
+                    .filter((offer) => offer.city.name === city)
+                    .map((offer) => {
                       if (city === offer.city.name) {
                         return <FavoritesOfferCard key={offer.id} offer={offer}/>;
                       }
@@ -71,7 +73,7 @@ const FavoritesScreen = ({offers, cities}) => { // сейчас выводятс
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers.filter((offer) => offer.city.name === state.city),
+  offers: state.offers,
   cities: state.cities
 });
 

@@ -16,7 +16,7 @@ const OfferCard = ({offer, dataId, handleOfferCardHover, handleOfferCardBlur}) =
     {offer.isPremium ? <PremiumMark/> : ``}
     <div className="cities__image-wrapper place-card__image-wrapper">
       <Link to={`/room/${offer.id}`}>
-        <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
+        <img className="place-card__image" src={offer[`preview_image`]} width="260" height="200" alt="Place image" />
       </Link>
     </div>
     <div className="place-card__info">

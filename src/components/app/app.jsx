@@ -23,16 +23,18 @@ const App = ({offers, reviews}) => {
       <Route path="/favorites" exact>
         <FavoritesScreen/>
       </Route>
-      <Route path="/room/:id" exact render={(routeProps) => {
-        const offer = offers.find((room) => room.id.toString() === routeProps.match.params.id);
-        const offerReviews = offer ? reviews.filter((review) => review.id === offer.id) : [];
-        return offer ? <RoomScreen
-          offer={offer}
-          reviews={offerReviews}
-          // offersNear - в будущем данные об объявлениях неподалёку будут приходить с сервера
-          offersNear={offers.slice(0, 3)}
-        /> : <NotFoundScreen/>;
-      }}/>
+      <Route
+        path="/room/:id"
+        exact
+        render={(routeProps) => {
+          const offer = offers.find((room) => room.id.toString() === routeProps.match.params.id);
+          if (offer) {
+            const offerReviews = reviews.filter((review) => review.id === offer.id);
+            return <RoomScreen offer={offer} reviews={offerReviews}/>;
+          }
+          return <NotFoundScreen/>;
+        }}
+      />
       <Route>
         <NotFoundScreen/>
       </Route>

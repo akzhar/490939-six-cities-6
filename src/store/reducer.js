@@ -1,6 +1,4 @@
 import {ActionType} from './actions.js';
-import offers from '../mocks/offers.json';
-import reviews from '../mocks/reviews.json';
 import {CITIES} from '../const.json';
 
 // TODO: move to utils
@@ -13,12 +11,14 @@ const initialState = {
   city: `Paris`,
   sort: `Popular`,
   activeOfferId: null,
-  offers,
-  reviews
+  offers: [],
+  reviews: []
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case ActionType.OFFERS_LOAD:
+      return {...state, offers: action.payload};
     case ActionType.CITY_CHANGE:
       return {...state, city: action.payload};
     case ActionType.SORT_CHANGE:
