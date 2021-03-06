@@ -6,7 +6,6 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './store/reducer.js';
 import thunk from 'redux-thunk';
-import api from './api.js';
 import {ActionCreator} from './store/actions.js';
 
 const store = createStore(
@@ -16,11 +15,7 @@ const store = createStore(
     )
 );
 
-api.get(`/hotels`)
-  .then((response) => {
-    store.dispatch(ActionCreator.finishOffersLoading());
-    store.dispatch(ActionCreator.setOffers(response.data));
-  });
+store.dispatch(ActionCreator.loadOffers());
 
 ReactDOM.render(
     <Provider store={store}>

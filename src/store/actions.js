@@ -1,3 +1,5 @@
+import api from '../api.js';
+
 export const ActionType = {
   OFFERS_IS_LOADED: `offers/loaded`,
   OFFERS_LOAD: `offers/load`,
@@ -7,13 +9,16 @@ export const ActionType = {
 };
 
 export const ActionCreator = {
-  finishOffersLoading: () => ({
-    type: ActionType.OFFERS_IS_LOADED
-  }),
-  setOffers: (offers) => ({
-    type: ActionType.OFFERS_LOAD,
-    payload: offers
-  }),
+  loadOffers: () => (dispatch) => {
+    api.get(`/hotels`)
+      .then((response) => {
+        dispatch({type: ActionType.OFFERS_IS_LOADED});
+        dispatch({
+          type: ActionType.OFFERS_LOAD,
+          payload: response.data
+        });
+      });
+  },
   changeActiveCity: (newActiveCity) => ({
     type: ActionType.CITY_CHANGE,
     payload: newActiveCity
