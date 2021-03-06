@@ -9,7 +9,7 @@ export const ActionType = {
 };
 
 export const ActionCreator = {
-  loadOffers: () => (dispatch) => {
+  loadOffers: (dispatch, _getStore) => {
     api.get(`/hotels`)
       .then((response) => {
         dispatch({type: ActionType.OFFERS_IS_LOADED});

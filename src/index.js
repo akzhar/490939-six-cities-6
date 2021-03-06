@@ -15,7 +15,7 @@ const store = createStore(
     )
 );
 
-store.dispatch(ActionCreator.loadOffers());
+store.dispatch(ActionCreator.loadOffers);
 
 ReactDOM.render(
     <Provider store={store}>
