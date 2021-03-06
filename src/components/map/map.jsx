@@ -4,14 +4,6 @@ import {mapCityTypes, mapPointTypes} from '../../prop-types/prop-types.jsx';
 import leaflet from 'leaflet';
 import "leaflet/dist/leaflet.css";
 
-// ф-ция возвращает новый слой карты: `voyager`
-const mapLayer = leaflet.tileLayer(
-    `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
-    {
-      attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-    }
-);
-
 const iconDefault = leaflet.icon({
   iconUrl: `img/pin.svg`,
   iconSize: [30, 30]
@@ -30,6 +22,12 @@ const Map = ({city, points, activeOfferId}) => {
 
   const createMap = () => {
     const leafletMap = leaflet.map(`map`, {center, zoom, zoomControl: true});
+    const mapLayer = leaflet.tileLayer(
+        `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
+        {
+          attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+        }
+    );
     mapLayer.addTo(leafletMap);
     setMap(leafletMap);
     updateMap(leafletMap);
