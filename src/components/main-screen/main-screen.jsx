@@ -6,9 +6,9 @@ import {Class} from '../../const.js';
 import Header from '../header/header.jsx';
 import MainScreenMap from '../main-screen-map/main-screen-map.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
-import PlacesMainEmpty from '../places-main-empty/places-main-empty.jsx';
-import PlacesMainLoading from '../places-main-loading/places-main-loading.jsx';
-import PlacesMain from '../places-main/places-main.jsx';
+import MainScreenPlacesLoading from '../main-screen-places-loading/main-screen-places-loading.jsx';
+import MainScreenPlacesEmpty from '../main-screen-places-empty/main-screen-places-empty.jsx';
+import MainScreenPlaces from '../main-screen-places/main-screen-places.jsx';
 
 const MainScreen = ({offersIsLoaded, hasOffers}) => (
   <div className="page page--gray page--main">
@@ -22,9 +22,9 @@ const MainScreen = ({offersIsLoaded, hasOffers}) => (
       </div>
       <div className="cities">
         <div className={`cities__places-container container ${(offersIsLoaded && !hasOffers) && Class.PLACES_EMPTY}`}>
-          {(!offersIsLoaded && !hasOffers) && <PlacesMainLoading/>}
-          {(offersIsLoaded && hasOffers) && <PlacesMain/>}
-          {(offersIsLoaded && !hasOffers) && <PlacesMainEmpty/>}
+          {(!offersIsLoaded && !hasOffers) && <MainScreenPlacesLoading/>}
+          {(offersIsLoaded && !hasOffers) && <MainScreenPlacesEmpty/>}
+          {(offersIsLoaded && hasOffers) && <MainScreenPlaces/>}
           <div className="cities__right-section">
             <section className="cities__map map">
               {(offersIsLoaded && hasOffers) && <MainScreenMap/>}

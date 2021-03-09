@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PlacesMainLoading = () => (
+const MainScreenPlacesLoading = () => (
   <section className="cities__no-places">
     <div className="cities__status-wrapper tabs__content">
       <b className="cities__status">Loading offers for you...</b>
@@ -9,4 +9,4 @@ const PlacesMainLoading = () => (
   </section>
 );
 
-export default PlacesMainLoading;
+export default MainScreenPlacesLoading;

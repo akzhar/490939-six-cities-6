@@ -8,7 +8,7 @@ import {ActiveSortToCompareFunc} from '../../const.js';
 import SortOptions from '../sort-options/sort-options.jsx';
 import OffersList from '../offers-list/offers-list.jsx';
 
-const PlacesMain = ({activeSort, activeCity, offers, setActiveOfferId}) => {
+const MainScreenPlaces = ({activeSort, activeCity, offers, setActiveOfferId}) => {
 
   function handleHover(evt) {
     setActiveOfferId(evt.currentTarget.dataset.id);
@@ -44,12 +44,12 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-PlacesMain.propTypes = {
+MainScreenPlaces.propTypes = {
   activeSort: PropTypes.string.isRequired,
   activeCity: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
   setActiveOfferId: PropTypes.func.isRequired
 };
 
-export {PlacesMain};
-export default connect(mapStateToProps, mapDispatchToProps)(PlacesMain);
+export {MainScreenPlaces};
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreenPlaces);
