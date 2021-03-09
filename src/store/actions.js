@@ -1,34 +1,34 @@
 import api from '../api.js';
 
 export const ActionType = {
-  OFFERS_IS_LOADED: `offers/loaded`,
-  OFFERS_LOAD: `offers/load`,
-  CITY_CHANGE: `city/change`,
-  SORT_CHANGE: `sort/change`,
-  OFFER_SET_ACTIVE: `offer/set/active`
+  CHANGE_ACTIVECITY: `change/activeCity`,
+  CHANGE_ACTIVESORT: `change/activeSort`,
+  CHANGE_ACTIVEOFFER_ID: `change/activeOfferId`,
+  SET_OFFERS_IS_LOADED: `set/offersIsLoaded`,
+  UPDATE_OFFERS: `update/offers`
 };
 
 export const ActionCreator = {
   loadOffers: (dispatch, _getStore) => {
     api.get(`/hotels`)
       .then((response) => {
-        dispatch({type: ActionType.OFFERS_IS_LOADED});
         dispatch({
-          type: ActionType.OFFERS_LOAD,
+          type: ActionType.UPDATE_OFFERS,
           payload: response.data
         });
+        dispatch({type: ActionType.SET_OFFERS_IS_LOADED});
       });
   },
   changeActiveCity: (newActiveCity) => ({
-    type: ActionType.CITY_CHANGE,
+    type: ActionType.CHANGE_ACTIVECITY,
     payload: newActiveCity
   }),
   changeActiveSort: (newActiveSort) => ({
-    type: ActionType.SORT_CHANGE,
+    type: ActionType.CHANGE_ACTIVESORT,
     payload: newActiveSort
   }),
   setActiveOfferId: (activeOfferId) => ({
-    type: ActionType.OFFER_SET_ACTIVE,
+    type: ActionType.CHANGE_ACTIVEOFFER_ID,
     payload: activeOfferId
   })
 };
