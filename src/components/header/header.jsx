@@ -47,7 +47,7 @@ const mapStateToProps = (state) => ({
 
 Header.propTypes = {
   isAuthorized: PropTypes.bool.isRequired,
-  userEmailser: PropTypes.string,
+  userEmail: PropTypes.string,
   avatarUrl: PropTypes.string
 };
 
