@@ -1,15 +1,18 @@
-import api from '../api.js';
+import getApi from '../api.js';
+
+const api = getApi();
 
 export const ActionType = {
   CHANGE_ACTIVECITY: `change/activeCity`,
   CHANGE_ACTIVESORT: `change/activeSort`,
   CHANGE_ACTIVEOFFER_ID: `change/activeOfferId`,
   SET_OFFERS_IS_LOADED: `set/offersIsLoaded`,
-  UPDATE_OFFERS: `update/offers`
+  UPDATE_OFFERS: `update/offers`,
+  SET_IS_AUTORIZED: `set/isAutorized`
 };
 
 export const ActionCreator = {
-  loadOffers: (dispatch, _getStore) => {
+  updateOffers: (dispatch, _getStore) => {
     api.get(`/hotels`)
       .then((response) => {
         dispatch({
@@ -27,8 +30,14 @@ export const ActionCreator = {
     type: ActionType.CHANGE_ACTIVESORT,
     payload: newActiveSort
   }),
-  setActiveOfferId: (activeOfferId) => ({
+  changeActiveOfferId: (activeOfferId) => ({
     type: ActionType.CHANGE_ACTIVEOFFER_ID,
     payload: activeOfferId
-  })
+  }),
+  login: (dispatch, _getState) => {
+    api.get(`/login`)
+      .then(() => {
+        dispatch({type: ActionType.SET_IS_AUTORIZED});
+      });
+  }
 };

@@ -7,7 +7,8 @@ const initialState = {
   activeSort: SORT_OPTIONS[0],
   activeOfferId: null,
   offersIsLoaded: false,
-  offers: []
+  offers: [],
+  isAuthorized: false
 };
 
 const reducer = (state, action) => {
@@ -22,6 +23,8 @@ const reducer = (state, action) => {
       return {...state, offersIsLoaded: true};
     case ActionType.UPDATE_OFFERS:
       return {...state, offers: action.payload};
+    case ActionType.SET_IS_AUTORIZED:
+      return {...state, isAuthorized: true};
     default:
       return {...initialState};
   }

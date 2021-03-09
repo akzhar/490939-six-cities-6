@@ -8,14 +8,14 @@ import {ActiveSortToCompareFunc} from '../../const.js';
 import SortOptions from '../sort-options/sort-options.jsx';
 import OffersList from '../offers-list/offers-list.jsx';
 
-const MainScreenPlaces = ({activeSort, activeCity, offers, setActiveOfferId}) => {
+const MainScreenPlaces = ({activeSort, activeCity, offers, changeActiveOfferId}) => {
 
   function handleHover(evt) {
-    setActiveOfferId(evt.currentTarget.dataset.id);
+    changeActiveOfferId(evt.currentTarget.dataset.id);
   }
 
   function handleBlur() {
-    setActiveOfferId(null);
+    changeActiveOfferId(null);
   }
 
   return <section className="cities__places places">
@@ -39,8 +39,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setActiveOfferId: (activeOfferId) => {
-    dispatch(ActionCreator.setActiveOfferId(activeOfferId));
+  changeActiveOfferId: (activeOfferId) => {
+    dispatch(ActionCreator.changeActiveOfferId(activeOfferId));
   }
 });
 
@@ -48,7 +48,7 @@ MainScreenPlaces.propTypes = {
   activeSort: PropTypes.string.isRequired,
   activeCity: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
-  setActiveOfferId: PropTypes.func.isRequired
+  changeActiveOfferId: PropTypes.func.isRequired
 };
 
 export {MainScreenPlaces};
