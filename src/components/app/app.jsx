@@ -4,27 +4,34 @@ import {connect} from 'react-redux';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
+import {AppRoute} from '../../const.js';
+import PrivateRoute from '../private-route/private-route.jsx';
 import MainScreen from '../main-screen/main-screen.jsx';
 import LoginScreen from '../login-screen/login-screen.jsx';
 import FavoritesScreen from '../favorites-screen/favorites-screen.jsx';
 import RoomScreen from '../room-screen/room-screen.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 
-const App = ({offers}) => {
+const App = ({offers, isAuthorized}) => {
 
   return <BrowserRouter>
     <Switch>
       <Route path="/" exact>
         <MainScreen/>
       </Route>
-      <Route path="/login" exact>
+      <Route path={AppRoute.LOGIN} exact>
         <LoginScreen/>
       </Route>
-      <Route path="/favorites" exact>
-        <FavoritesScreen/>
-      </Route>
+      <PrivateRoute
+        isAuthorized={isAuthorized}
+        path={AppRoute.FAVORITES}
+        exact={true}
+        render = {(_routeProps) => {
+          return <FavoritesScreen/>;
+        }}
+      />
       <Route
-        path="/room/:id"
+        path={`${AppRoute.OFFER}/:id`}
         exact
         render={(routeProps) => {
           const roomId = +routeProps.match.params.id;
@@ -40,11 +47,13 @@ const App = ({offers}) => {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers
+  offers: state.offers,
+  isAuthorized: state.isAuthorized
 });
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired
+  offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
+  isAuthorized: PropTypes.bool.isRequired
 };
 
 export {App};

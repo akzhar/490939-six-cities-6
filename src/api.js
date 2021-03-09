@@ -3,6 +3,15 @@ import axios from 'axios';
 const BASE_API_URL = `https://6.react.pages.academy/six-cities`;
 const API_TIMEOUT = 5000;
 
+const apiRoute = {
+  get: {
+    login: `/login`,
+    offers: `/hotels`,
+    offersNear: (offerId) => `/hotels/${offerId}/nearby`,
+    reviews: (offerId) => `/comments/${offerId}`
+  }
+};
+
 const HttpCode = {
   OK: 200,
   UNAUTHORIZED: 401
@@ -34,4 +43,5 @@ const getApi = () => {
   return api;
 };
 
+export {apiRoute};
 export default getApi;

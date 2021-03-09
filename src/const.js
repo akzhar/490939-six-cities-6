@@ -20,4 +20,9 @@ export const Class = {
   PLACES_EMPTY: `cities__places-container--empty`,
   HOST_PRO: `property__avatar-wrapper--pro`
 };
+export const AppRoute = {
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+  OFFER: `/room`
+};
 

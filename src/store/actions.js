@@ -1,4 +1,4 @@
-import getApi from '../api.js';
+import getApi, {apiRoute} from '../api.js';
 
 const api = getApi();
 
@@ -13,7 +13,7 @@ export const ActionType = {
 
 export const ActionCreator = {
   updateOffers: (dispatch, _getStore) => {
-    api.get(`/hotels`)
+    api.get(apiRoute.get.offers)
       .then((response) => {
         dispatch({
           type: ActionType.UPDATE_OFFERS,
@@ -35,7 +35,7 @@ export const ActionCreator = {
     payload: activeOfferId
   }),
   login: (dispatch, _getState) => {
-    api.get(`/login`)
+    api.get(apiRoute.get.login)
       .then(() => {
         dispatch({type: ActionType.SET_IS_AUTORIZED});
       });

@@ -2,7 +2,9 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
 import {Class} from '../../const.js';
-import api from '../../api.js';
+import getApi, {apiRoute} from '../../api.js';
+
+const api = getApi();
 
 import Header from '../header/header.jsx';
 import ToBookMarksBtn from '../to-bookmarks-btn/to-bookmarks-btn.jsx';
@@ -18,8 +20,8 @@ const RoomScreen = ({offer}) => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    const offersNearPromise = api.get(`/hotels/${offer.id}/nearby`);
-    const reviewsPromise = api.get(`/comments/${offer.id}`);
+    const offersNearPromise = api.get(apiRoute.get.offersNear(offer.id));
+    const reviewsPromise = api.get(apiRoute.get.reviews(offer.id));
     Promise.all([offersNearPromise, reviewsPromise])
       .then((responses) => {
         setOffersNear(responses[0].data);
