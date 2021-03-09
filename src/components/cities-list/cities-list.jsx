@@ -2,14 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
+import {Class} from '../../const.js';
 
-const CitiesList = ({cities, city, changeCity}) => (
+const CitiesList = ({cities, activeCity, changeActiveCity}) => (
   <ul className="locations__list tabs__list">
     {cities.map((cityName) => (
       <li className="locations__item" key={cityName}>
         <a
-          className={`locations__item-link tabs__item ${(cityName === city) ? `tabs__item--active` : ``}`}
-          onClick={() => changeCity(cityName)}
+          className={`locations__item-link tabs__item ${(cityName === activeCity) && Class.TAB_ACTIVE}`}
+          onClick={() => changeActiveCity(cityName)}
         >
           <span>{cityName}</span>
         </a>
@@ -20,19 +21,19 @@ const CitiesList = ({cities, city, changeCity}) => (
 
 const mapStateToProps = (state) => ({
   cities: state.cities,
-  city: state.city
+  activeCity: state.activeCity
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCity(newCity) {
-    dispatch(ActionCreator.changeCity(newCity));
+  changeActiveCity(newActiveCity) {
+    dispatch(ActionCreator.changeActiveCity(newActiveCity));
   },
 });
 
 CitiesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  city: PropTypes.string.isRequired,
-  changeCity: PropTypes.func.isRequired
+  activeCity: PropTypes.string.isRequired,
+  changeActiveCity: PropTypes.func.isRequired
 };
 
 export {CitiesList};

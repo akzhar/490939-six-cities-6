@@ -7,7 +7,9 @@ import OffersList from '../offers-list/offers-list.jsx';
 const PlacesNear = ({offers}) => (
   <section className="near-places places">
     <h2 className="near-places__title">Other places in the neighbourhood</h2>
-    <OffersList offers={offers} className="near-places__list"/>
+    <div className="near-places__list places__list">
+      <OffersList offers={offers}/>
+    </div>
   </section>
 );
 

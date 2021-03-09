@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import {reviewTypes} from '../../prop-types/prop-types.jsx';
 
 import ReviewItem from '../review-item/review-item.jsx';
