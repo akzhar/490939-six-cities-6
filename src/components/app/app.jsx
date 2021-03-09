@@ -16,7 +16,7 @@ const App = ({offers, isAuthorized}) => {
 
   return <BrowserRouter>
     <Switch>
-      <Route path="/" exact>
+      <Route path={AppRoute.MAIN} exact>
         <MainScreen/>
       </Route>
       <Route path={AppRoute.LOGIN} exact>

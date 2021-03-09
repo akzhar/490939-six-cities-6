@@ -10,9 +10,9 @@ import MainScreenPlacesLoading from '../main-screen-places-loading/main-screen-p
 import MainScreenPlacesEmpty from '../main-screen-places-empty/main-screen-places-empty.jsx';
 import MainScreenPlaces from '../main-screen-places/main-screen-places.jsx';
 
-const MainScreen = ({offersIsLoaded, hasOffers, isAuthorized}) => (
+const MainScreen = ({offersIsLoaded, hasOffers}) => (
   <div className="page page--gray page--main">
-    <Header isMain={true} isAuthorized={isAuthorized}/>
+    <Header/>
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
@@ -38,14 +38,12 @@ const MainScreen = ({offersIsLoaded, hasOffers, isAuthorized}) => (
 
 const mapStateToProps = (state) => ({
   offersIsLoaded: state.offersIsLoaded,
-  hasOffers: state.offers.some((offer) => offer.city.name === state.activeCity),
-  isAuthorized: state.isAuthorized
+  hasOffers: state.offers.some((offer) => offer.city.name === state.activeCity)
 });
 
 MainScreen.propTypes = {
   offersIsLoaded: PropTypes.bool.isRequired,
-  hasOffers: PropTypes.bool.isRequired,
-  isAuthorized: PropTypes.bool.isRequired
+  hasOffers: PropTypes.bool.isRequired
 };
 
 export {MainScreen};

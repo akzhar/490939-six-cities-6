@@ -21,6 +21,7 @@ export const Class = {
   HOST_PRO: `property__avatar-wrapper--pro`
 };
 export const AppRoute = {
+  MAIN: `/`,
   LOGIN: `/login`,
   FAVORITES: `/favorites`,
   OFFER: `/room`

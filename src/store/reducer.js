@@ -8,7 +8,11 @@ const initialState = {
   activeOfferId: null,
   offersIsLoaded: false,
   offers: [],
-  isAuthorized: false
+  isAuthorized: false,
+  user: {
+    email: null,
+    avatarUrl: null
+  }
 };
 
 const reducer = (state, action) => {
@@ -23,8 +27,10 @@ const reducer = (state, action) => {
       return {...state, offersIsLoaded: true};
     case ActionType.UPDATE_OFFERS:
       return {...state, offers: action.payload};
-    case ActionType.SET_IS_AUTORIZED:
-      return {...state, isAuthorized: true};
+    case ActionType.CHANGE_AUTORIZED_STATUS:
+      return {...state, isAuthorized: action.payload};
+    case ActionType.CHANGE_AUTORIZED_USER:
+      return {...state, user: action.payload};
     default:
       return {...initialState};
   }

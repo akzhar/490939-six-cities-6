@@ -8,13 +8,19 @@ const apiRoute = {
     login: `/login`,
     offers: `/hotels`,
     offersNear: (offerId) => `/hotels/${offerId}/nearby`,
-    reviews: (offerId) => `/comments/${offerId}`
+    reviews: (offerId) => `/comments/${offerId}`,
+    logout: `/logout`
+  },
+  post: {
+    login: `/login`,
   }
 };
 
 const HttpCode = {
   OK: 200,
-  UNAUTHORIZED: 401
+  UNAUTHORIZED: 401,
+  BAD_REQUEST: 400,
+  NOT_FOUND: 404
 };
 
 const getApi = () => {
