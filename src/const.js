@@ -1,6 +1,7 @@
 export const MONTH_NAMES = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
 export const SORT_OPTIONS = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
 export const CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+export const ROOM_ID_REGEXP = /(?!\/room\/)\d+/;
 export const RATING_STARS = [
   {value: 5, title: `perfect`},
   {value: 4, title: `good`},
@@ -12,6 +13,9 @@ export const ActiveSortToCompareFunc = {
   "Price: low to high": (a, b) => a.price - b.price,
   "Price: high to low": (a, b) => b.price - a.price,
   "Top rated first": (a, b) => b.rating - a.rating
+};
+export const ReviewsSortToCompareFunc = {
+  "Date: latest to earliest": (a, b) => new Date(b.date) - new Date(a.date)
 };
 export const Class = {
   LIST_OPENED: `places__options--opened`,

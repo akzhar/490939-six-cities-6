@@ -36,7 +36,7 @@ const App = ({offers, isAuthorized}) => {
         render={(routeProps) => {
           const roomId = +routeProps.match.params.id;
           const offer = offers.find((room) => room.id === roomId);
-          return offer ? <RoomScreen offer={offer}/> : <NotFoundScreen/>;
+          return offer ? <RoomScreen offer={offer} isAuthorized={isAuthorized}/> : <NotFoundScreen/>;
         }}
       />
       <Route>

@@ -13,6 +13,7 @@ const apiRoute = {
   },
   post: {
     login: `/login`,
+    comment: (offerId) => `/comments/${offerId}`
   }
 };
 

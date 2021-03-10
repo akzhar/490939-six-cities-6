@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
-import {Class} from '../../const.js';
+import {Class, ReviewsSortToCompareFunc} from '../../const.js';
 import getApi, {apiRoute} from '../../api.js';
+
+const REVIEWS_SORT = `Date: latest to earliest`;
 
 const api = getApi();
 
@@ -14,10 +16,12 @@ import RoomScreenMap from '../room-screen-map/room-screen-map.jsx';
 import RoomScreenPlaces from '../room-screen-places/room-screen-places.jsx';
 import RatingStars from '../rating-stars/rating-stars.jsx';
 
-const RoomScreen = ({offer}) => {
+const RoomScreen = ({offer, isAuthorized}) => {
 
   const [offersNear, setOffersNear] = useState([]);
   const [reviews, setReviews] = useState([]);
+
+  const onCommentSubmit = (newReviews) => setReviews(newReviews);
 
   useEffect(() => {
     const offersNearPromise = api.get(apiRoute.get.offersNear(offer.id));
@@ -105,8 +109,8 @@ const RoomScreen = ({offer}) => {
                 <h2 className="reviews__title">
                   Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
                 </h2>
-                <ReviewsList reviews={reviews}/>
-                <CommentForm/>
+                <ReviewsList reviews={reviews.sort(ReviewsSortToCompareFunc[REVIEWS_SORT])}/>
+                <CommentForm isAuthorized={isAuthorized} onCommentSubmit={onCommentSubmit}/>
               </section>
             </div>
           </div>
@@ -123,7 +127,8 @@ const RoomScreen = ({offer}) => {
 };
 
 RoomScreen.propTypes = {
-  offer: PropTypes.shape(offerTypes)
+  offer: PropTypes.shape(offerTypes),
+  isAuthorized: PropTypes.bool.isRequired
 };
 
 export default RoomScreen;
