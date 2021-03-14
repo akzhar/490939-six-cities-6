@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Router, Switch, Route} from 'react-router-dom';
+import browserHistory from '../../browser-history.js';
 
 import {AppRoute} from '../../const.js';
 import PrivateRoute from '../private-route/private-route.jsx';
@@ -14,7 +15,7 @@ import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
 
 const App = ({offers, isAuthorized}) => {
 
-  return <BrowserRouter>
+  return <Router history={browserHistory}>
     <Switch>
       <Route path={AppRoute.MAIN} exact>
         <MainScreen/>
@@ -43,7 +44,7 @@ const App = ({offers, isAuthorized}) => {
         <NotFoundScreen/>
       </Route>
     </Switch>
-  </BrowserRouter>;
+  </Router>;
 };
 
 const mapStateToProps = (state) => ({

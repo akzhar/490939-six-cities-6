@@ -31,6 +31,8 @@ const reducer = (state, action) => {
       return {...state, isAuthorized: action.payload};
     case ActionType.CHANGE_AUTORIZED_USER:
       return {...state, user: action.payload};
+    case ActionType.REDIRECT_TO:
+      return {...state};
     default:
       return {...initialState};
   }

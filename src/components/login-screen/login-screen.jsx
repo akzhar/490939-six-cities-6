@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {useHistory} from 'react-router-dom';
 import {ActionCreator} from '../../store/actions.js';
 import {AppRoute} from '../../const.js';
 
 import Header from '../header/header.jsx';
 
-const LoginScreen = ({tryLogin}) => {
-
-  const history = useHistory();
+const LoginScreen = ({tryLogin, redirectTo}) => {
 
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
@@ -18,7 +15,7 @@ const LoginScreen = ({tryLogin}) => {
     const loginInfo = {email: formData.get(`email`), password: formData.get(`password`)};
     if (loginInfo.email && loginInfo.password) {
       tryLogin(loginInfo, () => {
-        history.push(AppRoute.MAIN);
+        redirectTo(AppRoute.MAIN);
       });
     }
   };
@@ -54,11 +51,13 @@ const LoginScreen = ({tryLogin}) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  tryLogin: (user, onSuccess) => dispatch(ActionCreator.login(user, onSuccess))
+  tryLogin: (user, onSuccess) => dispatch(ActionCreator.login(user, onSuccess)),
+  redirectTo: (to) => dispatch(ActionCreator.redirectTo(to))
 });
 
 LoginScreen.propTypes = {
-  tryLogin: PropTypes.func.isRequired
+  tryLogin: PropTypes.func.isRequired,
+  redirectTo: PropTypes.func.isRequired
 };
 
 export {LoginScreen};

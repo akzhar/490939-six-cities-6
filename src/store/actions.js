@@ -1,4 +1,5 @@
 import getApi, {apiRoute} from '../api.js';
+import browserHistory from '../browser-history.js';
 
 const api = getApi();
 
@@ -9,7 +10,8 @@ export const ActionType = {
   SET_OFFERS_IS_LOADED: `set/offersIsLoaded`,
   UPDATE_OFFERS: `update/offers`,
   CHANGE_AUTORIZED_STATUS: `change/isAutorized`,
-  CHANGE_AUTORIZED_USER: `change/user`
+  CHANGE_AUTORIZED_USER: `change/user`,
+  REDIRECT_TO: `redirectTo`
 };
 
 export const ActionCreator = {
@@ -56,5 +58,9 @@ export const ActionCreator = {
       .catch((error) => {
         throw error;
       });
+  },
+  redirectTo: (to) => (dispatch, _getState) => {
+    dispatch({type: ActionType.REDIRECT_TO});
+    browserHistory.push(to);
   }
 };
