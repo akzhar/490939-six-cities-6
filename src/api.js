@@ -9,11 +9,13 @@ const apiRoute = {
     offers: `/hotels`,
     offersNear: (offerId) => `/hotels/${offerId}/nearby`,
     reviews: (offerId) => `/comments/${offerId}`,
-    logout: `/logout`
+    logout: `/logout`,
+    favorites: ``
   },
   post: {
     login: `/login`,
-    comment: (offerId) => `/comments/${offerId}`
+    comment: (offerId) => `/comments/${offerId}`,
+    favorites: ``
   }
 };
 
