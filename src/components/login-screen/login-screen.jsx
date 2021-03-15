@@ -1,15 +1,32 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/actions.js';
+import {AppRoute} from '../../const.js';
 
 import Header from '../header/header.jsx';
 
-const LoginScreen = () => (
-  <div className="page page--gray page--login">
+const LoginScreen = ({tryLogin, redirectTo}) => {
+
+  const handleFormSubmit = (evt) => {
+    evt.preventDefault();
+    const form = evt.target;
+    const formData = new FormData(form);
+    const loginInfo = {email: formData.get(`email`), password: formData.get(`password`)};
+    if (loginInfo.email && loginInfo.password) {
+      tryLogin(loginInfo, () => {
+        redirectTo(AppRoute.MAIN);
+      });
+    }
+  };
+
+  return <div className="page page--gray page--login">
     <Header/>
     <main className="page__main page__main--login">
       <div className="page__login-container container">
         <section className="login">
           <h1 className="login__title">Sign in</h1>
-          <form className="login__form form" action="#" method="post">
+          <form className="login__form form" action="#" method="post" onSubmit={handleFormSubmit}>
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden">E-mail</label>
               <input className="login__input form__input" type="email" name="email" placeholder="Email" required=""/>
@@ -30,7 +47,18 @@ const LoginScreen = () => (
         </section>
       </div>
     </main>
-  </div>
-);
+  </div>;
+};
 
-export default LoginScreen;
+const mapDispatchToProps = (dispatch) => ({
+  tryLogin: (user, onSuccess) => dispatch(ActionCreator.login(user, onSuccess)),
+  redirectTo: (to) => dispatch(ActionCreator.redirectTo(to))
+});
+
+LoginScreen.propTypes = {
+  tryLogin: PropTypes.func.isRequired,
+  redirectTo: PropTypes.func.isRequired
+};
+
+export {LoginScreen};
+export default connect(null, mapDispatchToProps)(LoginScreen);

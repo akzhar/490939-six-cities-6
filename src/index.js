@@ -15,7 +15,10 @@ const store = createStore(
     )
 );
 
-store.dispatch(ActionCreator.loadOffers);
+// temp logout
+store.dispatch(ActionCreator.logout);
+// store.dispatch(ActionCreator.checkLogin);
+store.dispatch(ActionCreator.updateOffers);
 
 ReactDOM.render(
     <Provider store={store}>

@@ -7,21 +7,32 @@ const initialState = {
   activeSort: SORT_OPTIONS[0],
   activeOfferId: null,
   offersIsLoaded: false,
-  offers: []
+  offers: [],
+  isAuthorized: false,
+  user: {
+    email: null,
+    avatarUrl: null
+  }
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case ActionType.CITY_CHANGE:
+    case ActionType.CHANGE_ACTIVECITY:
       return {...state, activeCity: action.payload};
-    case ActionType.SORT_CHANGE:
+    case ActionType.CHANGE_ACTIVESORT:
       return {...state, activeSort: action.payload};
-    case ActionType.OFFER_SET_ACTIVE:
+    case ActionType.CHANGE_ACTIVEOFFER_ID:
       return {...state, activeOfferId: action.payload};
-    case ActionType.OFFERS_LOAD:
-      return {...state, offers: action.payload};
-    case ActionType.OFFERS_IS_LOADED:
+    case ActionType.SET_OFFERS_IS_LOADED:
       return {...state, offersIsLoaded: true};
+    case ActionType.UPDATE_OFFERS:
+      return {...state, offers: action.payload};
+    case ActionType.CHANGE_AUTORIZED_STATUS:
+      return {...state, isAuthorized: action.payload};
+    case ActionType.CHANGE_AUTORIZED_USER:
+      return {...state, user: action.payload};
+    case ActionType.REDIRECT_TO:
+      return {...state};
     default:
       return {...initialState};
   }

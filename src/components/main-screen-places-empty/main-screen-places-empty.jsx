@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-const PlacesMainEmpty = ({activeCity}) => (
+const MainScreenPlacesEmpty = ({activeCity}) => (
   <section className="cities__no-places">
     <div className="cities__status-wrapper tabs__content">
       <b className="cities__status">No places to stay available</b>
@@ -15,9 +15,9 @@ const mapStateToProps = (state) => ({
   activeCity: state.activeCity
 });
 
-PlacesMainEmpty.propTypes = {
+MainScreenPlacesEmpty.propTypes = {
   activeCity: PropTypes.string.isRequired
 };
 
-export {PlacesMainEmpty};
-export default connect(mapStateToProps, null)(PlacesMainEmpty);
+export {MainScreenPlacesEmpty};
+export default connect(mapStateToProps, null)(MainScreenPlacesEmpty);

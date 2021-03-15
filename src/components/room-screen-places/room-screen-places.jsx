@@ -4,7 +4,7 @@ import {offerTypes} from '../../prop-types/prop-types.jsx';
 
 import OffersList from '../offers-list/offers-list.jsx';
 
-const PlacesNear = ({offers}) => (
+const RoomScreenPlaces = ({offers}) => (
   <section className="near-places places">
     <h2 className="near-places__title">Other places in the neighbourhood</h2>
     <div className="near-places__list places__list">
@@ -13,8 +13,8 @@ const PlacesNear = ({offers}) => (
   </section>
 );
 
-PlacesNear.propTypes = {
+RoomScreenPlaces.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired
 };
 
-export default PlacesNear;
+export default RoomScreenPlaces;

@@ -1,25 +1,31 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
-import {Class} from '../../const.js';
-import api from '../../api.js';
+import {Class, ReviewsSortToCompareFunc} from '../../const.js';
+import getApi, {apiRoute} from '../../api.js';
+
+const REVIEWS_SORT = `Date: latest to earliest`;
+
+const api = getApi();
 
 import Header from '../header/header.jsx';
 import ToBookMarksBtn from '../to-bookmarks-btn/to-bookmarks-btn.jsx';
 import CommentForm from '../comment-form/comment-form.jsx';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
 import RoomScreenMap from '../room-screen-map/room-screen-map.jsx';
-import PlacesNear from '../places-near/places-near.jsx';
+import RoomScreenPlaces from '../room-screen-places/room-screen-places.jsx';
 import RatingStars from '../rating-stars/rating-stars.jsx';
 
-const RoomScreen = ({offer}) => {
+const RoomScreen = ({offer, isAuthorized}) => {
 
   const [offersNear, setOffersNear] = useState([]);
   const [reviews, setReviews] = useState([]);
 
+  const onCommentSubmit = (newReviews) => setReviews(newReviews);
+
   useEffect(() => {
-    const offersNearPromise = api.get(`/hotels/${offer.id}/nearby`);
-    const reviewsPromise = api.get(`/comments/${offer.id}`);
+    const offersNearPromise = api.get(apiRoute.get.offersNear(offer.id));
+    const reviewsPromise = api.get(apiRoute.get.reviews(offer.id));
     Promise.all([offersNearPromise, reviewsPromise])
       .then((responses) => {
         setOffersNear(responses[0].data);
@@ -103,8 +109,8 @@ const RoomScreen = ({offer}) => {
                 <h2 className="reviews__title">
                   Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
                 </h2>
-                <ReviewsList reviews={reviews}/>
-                <CommentForm/>
+                <ReviewsList reviews={reviews.sort(ReviewsSortToCompareFunc[REVIEWS_SORT])}/>
+                <CommentForm isAuthorized={isAuthorized} onCommentSubmit={onCommentSubmit}/>
               </section>
             </div>
           </div>
@@ -113,7 +119,7 @@ const RoomScreen = ({offer}) => {
           </section>
         </section>
         <div className="container">
-          {offersNear.length && <PlacesNear offers={offersNear}/>}
+          {offersNear.length && <RoomScreenPlaces offers={offersNear}/>}
         </div>
       </main>
     </div>
@@ -121,7 +127,8 @@ const RoomScreen = ({offer}) => {
 };
 
 RoomScreen.propTypes = {
-  offer: PropTypes.shape(offerTypes)
+  offer: PropTypes.shape(offerTypes),
+  isAuthorized: PropTypes.bool.isRequired
 };
 
 export default RoomScreen;
