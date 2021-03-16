@@ -4,20 +4,27 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
 import {Class} from '../../const.js';
 
-const CitiesList = ({cities, activeCity, changeActiveCity}) => (
-  <ul className="locations__list tabs__list">
+const CitiesList = ({cities, activeCity, changeActiveCity}) => {
+
+  const handleCityNameClick = (cityName) => {
+    if (cityName !== activeCity) {
+      changeActiveCity(cityName);
+    }
+  };
+
+  return <ul className="locations__list tabs__list">
     {cities.map((cityName) => (
       <li className="locations__item" key={cityName}>
         <a
           className={`locations__item-link tabs__item ${(cityName === activeCity) && Class.TAB_ACTIVE}`}
-          onClick={() => changeActiveCity(cityName)}
+          onClick={() => handleCityNameClick(cityName)}
         >
           <span>{cityName}</span>
         </a>
       </li>
     ))}
-  </ul>
-);
+  </ul>;
+};
 
 const mapStateToProps = (state) => ({
   cities: state.cities,
