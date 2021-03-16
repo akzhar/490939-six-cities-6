@@ -45,7 +45,7 @@ const SortOptions = ({activeSort, changeActiveSort}) => {
 };
 
 const mapStateToProps = (state) => ({
-  activeSort: state.activeSort
+  activeSort: state.active.sort
 });
 
 const mapDispatchToProps = (dispatch) => ({

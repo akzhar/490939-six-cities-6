@@ -41,9 +41,9 @@ const MainScreenPlaces = ({activeSort, activeCity, offers, changeActiveOfferId})
 };
 
 const mapStateToProps = (state) => ({
-  activeSort: state.activeSort,
-  activeCity: state.activeCity,
-  offers: state.offers
+  activeSort: state.active.sort,
+  activeCity: state.active.city,
+  offers: state.offers.all
 });
 
 const mapDispatchToProps = (dispatch) => ({

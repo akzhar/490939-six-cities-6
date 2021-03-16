@@ -37,8 +37,8 @@ const MainScreen = ({offersIsLoaded, hasOffers}) => (
 );
 
 const mapStateToProps = (state) => ({
-  offersIsLoaded: state.offersIsLoaded,
-  hasOffers: state.offers.some((offer) => offer.city.name === state.activeCity)
+  offersIsLoaded: state.offers.isLoaded,
+  hasOffers: state.offers.all.some((offer) => offer.city.name === state.active.city)
 });
 
 MainScreen.propTypes = {

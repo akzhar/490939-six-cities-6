@@ -27,9 +27,9 @@ const MainScreenMap = ({activeCity, offers, activeOfferId}) => {
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
-  offers: state.offers,
-  activeOfferId: state.activeOfferId
+  activeCity: state.active.city,
+  offers: state.offers.all,
+  activeOfferId: state.active.offerId
 });
 
 MainScreenMap.propTypes = {

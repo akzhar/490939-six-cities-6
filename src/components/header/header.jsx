@@ -40,7 +40,7 @@ const Header = ({isAuthorized, userEmail, avatarUrl}) => {
 };
 
 const mapStateToProps = (state) => ({
-  isAuthorized: state.isAuthorized,
+  isAuthorized: state.user.isAuthorized,
   userEmail: state.user.email,
   avatarUrl: state.user.avatarUrl
 });

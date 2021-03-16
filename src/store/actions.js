@@ -4,14 +4,15 @@ import browserHistory from '../browser-history.js';
 const api = getApi();
 
 export const ActionType = {
-  CHANGE_ACTIVECITY: `change/activeCity`,
-  CHANGE_ACTIVESORT: `change/activeSort`,
-  CHANGE_ACTIVEOFFER_ID: `change/activeOfferId`,
-  SET_OFFERS_IS_LOADED: `set/offersIsLoaded`,
-  UPDATE_OFFERS: `update/offers`,
-  CHANGE_AUTORIZED_STATUS: `change/isAutorized`,
-  CHANGE_AUTORIZED_USER: `change/user`,
-  REDIRECT_TO: `redirectTo`
+  CHANGE_ACTIVECITY: `change/active/city`,
+  CHANGE_ACTIVESORT: `change/active/sort`,
+  CHANGE_ACTIVEOFFER_ID: `change/active/offerId`,
+  SET_OFFERS_IS_LOADED: `set/offers/isLoaded`,
+  UPDATE_OFFERS: `update/offers/all`,
+  CHANGE_AUTHORIZED_STATUS: `change/user/isAutorized`,
+  CHANGE_AUTHORIZED_USER_EMAIL: `change/user/email`,
+  CHANGE_AUTHORIZED_USER_AVATAR: `change/user/avatarUrl`,
+  REDIRECT_TO: `history/redirectTo`
 };
 
 export const ActionCreator = {
@@ -31,8 +32,12 @@ export const ActionCreator = {
   changeActiveOfferId: (activeOfferId) => ({type: ActionType.CHANGE_ACTIVEOFFER_ID, payload: activeOfferId}),
   checkLogin: (dispatch, _getState) => {
     api.get(apiRoute.get.login)
-      .then(() => dispatch({type: ActionType.CHANGE_AUTORIZED_STATUS, payload: true}))
-      .catch(() => dispatch({type: ActionType.CHANGE_AUTORIZED_STATUS, payload: false}))
+      .then((response) => {
+        dispatch({type: ActionType.CHANGE_AUTHORIZED_USER_EMAIL, payload: response.data.email});
+        dispatch({type: ActionType.CHANGE_AUTHORIZED_USER_AVATAR, payload: response.data[`avatar_url`]});
+        dispatch({type: ActionType.CHANGE_AUTHORIZED_STATUS, payload: true});
+      })
+      .catch(() => dispatch({type: ActionType.CHANGE_AUTHORIZED_STATUS, payload: false}))
       .catch((error) => {
         throw error;
       });
@@ -40,13 +45,10 @@ export const ActionCreator = {
   login: (loginInfo, onSuccess) => (dispatch, _getState) => {
     api.post(apiRoute.post.login, loginInfo)
       .then((response) => {
-        const user = {
-          email: response.data.email,
-          avatarUrl: response.data[`avatar_url`]
-        };
-        dispatch({type: ActionType.CHANGE_AUTORIZED_USER, payload: user});
+        dispatch({type: ActionType.CHANGE_AUTHORIZED_USER_EMAIL, payload: response.data.email});
+        dispatch({type: ActionType.CHANGE_AUTHORIZED_USER_AVATAR, payload: response.data[`avatar_url`]});
       })
-      .then(() => dispatch({type: ActionType.CHANGE_AUTORIZED_STATUS, payload: true}))
+      .then(() => dispatch({type: ActionType.CHANGE_AUTHORIZED_STATUS, payload: true}))
       .then(onSuccess)
       .catch((error) => {
         throw error;
@@ -54,7 +56,7 @@ export const ActionCreator = {
   },
   logout: (dispatch, _getState) => {
     api.get(apiRoute.get.logout)
-      .then(() => dispatch({type: ActionType.CHANGE_AUTORIZED_STATUS, payload: false}))
+      .then(() => dispatch({type: ActionType.CHANGE_AUTHORIZED_STATUS, payload: false}))
       .catch((error) => {
         throw error;
       });

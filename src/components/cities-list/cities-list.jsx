@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
-import {Class} from '../../const.js';
+import {CITIES, Class} from '../../const.js';
 
-const CitiesList = ({cities, activeCity, changeActiveCity}) => {
+const CitiesList = ({activeCity, changeActiveCity}) => {
 
   const handleCityNameClick = (cityName) => {
     if (cityName !== activeCity) {
@@ -13,7 +13,7 @@ const CitiesList = ({cities, activeCity, changeActiveCity}) => {
   };
 
   return <ul className="locations__list tabs__list">
-    {cities.map((cityName) => (
+    {CITIES.map((cityName) => (
       <li className="locations__item" key={cityName}>
         <a
           className={`locations__item-link tabs__item ${(cityName === activeCity) && Class.TAB_ACTIVE}`}
@@ -27,8 +27,7 @@ const CitiesList = ({cities, activeCity, changeActiveCity}) => {
 };
 
 const mapStateToProps = (state) => ({
-  cities: state.cities,
-  activeCity: state.activeCity
+  activeCity: state.active.city
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -38,7 +37,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 CitiesList.propTypes = {
-  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   activeCity: PropTypes.string.isRequired,
   changeActiveCity: PropTypes.func.isRequired
 };
