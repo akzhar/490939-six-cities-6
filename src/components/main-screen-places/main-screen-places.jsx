@@ -18,17 +18,21 @@ const MainScreenPlaces = ({activeSort, activeCity, offers, changeActiveOfferId})
     changeActiveOfferId(null);
   }, []);
 
-  const getSortedOffers = useMemo(() => {
-    return offers.sort(ActiveSortToCompareFunc[activeSort]);
-  }, [activeSort]);
+  const filteredOffers = useMemo(() => {
+    return offers.filter((offer) => offer.city.name === activeCity);
+  }, [activeCity]);
+
+  const sortedOffers = useMemo(() => {
+    return filteredOffers.slice().sort(ActiveSortToCompareFunc[activeSort]);
+  }, [activeSort, activeCity]);
 
   return <section className="cities__places places">
     <h2 className="visually-hidden">Places</h2>
-    <b className="places__found">{offers.length} places to stay in {activeCity}</b>
+    <b className="places__found">{filteredOffers.length} places to stay in {activeCity}</b>
     <SortOptions/>
     <div className="cities__places-list places__list tabs__content">
       <OffersList
-        offers={getSortedOffers}
+        offers={sortedOffers}
         handleHover={handleHover}
         handleBlur={handleBlur}
       />
@@ -39,7 +43,7 @@ const MainScreenPlaces = ({activeSort, activeCity, offers, changeActiveOfferId})
 const mapStateToProps = (state) => ({
   activeSort: state.activeSort,
   activeCity: state.activeCity,
-  offers: state.offers.filter((offer) => offer.city.name === state.activeCity)
+  offers: state.offers
 });
 
 const mapDispatchToProps = (dispatch) => ({
