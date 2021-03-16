@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useMemo} from 'react';
 import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
 import {connect} from 'react-redux';
@@ -10,13 +10,17 @@ import OffersList from '../offers-list/offers-list.jsx';
 
 const MainScreenPlaces = ({activeSort, activeCity, offers, changeActiveOfferId}) => {
 
-  function handleHover(evt) {
+  const handleHover = useCallback((evt) => {
     changeActiveOfferId(evt.currentTarget.dataset.id);
-  }
+  }, []);
 
-  function handleBlur() {
+  const handleBlur = useCallback(() => {
     changeActiveOfferId(null);
-  }
+  }, []);
+
+  const getSortedOffers = useMemo(() => {
+    return offers.sort(ActiveSortToCompareFunc[activeSort]);
+  }, [activeSort]);
 
   return <section className="cities__places places">
     <h2 className="visually-hidden">Places</h2>
@@ -24,7 +28,7 @@ const MainScreenPlaces = ({activeSort, activeCity, offers, changeActiveOfferId})
     <SortOptions/>
     <div className="cities__places-list places__list tabs__content">
       <OffersList
-        offers={offers.sort(ActiveSortToCompareFunc[activeSort])}
+        offers={getSortedOffers}
         handleHover={handleHover}
         handleBlur={handleBlur}
       />
