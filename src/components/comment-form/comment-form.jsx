@@ -11,7 +11,7 @@ const CommentLength = {
   MIN: 50
 };
 
-const CommentForm = ({isAuthorized, onCommentSubmit}) => {
+const CommentForm = ({onCommentSubmit}) => {
 
   const [formIsDisabled, setFormIsDisabled] = useState(false);
 
@@ -27,7 +27,8 @@ const CommentForm = ({isAuthorized, onCommentSubmit}) => {
   const getRatingValue = () => ratingFormRef.current.dataset.value;
 
   const isRatingSet = () => {
-    return getCommentValue() !== null;
+    const rating = getRatingValue();
+    return rating !== null;
   };
 
   const isCommentValid = () => {
@@ -72,8 +73,7 @@ const CommentForm = ({isAuthorized, onCommentSubmit}) => {
       });
   };
 
-  return isAuthorized &&
-  <form className="reviews__form form" action="#" method="post" ref={formRef} onSubmit={handleFormSubmit}>
+  return <form className="reviews__form form" action="#" method="post" ref={formRef} onSubmit={handleFormSubmit}>
     <label className="reviews__label form__label" htmlFor="review">Your review</label>
     <div className="reviews__rating-form form__rating" data-value={null} ref={ratingFormRef} onClick={handleRatingClick}>
       {RATING_STARS.map((star) => (
@@ -115,7 +115,6 @@ const CommentForm = ({isAuthorized, onCommentSubmit}) => {
 };
 
 CommentForm.propTypes = {
-  isAuthorized: PropTypes.bool.isRequired,
   onCommentSubmit: PropTypes.func.isRequired
 };
 

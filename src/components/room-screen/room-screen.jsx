@@ -30,8 +30,11 @@ const RoomScreen = ({offer, isAuthorized}) => {
       .then((responses) => {
         setOffersNear(responses[0].data);
         setReviews(responses[1].data);
+      })
+      .catch((error) => {
+        throw error;
       });
-  }, [offer]);
+  }, []);
 
   const PremiumMark = () => (
     <div className="property__mark">
@@ -60,7 +63,7 @@ const RoomScreen = ({offer, isAuthorized}) => {
                 <h1 className="property__name">
                   {offer.title}
                 </h1>
-                <ToBookMarksBtn className="property" size={{width: 31, height: 33}}/>
+                <ToBookMarksBtn className="property" size={{width: 31, height: 33}} offerIsBookMarked={offer[`is_favorite`]} offerId={offer.id}/>
               </div>
               <div className="property__rating rating">
                 <RatingStars rating={offer.rating} className="property__stars"/>
@@ -110,7 +113,7 @@ const RoomScreen = ({offer, isAuthorized}) => {
                   Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <ReviewsList reviews={reviews.sort(ReviewsSortToCompareFunc[REVIEWS_SORT])}/>
-                <CommentForm isAuthorized={isAuthorized} onCommentSubmit={onCommentSubmit}/>
+                {isAuthorized && <CommentForm onCommentSubmit={onCommentSubmit}/>}
               </section>
             </div>
           </div>
