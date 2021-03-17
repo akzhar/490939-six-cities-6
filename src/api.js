@@ -7,15 +7,16 @@ const apiRoute = {
   get: {
     login: `/login`,
     offers: `/hotels`,
+    offer: (offerId) => `/hotels/${offerId}`,
     offersNear: (offerId) => `/hotels/${offerId}/nearby`,
     reviews: (offerId) => `/comments/${offerId}`,
     logout: `/logout`,
-    favorites: ``
+    favorites: `/favorite`,
   },
   post: {
     login: `/login`,
     comment: (offerId) => `/comments/${offerId}`,
-    favorites: ``
+    favorites: (offerId, status) => `/favorite/${offerId}/${status}`
   }
 };
 

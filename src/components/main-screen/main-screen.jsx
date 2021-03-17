@@ -10,8 +10,9 @@ import MainScreenPlacesLoading from '../main-screen-places-loading/main-screen-p
 import MainScreenPlacesEmpty from '../main-screen-places-empty/main-screen-places-empty.jsx';
 import MainScreenPlaces from '../main-screen-places/main-screen-places.jsx';
 
-const MainScreen = ({offersIsLoaded, hasOffers}) => (
-  <div className="page page--gray page--main">
+const MainScreen = ({offersIsLoaded, hasOffers}) => {
+
+  return <div className="page page--gray page--main">
     <Header/>
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -21,7 +22,7 @@ const MainScreen = ({offersIsLoaded, hasOffers}) => (
         </section>
       </div>
       <div className="cities">
-        <div className={`cities__places-container container ${(offersIsLoaded && !hasOffers) && Class.PLACES_EMPTY}`}>
+        <div className={`cities__places-container container ${(offersIsLoaded && !hasOffers) ? Class.PLACES_EMPTY : ``}`}>
           {(!offersIsLoaded && !hasOffers) && <MainScreenPlacesLoading/>}
           {(offersIsLoaded && !hasOffers) && <MainScreenPlacesEmpty/>}
           {(offersIsLoaded && hasOffers) && <MainScreenPlaces/>}
@@ -33,12 +34,12 @@ const MainScreen = ({offersIsLoaded, hasOffers}) => (
         </div>
       </div>
     </main>
-  </div>
-);
+  </div>;
+};
 
 const mapStateToProps = (state) => ({
   offersIsLoaded: state.offers.isLoaded,
-  hasOffers: state.offers.all.some((offer) => offer.city.name === state.active.city)
+  hasOffers: state.active.city.hasOffers
 });
 
 MainScreen.propTypes = {

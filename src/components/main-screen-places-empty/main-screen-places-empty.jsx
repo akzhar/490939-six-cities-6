@@ -12,7 +12,7 @@ const MainScreenPlacesEmpty = ({activeCity}) => (
 );
 
 const mapStateToProps = (state) => ({
-  activeCity: state.active.city
+  activeCity: state.active.city.name
 });
 
 MainScreenPlacesEmpty.propTypes = {
