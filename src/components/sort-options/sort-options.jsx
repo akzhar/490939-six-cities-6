@@ -15,8 +15,10 @@ const SortOptions = ({activeSort, changeActiveSort}) => {
 
   const handleOptionsListClick = (evt) => {
     const newActiveSort = evt.target.textContent;
-    changeActiveSort(newActiveSort);
-    sortListRef.current.querySelector(`span`).textContent = newActiveSort;
+    if (newActiveSort !== activeSort) {
+      changeActiveSort(newActiveSort);
+      sortListRef.current.querySelector(`span`).textContent = newActiveSort;
+    }
     optionsListRef.current.classList.remove(Class.LIST_OPENED);
   };
 
@@ -43,7 +45,7 @@ const SortOptions = ({activeSort, changeActiveSort}) => {
 };
 
 const mapStateToProps = (state) => ({
-  activeSort: state.activeSort
+  activeSort: state.active.sort
 });
 
 const mapDispatchToProps = (dispatch) => ({

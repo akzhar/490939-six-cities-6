@@ -23,4 +23,4 @@ OffersList.propTypes = {
   handleBlur: PropTypes.func
 };
 
-export default OffersList;
+export default React.memo(OffersList);

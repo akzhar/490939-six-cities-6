@@ -48,8 +48,8 @@ const App = ({offers, isAuthorized}) => {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
-  isAuthorized: state.isAuthorized
+  offers: state.offers.all,
+  isAuthorized: state.user.isAuthorized
 });
 
 App.propTypes = {
