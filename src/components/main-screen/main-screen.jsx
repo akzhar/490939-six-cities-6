@@ -1,8 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Class, Message} from '../../const.js';
-import {ActionCreator} from '../../store/actions.js';
+import {Class} from '../../const.js';
 import {getHasOffers} from '../../store/selectors.js';
 
 import Header from '../header/header.jsx';
@@ -13,14 +12,8 @@ import MainScreenPlacesEmpty from '../main-screen-places-empty/main-screen-place
 import MainScreenPlaces from '../main-screen-places/main-screen-places.jsx';
 import Popup from '../popup/popup.jsx';
 
-const MainScreen = ({offersIsLoaded, hasOffers, updateOffers, showPopup}) => {
-
-  useEffect(() => {
-    const onFail = () => showPopup(Message.ERROR.OFFERS_WAS_NOT_LOADED);
-    updateOffers(null, onFail);
-  }, []);
-
-  return <React.Fragment>
+const MainScreen = ({offersIsLoaded, hasOffers}) => (
+  <React.Fragment>
     <div className="page page--gray page--main">
       <Header/>
       <main className="page__main page__main--index">
@@ -43,7 +36,12 @@ const MainScreen = ({offersIsLoaded, hasOffers, updateOffers, showPopup}) => {
       </main>
     </div>
     <Popup/>
-  </React.Fragment>;
+  </React.Fragment>
+);
+
+MainScreen.propTypes = {
+  offersIsLoaded: PropTypes.bool.isRequired,
+  hasOffers: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -51,17 +49,5 @@ const mapStateToProps = (state) => ({
   hasOffers: getHasOffers(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  updateOffers: (onSuccess, onFail) => dispatch(ActionCreator.updateOffers(onSuccess, onFail)),
-  showPopup: (message) => dispatch(ActionCreator.showPopup(message))
-});
-
-MainScreen.propTypes = {
-  offersIsLoaded: PropTypes.bool.isRequired,
-  hasOffers: PropTypes.bool.isRequired,
-  updateOffers: PropTypes.func.isRequired,
-  showPopup: PropTypes.func.isRequired
-};
-
 export {MainScreen};
-export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);
+export default connect(mapStateToProps, null)(MainScreen);
