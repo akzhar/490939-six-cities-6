@@ -11,7 +11,7 @@ import OffersList from '../offers-list/offers-list.jsx';
 const MainScreenPlaces = ({activeSort, activeCity, offers, changeActiveOfferId}) => {
 
   const handleHover = useCallback((evt) => {
-    changeActiveOfferId(evt.currentTarget.dataset.id);
+    changeActiveOfferId(+evt.currentTarget.dataset.id);
   }, []);
 
   const handleBlur = useCallback(() => {

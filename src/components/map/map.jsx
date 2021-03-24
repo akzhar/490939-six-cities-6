@@ -31,6 +31,7 @@ const Map = ({city, points, activeOfferId}) => {
     mapLayer.addTo(leafletMap);
     setMap(leafletMap);
     updateMap(leafletMap);
+    markActiveOfferOnMap(leafletMap);
   };
 
   const updateMap = (map) => {
@@ -51,7 +52,7 @@ const Map = ({city, points, activeOfferId}) => {
     if (map) {
       map.eachLayer((layer) => {
         if (layer instanceof leaflet.Marker) {
-          const icon = (layer.options.alt === +activeOfferId) ? iconActive : iconDefault;
+          const icon = (layer.options.alt === activeOfferId) ? iconActive : iconDefault;
           layer.setIcon(icon);
         }
       });
@@ -79,7 +80,7 @@ const Map = ({city, points, activeOfferId}) => {
 Map.propTypes = {
   city: PropTypes.shape(mapCityTypes).isRequired,
   points: PropTypes.arrayOf(PropTypes.shape(mapPointTypes)).isRequired,
-  activeOfferId: PropTypes.string
+  activeOfferId: PropTypes.number
 };
 
 export default Map;
