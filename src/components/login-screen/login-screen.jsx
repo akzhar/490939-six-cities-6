@@ -2,11 +2,11 @@ import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
-import {AppRoute} from '../../const.js';
+import {AppRoute, Message} from '../../const.js';
 
 import Header from '../header/header.jsx';
 
-const LoginScreen = ({login, checkLogin, redirectTo}) => {
+const LoginScreen = ({login, checkLogin, redirectTo, showPopup, changeActiveCityName}) => {
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
@@ -17,13 +17,13 @@ const LoginScreen = ({login, checkLogin, redirectTo}) => {
   const getPasswordValue = () => passwordInputRef.current.value;
 
   const isEmailValid = () => {
-    // валидация выполнятеся самим input type="email"
+    // валидация выполнятеся самим input type="email" (просто не должен быть пустым)
     const email = getEmailValue();
     return email !== ``;
   };
 
   const isPasswordValid = () => {
-    // валидации пароля нет
+    // валидации пароля нет (просто не должен быть пустым)
     const password = getPasswordValue();
     return password !== ``;
   };
@@ -32,32 +32,25 @@ const LoginScreen = ({login, checkLogin, redirectTo}) => {
     submitBtnRef.current.disabled = (isEmailValid() && isPasswordValid()) ? false : true;
   };
 
+  const handleLocationLinkClick = (evt) => {
+    const newCity = evt.currentTarget.querySelector(`span`).textContent;
+    changeActiveCityName(newCity);
+    redirectTo(AppRoute.MAIN);
+  };
+
   const handleFormSubmit = (evt) => {
     evt.preventDefault();
     const form = evt.target;
     const formData = new FormData(form);
     const user = {email: formData.get(`email`), password: formData.get(`password`)};
-    if (user.email && user.password) {
-      login(
-          user,
-          () => {
-            redirectTo(AppRoute.MAIN);
-          },
-          () => {
-            // TODO: replace alert by popup
-            // eslint-disable-next-line no-alert
-            alert(`failed login`);
-          }
-      );
-    }
+    const onSuccess = () => redirectTo(AppRoute.MAIN);
+    const onFail = () => showPopup(Message.ERROR.LOGIN_WAS_FAILED);
+    login(user, onSuccess, onFail);
   };
 
   useEffect(() => {
-    checkLogin(
-        () => {
-          redirectTo(AppRoute.MAIN);
-        }
-    );
+    const onSuccess = () => redirectTo(AppRoute.MAIN);
+    checkLogin(onSuccess);
   }, []);
 
   return <div className="page page--gray page--login">
@@ -80,7 +73,7 @@ const LoginScreen = ({login, checkLogin, redirectTo}) => {
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <a className="locations__item-link" href="#">
+            <a className="locations__item-link" onClick={handleLocationLinkClick}>
               <span>Amsterdam</span>
             </a>
           </div>
@@ -90,17 +83,21 @@ const LoginScreen = ({login, checkLogin, redirectTo}) => {
   </div>;
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  login: (user, onSuccess, onFail) => dispatch(ActionCreator.login(user, onSuccess, onFail)),
-  checkLogin: (onSuccess, onFail) => dispatch(ActionCreator.checkLogin(onSuccess, onFail)),
-  redirectTo: (to) => dispatch(ActionCreator.redirectTo(to))
-});
-
 LoginScreen.propTypes = {
   login: PropTypes.func.isRequired,
   checkLogin: PropTypes.func.isRequired,
-  redirectTo: PropTypes.func.isRequired
+  redirectTo: PropTypes.func.isRequired,
+  showPopup: PropTypes.func.isRequired,
+  changeActiveCityName: PropTypes.func.isRequired,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  login: (user, onSuccess, onFail) => dispatch(ActionCreator.login(user, onSuccess, onFail)),
+  checkLogin: (onSuccess, onFail) => dispatch(ActionCreator.checkLogin(onSuccess, onFail)),
+  redirectTo: (to) => dispatch(ActionCreator.redirectTo(to)),
+  showPopup: (message) => dispatch(ActionCreator.showPopup(message)),
+  changeActiveCityName: (newName) => dispatch(ActionCreator.changeActiveCityName(newName))
+});
 
 export {LoginScreen};
 export default connect(null, mapDispatchToProps)(LoginScreen);
