@@ -1,17 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
-import {Class, ReviewsSortToCompareFunc, OfferTypeToOfferProperty} from '../../const.js';
+import {Class, OfferTypeToOfferProperty, MAX_NEARBY_COUNT} from '../../const.js';
 import getApi, {apiRoute} from '../../api.js';
-
-const REVIEWS_SORT = `Date: latest to earliest`;
 
 const api = getApi();
 
 import Header from '../header/header.jsx';
 import ToBookMarksBtn from '../to-bookmarks-btn/to-bookmarks-btn.jsx';
-import CommentForm from '../comment-form/comment-form.jsx';
-import ReviewsList from '../reviews-list/reviews-list.jsx';
+import Reviews from '../reviews/reviews.jsx';
 import RoomScreenMap from '../room-screen-map/room-screen-map.jsx';
 import RoomScreenPlaces from '../room-screen-places/room-screen-places.jsx';
 import RatingStars from '../rating-stars/rating-stars.jsx';
@@ -19,17 +16,11 @@ import RatingStars from '../rating-stars/rating-stars.jsx';
 const RoomScreen = ({offer, isAuthorized}) => {
 
   const [offersNear, setOffersNear] = useState([]);
-  const [reviews, setReviews] = useState([]);
-
-  const onCommentSubmit = (newReviews) => setReviews(newReviews);
 
   useEffect(() => {
-    const offersNearPromise = api.get(apiRoute.get.offersNear(offer.id));
-    const reviewsPromise = api.get(apiRoute.get.reviews(offer.id));
-    Promise.all([offersNearPromise, reviewsPromise])
-      .then((responses) => {
-        setOffersNear(responses[0].data);
-        setReviews(responses[1].data);
+    api.get(apiRoute.get.offersNear(offer.id))
+      .then((response) => {
+        setOffersNear(response.data.slice(0, MAX_NEARBY_COUNT));
       })
       .catch((error) => {
         throw error;
@@ -108,13 +99,7 @@ const RoomScreen = ({offer, isAuthorized}) => {
                   </p>
                 </div>
               </div>
-              <section className="property__reviews reviews">
-                <h2 className="reviews__title">
-                  Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
-                </h2>
-                <ReviewsList reviews={reviews.sort(ReviewsSortToCompareFunc[REVIEWS_SORT])}/>
-                {isAuthorized && <CommentForm onCommentSubmit={onCommentSubmit}/>}
-              </section>
+              <Reviews offerId={offer.id} isAuthorized={isAuthorized}/>
             </div>
           </div>
           <section className="property__map map">

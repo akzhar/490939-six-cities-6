@@ -2,6 +2,8 @@ export const MONTH_NAMES = [`January`, `February`, `March`, `April`, `May`, `Jun
 export const SORT_OPTIONS = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
 export const CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 export const ROOM_ID_REGEXP = /(?!\/room\/)\d+/;
+export const MAX_REVIEWS_COUNT = 10;
+export const MAX_NEARBY_COUNT = 3;
 export const RATING_STARS = [
   {value: 5, title: `perfect`},
   {value: 4, title: `good`},
