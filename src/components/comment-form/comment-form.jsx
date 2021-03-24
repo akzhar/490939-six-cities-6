@@ -24,7 +24,7 @@ const CommentForm = ({onCommentSubmit, showPopup}) => {
 
   const isRatingSet = () => {
     const rating = getRatingValue();
-    return rating !== null;
+    return rating !== undefined;
   };
 
   const isCommentValid = () => {

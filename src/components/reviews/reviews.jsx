@@ -23,7 +23,7 @@ const Reviews = ({offerId, isAuthorized}) => {
       .catch((error) => {
         throw error;
       });
-  }, []);
+  }, [offerId]);
 
   return <section className="property__reviews reviews">
     <h2 className="reviews__title">
