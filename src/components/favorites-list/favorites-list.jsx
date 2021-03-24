@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
-import {favoritesSelector, favoriteCitiesSelector} from '../../store/selectors.js';
+import {getFavorites, getFavoriteCities} from '../../store/selectors.js';
 import {AppRoute} from '../../const.js';
 
 import FavoritesCard from '../favorites-card/favorites-card.jsx';
@@ -49,8 +49,8 @@ const FavoritesList = ({favorites, favoriteSities, changeActiveCityName, setActi
 };
 
 const mapStateToProps = (state) => ({
-  favorites: favoritesSelector(state),
-  favoriteSities: favoriteCitiesSelector(state)
+  favorites: getFavorites(state),
+  favoriteSities: getFavoriteCities(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

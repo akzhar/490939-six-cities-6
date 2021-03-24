@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {hasFavoritesSelector} from '../../store/selectors.js';
+import {getHasFavorites} from '../../store/selectors.js';
 
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
@@ -19,7 +19,7 @@ const FavoritesScreen = ({hasFavorites}) => (
 );
 
 const mapStateToProps = (state) => ({
-  hasFavorites: hasFavoritesSelector(state)
+  hasFavorites: getHasFavorites(state)
 });
 
 FavoritesScreen.propTypes = {
