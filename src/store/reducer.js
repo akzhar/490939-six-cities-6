@@ -1,13 +1,7 @@
 import {combineReducers} from 'redux';
-import reducerActive, {initialStateActive} from './reducer-active.js';
-import reducerOffers, {initialStateOffers} from './reducer-offers.js';
-import reducerUser, {initialStateUser} from './reducer-user.js';
-
-const initialState = {
-  active: initialStateActive,
-  offers: initialStateOffers,
-  user: initialStateUser
-};
+import reducerActive from './reducer-active.js';
+import reducerOffers from './reducer-offers.js';
+import reducerUser from './reducer-user.js';
 
 const reducer = combineReducers({
   active: reducerActive,
@@ -15,5 +9,4 @@ const reducer = combineReducers({
   user: reducerUser
 });
 
-export {initialState};
 export default reducer;

@@ -6,7 +6,7 @@ const initialStateUser = {
   avatarUrl: null
 };
 
-const reducerAuthorization = (state, action) => {
+const reducerAuthorization = (state = initialStateUser, action) => {
   switch (action.type) {
     case ActionType.SET_USER_IS_AUTHORIZED:
       return {...state, isAuthorized: action.payload};
@@ -19,5 +19,4 @@ const reducerAuthorization = (state, action) => {
   }
 };
 
-export {initialStateUser};
 export default reducerAuthorization;

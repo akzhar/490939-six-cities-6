@@ -10,7 +10,7 @@ const initialStateActive = {
   offerId: null
 };
 
-const reducerActive = (state, action) => {
+const reducerActive = (state = initialStateActive, action) => {
   switch (action.type) {
     case ActionType.CHANGE_ACTIVECITY_NAME:
       return {...state, city: {...state.city, name: action.payload}};
@@ -25,5 +25,4 @@ const reducerActive = (state, action) => {
   }
 };
 
-export {initialStateActive};
 export default reducerActive;

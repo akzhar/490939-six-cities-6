@@ -5,7 +5,7 @@ const initialStateOffers = {
   items: []
 };
 
-const reducerOffers = (state, action) => {
+const reducerOffers = (state = initialStateOffers, action) => {
   switch (action.type) {
     case ActionType.SET_OFFERS_IS_LOADED:
       return {...state, isLoaded: true};
@@ -16,5 +16,4 @@ const reducerOffers = (state, action) => {
   }
 };
 
-export {initialStateOffers};
 export default reducerOffers;
