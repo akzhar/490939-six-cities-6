@@ -1,17 +1,14 @@
 import React, {useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
-import {RATING_STARS, ROOM_ID_REGEXP} from '../../const.js';
-import getApi, {apiRoute} from '../../api.js';
+import {RATING_STARS, ROOM_ID_REGEXP, Message, CommentLength, apiRoute} from '../../const.js';
+import getApi from '../../api.js';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/actions.js';
 
 const api = getApi();
 
-const CommentLength = {
-  MAX: 300,
-  MIN: 50
-};
-
-const CommentForm = ({isAuthorized, onCommentSubmit}) => {
+const CommentForm = ({onCommentSubmit, showPopup}) => {
 
   const [formIsDisabled, setFormIsDisabled] = useState(false);
 
@@ -19,7 +16,6 @@ const CommentForm = ({isAuthorized, onCommentSubmit}) => {
   const ratingFormRef = useRef();
   const textAreaRef = useRef();
   const submitBtnRef = useRef();
-
   const history = useHistory();
 
   const getCommentValue = () => textAreaRef.current.value;
@@ -27,7 +23,8 @@ const CommentForm = ({isAuthorized, onCommentSubmit}) => {
   const getRatingValue = () => ratingFormRef.current.dataset.value;
 
   const isRatingSet = () => {
-    return getCommentValue() !== null;
+    const rating = getRatingValue();
+    return rating !== undefined;
   };
 
   const isCommentValid = () => {
@@ -62,8 +59,12 @@ const CommentForm = ({isAuthorized, onCommentSubmit}) => {
     const offerId = history.location.pathname.match(ROOM_ID_REGEXP)[0];
     const url = apiRoute.post.comment(offerId);
     api.post(url, {comment: getCommentValue(), rating: getRatingValue()})
-      .then((response) => onCommentSubmit(response.data))
+      .then((response) => {
+        showPopup(Message.OK.COMMENT_WAS_UPLOADED);
+        onCommentSubmit(response.data);
+      })
       .catch((error) => {
+        showPopup(Message.ERROR.COMMENT_WAS_NOT_UPLOADED);
         throw error;
       })
       .finally(() => {
@@ -72,8 +73,7 @@ const CommentForm = ({isAuthorized, onCommentSubmit}) => {
       });
   };
 
-  return isAuthorized &&
-  <form className="reviews__form form" action="#" method="post" ref={formRef} onSubmit={handleFormSubmit}>
+  return <form className="reviews__form form" action="#" method="post" ref={formRef} onSubmit={handleFormSubmit}>
     <label className="reviews__label form__label" htmlFor="review">Your review</label>
     <div className="reviews__rating-form form__rating" data-value={null} ref={ratingFormRef} onClick={handleRatingClick}>
       {RATING_STARS.map((star) => (
@@ -115,9 +115,13 @@ const CommentForm = ({isAuthorized, onCommentSubmit}) => {
 };
 
 CommentForm.propTypes = {
-  isAuthorized: PropTypes.bool.isRequired,
-  onCommentSubmit: PropTypes.func.isRequired
+  onCommentSubmit: PropTypes.func.isRequired,
+  showPopup: PropTypes.func.isRequired
 };
 
-export default CommentForm;
+const mapDispatchToProps = (dispatch) => ({
+  showPopup: (message) => dispatch(ActionCreator.showPopup(message))
+});
+
+export default connect(null, mapDispatchToProps)(CommentForm);
 

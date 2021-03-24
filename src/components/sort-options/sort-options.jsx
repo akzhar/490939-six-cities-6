@@ -44,6 +44,11 @@ const SortOptions = ({activeSort, changeActiveSort}) => {
   </form>;
 };
 
+SortOptions.propTypes = {
+  activeSort: PropTypes.string.isRequired,
+  changeActiveSort: PropTypes.func.isRequired
+};
+
 const mapStateToProps = (state) => ({
   activeSort: state.active.sort
 });
@@ -53,11 +58,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeActiveSort(newActiveSort));
   }
 });
-
-SortOptions.propTypes = {
-  activeSort: PropTypes.string.isRequired,
-  changeActiveSort: PropTypes.func.isRequired
-};
 
 export {SortOptions};
 export default connect(mapStateToProps, mapDispatchToProps)(SortOptions);

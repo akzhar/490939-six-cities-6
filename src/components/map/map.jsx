@@ -2,16 +2,18 @@ import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {mapCityTypes, mapPointTypes} from '../../prop-types/prop-types.jsx';
 import leaflet from 'leaflet';
-import "leaflet/dist/leaflet.css";
+import {MapIcon} from '../../const.js';
+
+import 'leaflet/dist/leaflet.css';
 
 const iconDefault = leaflet.icon({
-  iconUrl: `img/pin.svg`,
-  iconSize: [30, 30]
+  iconUrl: MapIcon.URL_DEFAULT,
+  iconSize: [MapIcon.WIDTH, MapIcon.HEIGHT]
 });
 
 const iconActive = leaflet.icon({
-  iconUrl: `img/pin-active.svg`,
-  iconSize: [30, 30]
+  iconUrl: MapIcon.URL_ACTIVE,
+  iconSize: [MapIcon.WIDTH, MapIcon.HEIGHT]
 });
 
 const Map = ({city, points, activeOfferId}) => {
@@ -31,6 +33,7 @@ const Map = ({city, points, activeOfferId}) => {
     mapLayer.addTo(leafletMap);
     setMap(leafletMap);
     updateMap(leafletMap);
+    markActiveOfferOnMap(leafletMap);
   };
 
   const updateMap = (map) => {
@@ -51,7 +54,7 @@ const Map = ({city, points, activeOfferId}) => {
     if (map) {
       map.eachLayer((layer) => {
         if (layer instanceof leaflet.Marker) {
-          const icon = (layer.options.alt === +activeOfferId) ? iconActive : iconDefault;
+          const icon = (layer.options.alt === activeOfferId) ? iconActive : iconDefault;
           layer.setIcon(icon);
         }
       });
@@ -71,15 +74,15 @@ const Map = ({city, points, activeOfferId}) => {
   }, [activeOfferId]);
 
   return <div
-    id = "map"
-    style = {{height: `100%`}}
+    id="map"
+    style={{height: `100%`, zIndex: 0}}
   />;
 };
 
 Map.propTypes = {
   city: PropTypes.shape(mapCityTypes).isRequired,
   points: PropTypes.arrayOf(PropTypes.shape(mapPointTypes)).isRequired,
-  activeOfferId: PropTypes.string
+  activeOfferId: PropTypes.number
 };
 
-export default Map;
+export default React.memo(Map);

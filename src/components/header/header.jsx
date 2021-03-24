@@ -4,21 +4,22 @@ import {connect} from 'react-redux';
 import {Link, useHistory} from 'react-router-dom';
 import {AppRoute} from '../../const.js';
 
+import './header.css';
+
 const Header = ({isAuthorized, userEmail, avatarUrl}) => {
 
   const history = useHistory();
-
-  const getLogoImg = () => <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />;
 
   return <header className="header">
     <div className="container">
       <div className="header__wrapper">
         <div className="header__left">
-          { history.location.pathname === AppRoute.MAIN ?
-            <a className="header__logo-link">{getLogoImg()}</a>
-            :
-            <Link to="/" className="header__logo-link">{getLogoImg()}</Link>
-          }
+          <Link
+            to="/"
+            className={`header__logo-link ${(history.location.pathname === AppRoute.MAIN) && `header__logo-link--disabled`}`}
+          >
+            <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
+          </Link>
         </div>
         <nav className="header__nav">
           <ul className="header__nav-list">
@@ -39,17 +40,17 @@ const Header = ({isAuthorized, userEmail, avatarUrl}) => {
   </header>;
 };
 
-const mapStateToProps = (state) => ({
-  isAuthorized: state.user.isAuthorized,
-  userEmail: state.user.email,
-  avatarUrl: state.user.avatarUrl
-});
-
 Header.propTypes = {
   isAuthorized: PropTypes.bool.isRequired,
   userEmail: PropTypes.string,
   avatarUrl: PropTypes.string
 };
+
+const mapStateToProps = (state) => ({
+  isAuthorized: state.user.isAuthorized,
+  userEmail: state.user.email,
+  avatarUrl: state.user.avatarUrl
+});
 
 export {Header};
 export default connect(mapStateToProps, null)(Header);

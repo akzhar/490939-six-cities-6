@@ -11,7 +11,7 @@ import OffersList from '../offers-list/offers-list.jsx';
 const MainScreenPlaces = ({activeSort, activeCity, offers, changeActiveOfferId}) => {
 
   const handleHover = useCallback((evt) => {
-    changeActiveOfferId(evt.currentTarget.dataset.id);
+    changeActiveOfferId(+evt.currentTarget.dataset.id);
   }, []);
 
   const handleBlur = useCallback(() => {
@@ -40,10 +40,17 @@ const MainScreenPlaces = ({activeSort, activeCity, offers, changeActiveOfferId})
   </section>;
 };
 
+MainScreenPlaces.propTypes = {
+  activeSort: PropTypes.string.isRequired,
+  activeCity: PropTypes.string.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
+  changeActiveOfferId: PropTypes.func.isRequired
+};
+
 const mapStateToProps = (state) => ({
   activeSort: state.active.sort,
-  activeCity: state.active.city,
-  offers: state.offers.all
+  activeCity: state.active.city.name,
+  offers: state.offers.items
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -51,13 +58,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeActiveOfferId(activeOfferId));
   }
 });
-
-MainScreenPlaces.propTypes = {
-  activeSort: PropTypes.string.isRequired,
-  activeCity: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
-  changeActiveOfferId: PropTypes.func.isRequired
-};
 
 export {MainScreenPlaces};
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreenPlaces);

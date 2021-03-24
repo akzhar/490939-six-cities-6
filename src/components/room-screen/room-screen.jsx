@@ -1,43 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
-import {Class, ReviewsSortToCompareFunc} from '../../const.js';
-import getApi, {apiRoute} from '../../api.js';
-
-const REVIEWS_SORT = `Date: latest to earliest`;
-
-const api = getApi();
+import {Class, OfferTypeToOfferProperty} from '../../const.js';
 
 import Header from '../header/header.jsx';
+import PremiumMark from '../premium-mark/premium-mark.jsx';
 import ToBookMarksBtn from '../to-bookmarks-btn/to-bookmarks-btn.jsx';
-import CommentForm from '../comment-form/comment-form.jsx';
-import ReviewsList from '../reviews-list/reviews-list.jsx';
+import Reviews from '../reviews/reviews.jsx';
 import RoomScreenMap from '../room-screen-map/room-screen-map.jsx';
 import RoomScreenPlaces from '../room-screen-places/room-screen-places.jsx';
 import RatingStars from '../rating-stars/rating-stars.jsx';
+import Popup from '../popup/popup.jsx';
 
-const RoomScreen = ({offer, isAuthorized}) => {
-
-  const [offersNear, setOffersNear] = useState([]);
-  const [reviews, setReviews] = useState([]);
-
-  const onCommentSubmit = (newReviews) => setReviews(newReviews);
-
-  useEffect(() => {
-    const offersNearPromise = api.get(apiRoute.get.offersNear(offer.id));
-    const reviewsPromise = api.get(apiRoute.get.reviews(offer.id));
-    Promise.all([offersNearPromise, reviewsPromise])
-      .then((responses) => {
-        setOffersNear(responses[0].data);
-        setReviews(responses[1].data);
-      });
-  }, [offer]);
-
-  const PremiumMark = () => (
-    <div className="property__mark">
-      <span>Premium</span>
-    </div>
-  );
+const RoomScreen = ({offer, offersNear}) => {
 
   return <React.Fragment>
     <div className="page">
@@ -55,12 +30,12 @@ const RoomScreen = ({offer, isAuthorized}) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {offer[`is_premium`] && <PremiumMark/>}
+              {offer[`is_premium`] && <PremiumMark className="property"/>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {offer.title}
                 </h1>
-                <ToBookMarksBtn className="property" size={{width: 31, height: 33}}/>
+                <ToBookMarksBtn className="property" size={{width: 31, height: 33}} offerIsBookMarked={offer[`is_favorite`]} offerId={offer.id}/>
               </div>
               <div className="property__rating rating">
                 <RatingStars rating={offer.rating} className="property__stars"/>
@@ -68,7 +43,7 @@ const RoomScreen = ({offer, isAuthorized}) => {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {offer.type}
+                  {OfferTypeToOfferProperty[offer.type]}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {offer.bedrooms} Bedrooms
@@ -105,17 +80,11 @@ const RoomScreen = ({offer, isAuthorized}) => {
                   </p>
                 </div>
               </div>
-              <section className="property__reviews reviews">
-                <h2 className="reviews__title">
-                  Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
-                </h2>
-                <ReviewsList reviews={reviews.sort(ReviewsSortToCompareFunc[REVIEWS_SORT])}/>
-                <CommentForm isAuthorized={isAuthorized} onCommentSubmit={onCommentSubmit}/>
-              </section>
+              <Reviews offerId={offer.id}/>
             </div>
           </div>
           <section className="property__map map">
-            {offersNear.length && <RoomScreenMap offers={offersNear}/>}
+            {offersNear.length && <RoomScreenMap offers={[...offersNear, offer]} activeOfferId={offer.id}/>}
           </section>
         </section>
         <div className="container">
@@ -123,12 +92,13 @@ const RoomScreen = ({offer, isAuthorized}) => {
         </div>
       </main>
     </div>
+    <Popup/>
   </React.Fragment>;
 };
 
 RoomScreen.propTypes = {
-  offer: PropTypes.shape(offerTypes),
-  isAuthorized: PropTypes.bool.isRequired
+  offer: PropTypes.shape(offerTypes).isRequired,
+  offersNear: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
 };
 
 export default RoomScreen;

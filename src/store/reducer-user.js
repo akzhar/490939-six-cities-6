@@ -1,8 +1,14 @@
 import {ActionType} from './actions.js';
 
-const reducerAuthorization = (state, action) => {
+const initialStateUser = {
+  isAuthorized: false,
+  email: null,
+  avatarUrl: null
+};
+
+const reducerAuthorization = (state = initialStateUser, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_AUTHORIZED_STATUS:
+    case ActionType.SET_USER_IS_AUTHORIZED:
       return {...state, isAuthorized: action.payload};
     case ActionType.CHANGE_AUTHORIZED_USER_EMAIL:
       return {...state, email: action.payload};

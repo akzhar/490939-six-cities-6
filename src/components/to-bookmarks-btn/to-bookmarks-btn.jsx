@@ -1,14 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/actions.js';
+import {AppRoute} from '../../const.js';
 
-const ToBookMarksBtn = ({className, size, isActive}) => (
-  <button type="button" className={`button ${className}__bookmark-button ${isActive && `${className}__bookmark-button--active`}`}>
+const ToBookMarksBtn = ({className, size, offerIsBookMarked, offerId, isAuthorized, redirectTo, bookMarkOffer}) => {
+
+  const [isBookMarked, setIsBookMarked] = useState(offerIsBookMarked);
+
+  const handleToBookMarksBtnClick = (isBookmarked) => {
+    if (!isAuthorized) {
+      redirectTo(AppRoute.LOGIN);
+      return;
+    }
+    bookMarkOffer(!isBookmarked, offerId);
+    setIsBookMarked(!isBookmarked);
+  };
+
+  return <button
+    type="button"
+    onClick={() => handleToBookMarksBtnClick(isBookMarked)}
+    className={`button ${className}__bookmark-button ${isBookMarked && `${className}__bookmark-button--active`}`}
+  >
     <svg className={`${className}__bookmark-icon`} width={size.width} height={size.height}>
       <use xlinkHref="#icon-bookmark"></use>
     </svg>
     <span className="visually-hidden">To bookmarks</span>
-  </button>
-);
+  </button>;
+};
 
 ToBookMarksBtn.propTypes = {
   className: PropTypes.string.isRequired,
@@ -16,7 +35,21 @@ ToBookMarksBtn.propTypes = {
     width: PropTypes.number,
     height: PropTypes.number
   }).isRequired,
-  isActive: PropTypes.bool
+  offerIsBookMarked: PropTypes.bool.isRequired,
+  offerId: PropTypes.number.isRequired,
+  isAuthorized: PropTypes.bool.isRequired,
+  redirectTo: PropTypes.func.isRequired,
+  bookMarkOffer: PropTypes.func.isRequired,
 };
 
-export default ToBookMarksBtn;
+const mapStateToProps = (state) => ({
+  isAuthorized: state.user.isAuthorized
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  redirectTo: (to) => dispatch(ActionCreator.redirectTo(to)),
+  bookMarkOffer: (isBookMarked, offerId) => dispatch(ActionCreator.bookMarkOffer(isBookMarked, offerId))
+});
+
+export {ToBookMarksBtn};
+export default connect(mapStateToProps, mapDispatchToProps)(ToBookMarksBtn);

@@ -4,22 +4,23 @@ import App from './components/app/app.jsx';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
-import reducer, {initialState} from './store/reducer.js';
+import reducer from './store/reducer.js';
 import thunk from 'redux-thunk';
 import {ActionCreator} from './store/actions.js';
+import {Message} from './const.js';
 
 const store = createStore(
     reducer,
-    initialState,
     composeWithDevTools(
         applyMiddleware(thunk)
     )
 );
 
-// temp logout
-store.dispatch(ActionCreator.logout);
-// store.dispatch(ActionCreator.checkLogin);
-store.dispatch(ActionCreator.updateOffers);
+store.dispatch(ActionCreator.checkLogin());
+const onFail = () => {
+  store.dispatch(ActionCreator.showPopup(Message.ERROR.OFFERS_WAS_NOT_LOADED));
+};
+store.dispatch(ActionCreator.updateOffers(null, onFail));
 
 ReactDOM.render(
     <Provider store={store}>

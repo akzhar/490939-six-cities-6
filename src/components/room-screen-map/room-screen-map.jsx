@@ -1,26 +1,26 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
+import {getPointsArray} from '../../utils.js';
 
 import Map from '../map/map.jsx';
 
-const RoomScreenMap = ({offers}) => {
+const RoomScreenMap = ({offers, activeOfferId}) => {
 
-  const city = offers[0].city.location;
-  const points = offers.map((offer) => {
-    return {
-      id: offer.id,
-      lat: offer.location.latitude,
-      lng: offer.location.longitude,
-      title: offer.title
-    };
-  });
+  const city = useMemo(() => {
+    return offers[0].city.location;
+  }, [activeOfferId]);
 
-  return <Map city={city} points={points}/>;
+  const points = useMemo(() => {
+    return getPointsArray(offers);
+  }, [activeOfferId]);
+
+  return <Map city={city} points={points} activeOfferId={activeOfferId}/>;
 };
 
 RoomScreenMap.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
+  activeOfferId: PropTypes.number.isRequired
 };
 
 export default RoomScreenMap;

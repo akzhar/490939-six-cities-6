@@ -1,7 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {offerTypes} from '../../prop-types/prop-types.jsx';
 import {Router, Switch, Route} from 'react-router-dom';
 import browserHistory from '../../browser-history.js';
 
@@ -10,10 +7,10 @@ import PrivateRoute from '../private-route/private-route.jsx';
 import MainScreen from '../main-screen/main-screen.jsx';
 import LoginScreen from '../login-screen/login-screen.jsx';
 import FavoritesScreen from '../favorites-screen/favorites-screen.jsx';
-import RoomScreen from '../room-screen/room-screen.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
+import WithRoom from '../../hoc/with-room.jsx';
 
-const App = ({offers, isAuthorized}) => {
+const App = () => {
 
   return <Router history={browserHistory}>
     <Switch>
@@ -24,7 +21,6 @@ const App = ({offers, isAuthorized}) => {
         <LoginScreen/>
       </Route>
       <PrivateRoute
-        isAuthorized={isAuthorized}
         path={AppRoute.FAVORITES}
         exact={true}
         render = {(_routeProps) => {
@@ -35,9 +31,8 @@ const App = ({offers, isAuthorized}) => {
         path={`${AppRoute.OFFER}/:id`}
         exact
         render={(routeProps) => {
-          const roomId = +routeProps.match.params.id;
-          const offer = offers.find((room) => room.id === roomId);
-          return offer ? <RoomScreen offer={offer} isAuthorized={isAuthorized}/> : <NotFoundScreen/>;
+          const offerId = +routeProps.match.params.id;
+          return <WithRoom offerId={offerId}/>;
         }}
       />
       <Route>
@@ -47,15 +42,4 @@ const App = ({offers, isAuthorized}) => {
   </Router>;
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers.all,
-  isAuthorized: state.user.isAuthorized
-});
-
-App.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
-  isAuthorized: PropTypes.bool.isRequired
-};
-
-export {App};
-export default connect(mapStateToProps, null)(App);
+export default App;

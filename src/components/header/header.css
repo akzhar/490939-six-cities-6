@@ -1,0 +1,4 @@
+.header__logo-link--disabled {
+  pointer-events: none;
+  cursor: default;
+};

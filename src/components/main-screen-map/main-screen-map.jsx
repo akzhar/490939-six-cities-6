@@ -1,42 +1,28 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {offerTypes} from '../../prop-types/prop-types.jsx';
+import {mapCityTypes, mapPointTypes} from '../../prop-types/prop-types.jsx';
 import {connect} from 'react-redux';
+import {getCity, getPoints} from '../../store/selectors.js';
 
 import Map from '../map/map.jsx';
 
-const MainScreenMap = ({activeCity, offers, activeOfferId}) => {
+const MainScreenMap = ({city, points, activeOfferId}) => (
+  <section className="cities__map map">
+    <Map city={city} points={points} activeOfferId={activeOfferId}/>
+  </section>
+);
 
-  const city = useMemo(() => {
-    return offers.find((offer) => offer.city.name === activeCity).city.location;
-  }, [activeCity]);
-
-  const points = useMemo(() => {
-    return offers.filter((offer) => offer.city.name === activeCity)
-            .map((offer) => {
-              return {
-                id: offer.id,
-                lat: offer.location.latitude,
-                lng: offer.location.longitude,
-                title: offer.title
-              };
-            });
-  }, [activeCity]);
-
-  return <Map city={city} points={points} activeOfferId={activeOfferId}/>;
+MainScreenMap.propTypes = {
+  city: PropTypes.shape(mapCityTypes).isRequired,
+  points: PropTypes.arrayOf(PropTypes.shape(mapPointTypes)).isRequired,
+  activeOfferId: PropTypes.number
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.active.city,
-  offers: state.offers.all,
+  city: getCity(state),
+  points: getPoints(state),
   activeOfferId: state.active.offerId
 });
-
-MainScreenMap.propTypes = {
-  activeCity: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
-  activeOfferId: PropTypes.string
-};
 
 export {MainScreenMap};
 export default connect(mapStateToProps, null)(MainScreenMap);
