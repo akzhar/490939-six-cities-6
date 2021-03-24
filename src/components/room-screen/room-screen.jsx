@@ -1,12 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
-import {Class, OfferTypeToOfferProperty, MAX_NEARBY_COUNT} from '../../const.js';
-import getApi, {apiRoute} from '../../api.js';
-
-const api = getApi();
+import {Class, OfferTypeToOfferProperty} from '../../const.js';
 
 import Header from '../header/header.jsx';
+import PremiumMark from '../premium-mark/premium-mark.jsx';
 import ToBookMarksBtn from '../to-bookmarks-btn/to-bookmarks-btn.jsx';
 import Reviews from '../reviews/reviews.jsx';
 import RoomScreenMap from '../room-screen-map/room-screen-map.jsx';
@@ -14,25 +12,7 @@ import RoomScreenPlaces from '../room-screen-places/room-screen-places.jsx';
 import RatingStars from '../rating-stars/rating-stars.jsx';
 import Popup from '../popup/popup.jsx';
 
-const RoomScreen = ({offer, isAuthorized}) => {
-
-  const [offersNear, setOffersNear] = useState([]);
-
-  useEffect(() => {
-    api.get(apiRoute.get.offersNear(offer.id))
-      .then((response) => {
-        setOffersNear(response.data.slice(0, MAX_NEARBY_COUNT));
-      })
-      .catch((error) => {
-        throw error;
-      });
-  }, []);
-
-  const PremiumMark = () => (
-    <div className="property__mark">
-      <span>Premium</span>
-    </div>
-  );
+const RoomScreen = ({offer, offersNear}) => {
 
   return <React.Fragment>
     <div className="page">
@@ -50,7 +30,7 @@ const RoomScreen = ({offer, isAuthorized}) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {offer[`is_premium`] && <PremiumMark/>}
+              {offer[`is_premium`] && <PremiumMark className="property"/>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {offer.title}
@@ -100,7 +80,7 @@ const RoomScreen = ({offer, isAuthorized}) => {
                   </p>
                 </div>
               </div>
-              <Reviews offerId={offer.id} isAuthorized={isAuthorized}/>
+              <Reviews offerId={offer.id}/>
             </div>
           </div>
           <section className="property__map map">
@@ -117,8 +97,8 @@ const RoomScreen = ({offer, isAuthorized}) => {
 };
 
 RoomScreen.propTypes = {
-  offer: PropTypes.shape(offerTypes),
-  isAuthorized: PropTypes.bool.isRequired
+  offer: PropTypes.shape(offerTypes).isRequired,
+  offersNear: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
 };
 
 export default RoomScreen;

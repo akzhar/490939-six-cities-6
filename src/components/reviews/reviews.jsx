@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {ReviewsSortToCompareFunc, MAX_REVIEWS_COUNT, REVIEWS_SORT, apiRoute} from '../../const.js';
 import getApi from '../../api.js';
 
@@ -38,5 +39,10 @@ Reviews.propTypes = {
   isAuthorized: PropTypes.bool.isRequired
 };
 
-export default Reviews;
+const mapStateToProps = (state) => ({
+  isAuthorized: state.user.isAuthorized
+});
+
+export {Reviews};
+export default connect(mapStateToProps, null)(Reviews);
 
