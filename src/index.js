@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 import reducer from './store/reducer.js';
 import thunk from 'redux-thunk';
 import {ActionCreator} from './store/actions.js';
+import {Message} from './const.js';
 
 const store = createStore(
     reducer,
@@ -16,6 +17,10 @@ const store = createStore(
 );
 
 store.dispatch(ActionCreator.checkLogin());
+const onFail = () => {
+  store.dispatch(ActionCreator.showPopup(Message.ERROR.OFFERS_WAS_NOT_LOADED));
+};
+store.dispatch(ActionCreator.updateOffers(null, onFail));
 
 ReactDOM.render(
     <Provider store={store}>
