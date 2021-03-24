@@ -85,4 +85,4 @@ Map.propTypes = {
   activeOfferId: PropTypes.number
 };
 
-export default Map;
+export default React.memo(Map);
