@@ -5,10 +5,12 @@ import {offerTypes} from '../../prop-types/prop-types.jsx';
 import RatingStars from '../rating-stars/rating-stars.jsx';
 import {OfferTypeToOfferProperty} from '../../const.js';
 
+import PremiumMark from '../premium-mark/premium-mark.jsx';
 import ToBookMarksBtn from '../to-bookmarks-btn/to-bookmarks-btn.jsx';
 
 const FavoritesOfferCard = ({offer}) => (
   <article className="favorites__card place-card">
+    {offer[`is_premium`] && <PremiumMark className="place-card"/>}
     <div className="favorites__image-wrapper place-card__image-wrapper">
       <Link to={`/room/${offer.id}`}>
         <img className="place-card__image" src={offer[`preview_image`]} width="150" height="110" alt="Place image" />
