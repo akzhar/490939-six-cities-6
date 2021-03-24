@@ -1,4 +1,5 @@
-import getApi, {apiRoute} from '../api.js';
+import getApi from '../api.js';
+import {apiRoute} from '../const.js';
 import browserHistory from '../browser-history.js';
 
 const api = getApi();

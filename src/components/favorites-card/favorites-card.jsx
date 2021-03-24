@@ -7,9 +7,8 @@ import {OfferTypeToOfferProperty} from '../../const.js';
 
 import ToBookMarksBtn from '../to-bookmarks-btn/to-bookmarks-btn.jsx';
 
-const FavoritesOfferCard = ({offer}) => {
-
-  return <article className="favorites__card place-card">
+const FavoritesOfferCard = ({offer}) => (
+  <article className="favorites__card place-card">
     <div className="favorites__image-wrapper place-card__image-wrapper">
       <Link to={`/room/${offer.id}`}>
         <img className="place-card__image" src={offer[`preview_image`]} width="150" height="110" alt="Place image" />
@@ -33,8 +32,8 @@ const FavoritesOfferCard = ({offer}) => {
       </h2>
       <p className="place-card__type">{OfferTypeToOfferProperty[offer.type]}</p>
     </div>
-  </article>;
-};
+  </article>
+);
 
 FavoritesOfferCard.propTypes = {
   offer: PropTypes.shape(offerTypes)

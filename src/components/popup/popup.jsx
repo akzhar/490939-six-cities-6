@@ -5,7 +5,7 @@ import {ActionCreator} from '../../store/actions.js';
 
 import CloseBtn from '../close-btn/close-btn.jsx';
 
-import "./popup.css";
+import './popup.css';
 
 const Popup = ({isOpen, message, hidePopup}) => {
 
@@ -33,6 +33,12 @@ const Popup = ({isOpen, message, hidePopup}) => {
   </div>;
 };
 
+Popup.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  message: PropTypes.string.isRequired,
+  hidePopup: PropTypes.func.isRequired
+};
+
 const mapStateToProps = (state) => ({
   isOpen: state.popup.isOpen,
   message: state.popup.message
@@ -41,11 +47,5 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   hidePopup: () => dispatch(ActionCreator.hidePopup())
 });
-
-Popup.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  message: PropTypes.string.isRequired,
-  hidePopup: PropTypes.func.isRequired
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Popup);

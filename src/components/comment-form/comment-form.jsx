@@ -1,17 +1,12 @@
 import React, {useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
-import {RATING_STARS, ROOM_ID_REGEXP, Message} from '../../const.js';
-import getApi, {apiRoute} from '../../api.js';
+import {RATING_STARS, ROOM_ID_REGEXP, Message, CommentLength, apiRoute} from '../../const.js';
+import getApi from '../../api.js';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
 
 const api = getApi();
-
-const CommentLength = {
-  MAX: 300,
-  MIN: 50
-};
 
 const CommentForm = ({onCommentSubmit, showPopup}) => {
 
@@ -21,7 +16,6 @@ const CommentForm = ({onCommentSubmit, showPopup}) => {
   const ratingFormRef = useRef();
   const textAreaRef = useRef();
   const submitBtnRef = useRef();
-
   const history = useHistory();
 
   const getCommentValue = () => textAreaRef.current.value;

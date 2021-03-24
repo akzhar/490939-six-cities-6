@@ -22,8 +22,19 @@ export const OfferTypeToOfferProperty = {
   "house": `House`,
   "hotel": `Hotel`
 };
+export const REVIEWS_SORT = `Date: latest to earliest`;
 export const ReviewsSortToCompareFunc = {
   "Date: latest to earliest": (a, b) => new Date(b.date) - new Date(a.date)
+};
+export const CommentLength = {
+  MAX: 300,
+  MIN: 50
+};
+export const MapIcon = {
+  WIDTH: 30,
+  HEIGHT: 30,
+  URL_DEFAULT: `img/pin.svg`,
+  URL_ACTIVE: `img/pin-active.svg`
 };
 export const Class = {
   LIST_OPENED: `places__options--opened`,
@@ -44,7 +55,31 @@ export const Message = {
   },
   ERROR: {
     OFFERS_WAS_NOT_LOADED: `Ошибка при загрузке данных с сервера`,
-    COMMENT_WAS_NOT_UPLOADED: `Ошибка при отправке комментария на сервер`
+    COMMENT_WAS_NOT_UPLOADED: `Ошибка при отправке комментария на сервер`,
+    LOGIN_WAS_FAILED: `Ошибка при попытке авторизоваться`
+  }
+};
+export const HttpCode = {
+  UNAUTHORIZED: 401
+};
+export const ApiConfig = {
+  BASE_URL: `https://6.react.pages.academy/six-cities`,
+  TIMEOUT: 5000
+};
+export const apiRoute = {
+  get: {
+    login: `/login`,
+    offers: `/hotels`,
+    offer: (offerId) => `/hotels/${offerId}`,
+    offersNear: (offerId) => `/hotels/${offerId}/nearby`,
+    reviews: (offerId) => `/comments/${offerId}`,
+    logout: `/logout`,
+    favorites: `/favorite`,
+  },
+  post: {
+    login: `/login`,
+    comment: (offerId) => `/comments/${offerId}`,
+    favorites: (offerId, status) => `/favorite/${offerId}/${status}`
   }
 };
 

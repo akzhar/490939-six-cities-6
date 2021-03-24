@@ -6,8 +6,8 @@ import ReviewItem from '../review-item/review-item.jsx';
 
 const ReviewsList = ({reviews}) => (
   <ul className="reviews__list">
-    {reviews.map((review, index) => (
-      <ReviewItem key={index} {...review}/>
+    {reviews.map((review) => (
+      <ReviewItem key={review.id} {...review}/>
     ))}
   </ul>
 );

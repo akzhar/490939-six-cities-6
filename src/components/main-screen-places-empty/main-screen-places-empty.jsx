@@ -11,13 +11,13 @@ const MainScreenPlacesEmpty = ({activeCity}) => (
   </section>
 );
 
-const mapStateToProps = (state) => ({
-  activeCity: state.active.city.name
-});
-
 MainScreenPlacesEmpty.propTypes = {
   activeCity: PropTypes.string.isRequired
 };
+
+const mapStateToProps = (state) => ({
+  activeCity: state.active.city.name
+});
 
 export {MainScreenPlacesEmpty};
 export default connect(mapStateToProps, null)(MainScreenPlacesEmpty);

@@ -40,17 +40,17 @@ const Header = ({isAuthorized, userEmail, avatarUrl}) => {
   </header>;
 };
 
-const mapStateToProps = (state) => ({
-  isAuthorized: state.user.isAuthorized,
-  userEmail: state.user.email,
-  avatarUrl: state.user.avatarUrl
-});
-
 Header.propTypes = {
   isAuthorized: PropTypes.bool.isRequired,
   userEmail: PropTypes.string,
   avatarUrl: PropTypes.string
 };
+
+const mapStateToProps = (state) => ({
+  isAuthorized: state.user.isAuthorized,
+  userEmail: state.user.email,
+  avatarUrl: state.user.avatarUrl
+});
 
 export {Header};
 export default connect(mapStateToProps, null)(Header);

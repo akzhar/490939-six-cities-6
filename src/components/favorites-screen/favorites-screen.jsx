@@ -18,13 +18,13 @@ const FavoritesScreen = ({hasFavorites}) => (
   </div>
 );
 
-const mapStateToProps = (state) => ({
-  hasFavorites: getHasFavorites(state)
-});
-
 FavoritesScreen.propTypes = {
   hasFavorites: PropTypes.bool.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  hasFavorites: getHasFavorites(state)
+});
 
 export {FavoritesList};
 export default connect(mapStateToProps, null)(FavoritesScreen);

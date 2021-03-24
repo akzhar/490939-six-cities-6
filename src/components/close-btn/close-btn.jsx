@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import "./close-btn.css";
+import './close-btn.css';
 
 const CloseBtn = ({title, onClick}) => (
   <button

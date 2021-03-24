@@ -12,16 +12,16 @@ const PrivateRoute = ({path, exact, render, isAuthorized}) => {
   />;
 };
 
-const mapStateToProps = (state) => ({
-  isAuthorized: state.user.isAuthorized
-});
-
 PrivateRoute.propTypes = {
   path: PropTypes.string.isRequired,
   exact: PropTypes.bool.isRequired,
   render: PropTypes.func.isRequired,
   isAuthorized: PropTypes.bool.isRequired
 };
+
+const mapStateToProps = (state) => ({
+  isAuthorized: state.user.isAuthorized
+});
 
 export {PrivateRoute};
 export default connect(mapStateToProps, null)(PrivateRoute);

@@ -29,15 +29,6 @@ const ToBookMarksBtn = ({className, size, offerIsBookMarked, offerId, isAuthoriz
   </button>;
 };
 
-const mapStateToProps = (state) => ({
-  isAuthorized: state.user.isAuthorized
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  redirectTo: (to) => dispatch(ActionCreator.redirectTo(to)),
-  bookMarkOffer: (isBookMarked, offerId) => dispatch(ActionCreator.bookMarkOffer(isBookMarked, offerId))
-});
-
 ToBookMarksBtn.propTypes = {
   className: PropTypes.string.isRequired,
   size: PropTypes.shape({
@@ -50,6 +41,15 @@ ToBookMarksBtn.propTypes = {
   redirectTo: PropTypes.func.isRequired,
   bookMarkOffer: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  isAuthorized: state.user.isAuthorized
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  redirectTo: (to) => dispatch(ActionCreator.redirectTo(to)),
+  bookMarkOffer: (isBookMarked, offerId) => dispatch(ActionCreator.bookMarkOffer(isBookMarked, offerId))
+});
 
 export {ToBookMarksBtn};
 export default connect(mapStateToProps, mapDispatchToProps)(ToBookMarksBtn);

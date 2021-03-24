@@ -12,17 +12,17 @@ const MainScreenMap = ({city, points, activeOfferId}) => (
   </section>
 );
 
-const mapStateToProps = (state) => ({
-  city: getCity(state),
-  points: getPoints(state),
-  activeOfferId: state.active.offerId
-});
-
 MainScreenMap.propTypes = {
   city: PropTypes.shape(mapCityTypes).isRequired,
   points: PropTypes.arrayOf(PropTypes.shape(mapPointTypes)).isRequired,
   activeOfferId: PropTypes.number
 };
+
+const mapStateToProps = (state) => ({
+  city: getCity(state),
+  points: getPoints(state),
+  activeOfferId: state.active.offerId
+});
 
 export {MainScreenMap};
 export default connect(mapStateToProps, null)(MainScreenMap);

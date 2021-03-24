@@ -47,6 +47,13 @@ const FavoritesList = ({favorites, favoriteSities, changeActiveCityName, redirec
   </div>;
 };
 
+FavoritesList.propTypes = {
+  favorites: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
+  favoriteSities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  changeActiveCityName: PropTypes.func.isRequired,
+  redirectTo: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   favorites: getFavorites(state),
   favoriteSities: getFavoriteCities(state)
@@ -56,13 +63,6 @@ const mapDispatchToProps = (dispatch) => ({
   changeActiveCityName: (newName) => dispatch(ActionCreator.changeActiveCityName(newName)),
   redirectTo: (to) => dispatch(ActionCreator.redirectTo(to))
 });
-
-FavoritesList.propTypes = {
-  favorites: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
-  favoriteSities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  changeActiveCityName: PropTypes.func.isRequired,
-  redirectTo: PropTypes.func.isRequired,
-};
 
 export {FavoritesList};
 export default connect(mapStateToProps, mapDispatchToProps)(FavoritesList);

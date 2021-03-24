@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {ReviewsSortToCompareFunc, MAX_REVIEWS_COUNT} from '../../const.js';
-import getApi, {apiRoute} from '../../api.js';
+import {ReviewsSortToCompareFunc, MAX_REVIEWS_COUNT, REVIEWS_SORT, apiRoute} from '../../const.js';
+import getApi from '../../api.js';
 
 const api = getApi();
 
 import CommentForm from '../comment-form/comment-form.jsx';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
-
-const REVIEWS_SORT = `Date: latest to earliest`;
 
 const Reviews = ({offerId, isAuthorized}) => {
 

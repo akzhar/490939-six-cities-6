@@ -4,18 +4,12 @@ import {Link} from 'react-router-dom';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
 import {OfferTypeToOfferProperty} from '../../const.js';
 
+import PremiumMark from '../premium-mark/premium-mark.jsx';
 import RatingStars from '../rating-stars/rating-stars.jsx';
 import ToBookMarksBtn from '../to-bookmarks-btn/to-bookmarks-btn.jsx';
 
-const OfferCard = ({offer, handleHover = null, handleBlur = null}) => {
-
-  const PremiumMark = () => (
-    <div className="place-card__mark">
-      <span>Premium</span>
-    </div>
-  );
-
-  return <article className="cities__place-card place-card" data-id={offer.id} onMouseEnter={handleHover} onMouseLeave={handleBlur}>
+const OfferCard = ({offer, handleHover = null, handleBlur = null}) => (
+  <article className="cities__place-card place-card" data-id={offer.id} onMouseEnter={handleHover} onMouseLeave={handleBlur}>
     {offer[`is_premium`] && <PremiumMark/>}
     <div className="cities__image-wrapper place-card__image-wrapper">
       <Link to={`/room/${offer.id}`}>
@@ -40,8 +34,8 @@ const OfferCard = ({offer, handleHover = null, handleBlur = null}) => {
       </h2>
       <p className="place-card__type">{OfferTypeToOfferProperty[offer.type]}</p>
     </div>
-  </article>;
-};
+  </article>
+);
 
 OfferCard.propTypes = {
   offer: PropTypes.shape(offerTypes).isRequired,

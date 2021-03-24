@@ -40,6 +40,13 @@ const MainScreenPlaces = ({activeSort, activeCity, offers, changeActiveOfferId})
   </section>;
 };
 
+MainScreenPlaces.propTypes = {
+  activeSort: PropTypes.string.isRequired,
+  activeCity: PropTypes.string.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
+  changeActiveOfferId: PropTypes.func.isRequired
+};
+
 const mapStateToProps = (state) => ({
   activeSort: state.active.sort,
   activeCity: state.active.city.name,
@@ -51,13 +58,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.changeActiveOfferId(activeOfferId));
   }
 });
-
-MainScreenPlaces.propTypes = {
-  activeSort: PropTypes.string.isRequired,
-  activeCity: PropTypes.string.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
-  changeActiveOfferId: PropTypes.func.isRequired
-};
 
 export {MainScreenPlaces};
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreenPlaces);
