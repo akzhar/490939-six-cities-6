@@ -8,12 +8,11 @@ import {AppRoute} from '../../const.js';
 
 import FavoritesCard from '../favorites-card/favorites-card.jsx';
 
-const FavoritesList = ({favorites, favoriteSities, changeActiveCityName, setActiveCityHasOffers, redirectTo}) => {
+const FavoritesList = ({favorites, favoriteSities, changeActiveCityName, redirectTo}) => {
 
   const handleLocationLinkClick = (evt) => {
     const newCity = evt.currentTarget.querySelector(`span`).textContent;
     changeActiveCityName(newCity);
-    setActiveCityHasOffers();
     redirectTo(AppRoute.MAIN);
   };
 
@@ -55,7 +54,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeActiveCityName: (newName) => dispatch(ActionCreator.changeActiveCityName(newName)),
-  setActiveCityHasOffers: () => dispatch(ActionCreator.setActiveCityHasOffers()),
   redirectTo: (to) => dispatch(ActionCreator.redirectTo(to))
 });
 
@@ -63,7 +61,6 @@ FavoritesList.propTypes = {
   favorites: PropTypes.arrayOf(PropTypes.shape(offerTypes)).isRequired,
   favoriteSities: PropTypes.arrayOf(PropTypes.string).isRequired,
   changeActiveCityName: PropTypes.func.isRequired,
-  setActiveCityHasOffers: PropTypes.func.isRequired,
   redirectTo: PropTypes.func.isRequired,
 };
 

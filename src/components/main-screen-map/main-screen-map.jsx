@@ -7,7 +7,9 @@ import {getCity, getPoints} from '../../store/selectors.js';
 import Map from '../map/map.jsx';
 
 const MainScreenMap = ({city, points, activeOfferId}) => (
-  <Map city={city} points={points} activeOfferId={activeOfferId}/>
+  <section className="cities__map map">
+    <Map city={city} points={points} activeOfferId={activeOfferId}/>
+  </section>
 );
 
 const mapStateToProps = (state) => ({

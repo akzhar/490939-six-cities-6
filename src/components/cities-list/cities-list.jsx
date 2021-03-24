@@ -4,12 +4,11 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
 import {CITIES, Class} from '../../const.js';
 
-const CitiesList = ({activeCity, changeActiveCityName, setActiveCityHasOffers}) => {
+const CitiesList = ({activeCity, changeActiveCityName}) => {
 
   const handleCityNameClick = (cityName) => {
     if (cityName !== activeCity) {
       changeActiveCityName(cityName);
-      setActiveCityHasOffers();
     }
   };
 
@@ -32,14 +31,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeActiveCityName: (newName) => dispatch(ActionCreator.changeActiveCityName(newName)),
-  setActiveCityHasOffers: () => dispatch(ActionCreator.setActiveCityHasOffers()),
+  changeActiveCityName: (newName) => dispatch(ActionCreator.changeActiveCityName(newName))
 });
 
 CitiesList.propTypes = {
   activeCity: PropTypes.string.isRequired,
-  changeActiveCityName: PropTypes.func.isRequired,
-  setActiveCityHasOffers: PropTypes.func.isRequired,
+  changeActiveCityName: PropTypes.func.isRequired
 };
 
 export {CitiesList};

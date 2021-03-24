@@ -12,6 +12,7 @@ import Reviews from '../reviews/reviews.jsx';
 import RoomScreenMap from '../room-screen-map/room-screen-map.jsx';
 import RoomScreenPlaces from '../room-screen-places/room-screen-places.jsx';
 import RatingStars from '../rating-stars/rating-stars.jsx';
+import Popup from '../popup/popup.jsx';
 
 const RoomScreen = ({offer, isAuthorized}) => {
 
@@ -111,6 +112,7 @@ const RoomScreen = ({offer, isAuthorized}) => {
         </div>
       </main>
     </div>
+    <Popup/>
   </React.Fragment>;
 };
 

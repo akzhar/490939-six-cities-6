@@ -9,6 +9,12 @@ const getActiveCityOffers = createSelector(
     (offersItems, activeCity) => offersItems.filter((offer) => offer.city.name === activeCity)
 );
 
+export const getHasOffers = createSelector(
+    getOffers,
+    getActiveCity,
+    (offersItems, activeCity) => offersItems.some((offer) => offer.city.name === activeCity)
+);
+
 export const getCity = createSelector(
     getOffers,
     getActiveCity,

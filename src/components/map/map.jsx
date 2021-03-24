@@ -72,7 +72,7 @@ const Map = ({city, points, activeOfferId}) => {
 
   return <div
     id = "map"
-    style = {{height: `100%`}}
+    style = {{height: `100%`, zIndex: 0}}
   />;
 };
 

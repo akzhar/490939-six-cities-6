@@ -1,8 +1,10 @@
 import React, {useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
-import {RATING_STARS, ROOM_ID_REGEXP} from '../../const.js';
+import {RATING_STARS, ROOM_ID_REGEXP, Message} from '../../const.js';
 import getApi, {apiRoute} from '../../api.js';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/actions.js';
 
 const api = getApi();
 
@@ -11,7 +13,7 @@ const CommentLength = {
   MIN: 50
 };
 
-const CommentForm = ({onCommentSubmit}) => {
+const CommentForm = ({onCommentSubmit, showPopup}) => {
 
   const [formIsDisabled, setFormIsDisabled] = useState(false);
 
@@ -63,8 +65,12 @@ const CommentForm = ({onCommentSubmit}) => {
     const offerId = history.location.pathname.match(ROOM_ID_REGEXP)[0];
     const url = apiRoute.post.comment(offerId);
     api.post(url, {comment: getCommentValue(), rating: getRatingValue()})
-      .then((response) => onCommentSubmit(response.data))
+      .then((response) => {
+        showPopup(Message.OK.COMMENT_WAS_UPLOADED);
+        onCommentSubmit(response.data);
+      })
       .catch((error) => {
+        showPopup(Message.ERROR.COMMENT_WAS_NOT_UPLOADED);
         throw error;
       })
       .finally(() => {
@@ -115,8 +121,13 @@ const CommentForm = ({onCommentSubmit}) => {
 };
 
 CommentForm.propTypes = {
-  onCommentSubmit: PropTypes.func.isRequired
+  onCommentSubmit: PropTypes.func.isRequired,
+  showPopup: PropTypes.func.isRequired
 };
 
-export default CommentForm;
+const mapDispatchToProps = (dispatch) => ({
+  showPopup: (message) => dispatch(ActionCreator.showPopup(message))
+});
+
+export default connect(null, mapDispatchToProps)(CommentForm);
 

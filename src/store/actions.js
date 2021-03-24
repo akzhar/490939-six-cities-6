@@ -5,7 +5,6 @@ const api = getApi();
 
 export const ActionType = {
   CHANGE_ACTIVECITY_NAME: `change/active/city/name`,
-  SET_ACTIVECITY_HASOFFERS: `set/active/city/hasOffers`,
   CHANGE_ACTIVESORT: `change/active/sort`,
   CHANGE_ACTIVEOFFER_ID: `change/active/offerId`,
   SET_OFFERS_IS_LOADED: `set/offers/isLoaded`,
@@ -13,7 +12,9 @@ export const ActionType = {
   SET_USER_IS_AUTHORIZED: `set/user/isAutorized`,
   CHANGE_AUTHORIZED_USER_EMAIL: `change/user/email`,
   CHANGE_AUTHORIZED_USER_AVATAR: `change/user/avatarUrl`,
-  REDIRECT_TO: `history/redirectTo`
+  REDIRECT_TO: `history/redirectTo`,
+  SET_POPUP_ISOPEN: `set/popup/isOpen`,
+  CHANGE_POPUP_MESSAGE: `change/popup/message`
 };
 
 export const ActionCreator = {
@@ -55,11 +56,6 @@ export const ActionCreator = {
   },
   changeActiveCityName: (newName) => (dispatch, _getState) => {
     dispatch({type: ActionType.CHANGE_ACTIVECITY_NAME, payload: newName});
-  },
-  setActiveCityHasOffers: () => (dispatch, getState) => {
-    const {offers, active} = getState();
-    const hasOffers = offers.items.some((offer) => offer.city.name === active.city.name);
-    dispatch({type: ActionType.SET_ACTIVECITY_HASOFFERS, payload: hasOffers});
   },
   changeActiveSort: (newActiveSort) => ({type: ActionType.CHANGE_ACTIVESORT, payload: newActiveSort}),
   changeActiveOfferId: (activeOfferId) => ({type: ActionType.CHANGE_ACTIVEOFFER_ID, payload: activeOfferId}),
@@ -110,5 +106,13 @@ export const ActionCreator = {
   redirectTo: (to) => (dispatch, _getState) => {
     dispatch({type: ActionType.REDIRECT_TO});
     browserHistory.push(to);
+  },
+  hidePopup: () => (dispatch, _getState) => {
+    dispatch({type: ActionType.SET_POPUP_ISOPEN, payload: false});
+    dispatch({type: ActionType.CHANGE_POPUP_MESSAGE, payload: ``});
+  },
+  showPopup: (message) => (dispatch, _getState) => {
+    dispatch({type: ActionType.SET_POPUP_ISOPEN, payload: true});
+    dispatch({type: ActionType.CHANGE_POPUP_MESSAGE, payload: message});
   }
 };

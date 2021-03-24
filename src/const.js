@@ -38,4 +38,13 @@ export const AppRoute = {
   FAVORITES: `/favorites`,
   OFFER: `/room`
 };
+export const Message = {
+  OK: {
+    COMMENT_WAS_UPLOADED: `Ваш комментарий был успешно опубликован`
+  },
+  ERROR: {
+    OFFERS_WAS_NOT_LOADED: `Ошибка при загрузке данных с сервера`,
+    COMMENT_WAS_NOT_UPLOADED: `Ошибка при отправке комментария на сервер`
+  }
+};
 

@@ -15,12 +15,7 @@ const store = createStore(
     )
 );
 
-// temp logout
-// store.dispatch(ActionCreator.logout);
 store.dispatch(ActionCreator.checkLogin());
-store.dispatch(ActionCreator.updateOffers(() => {
-  store.dispatch(ActionCreator.setActiveCityHasOffers());
-}));
 
 ReactDOM.render(
     <Provider store={store}>
