@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
+import {OfferTypeToOfferProperty} from '../../const.js';
 
 import RatingStars from '../rating-stars/rating-stars.jsx';
 import ToBookMarksBtn from '../to-bookmarks-btn/to-bookmarks-btn.jsx';
@@ -37,7 +38,7 @@ const OfferCard = ({offer, handleHover = null, handleBlur = null}) => {
           {offer.title}
         </Link>
       </h2>
-      <p className="place-card__type">{offer.type}</p>
+      <p className="place-card__type">{OfferTypeToOfferProperty[offer.type]}</p>
     </div>
   </article>;
 };

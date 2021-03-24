@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
 import RatingStars from '../rating-stars/rating-stars.jsx';
+import {OfferTypeToOfferProperty} from '../../const.js';
 
 import ToBookMarksBtn from '../to-bookmarks-btn/to-bookmarks-btn.jsx';
 
@@ -30,7 +31,7 @@ const FavoritesOfferCard = ({offer}) => {
           {offer.title}
         </Link>
       </h2>
-      <p className="place-card__type">{offer.type}</p>
+      <p className="place-card__type">{OfferTypeToOfferProperty[offer.type]}</p>
     </div>
   </article>;
 };

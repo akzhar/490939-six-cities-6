@@ -14,6 +14,12 @@ export const ActiveSortToCompareFunc = {
   "Price: high to low": (a, b) => b.price - a.price,
   "Top rated first": (a, b) => b.rating - a.rating
 };
+export const OfferTypeToOfferProperty = {
+  "apartment": `Apartment`,
+  "room": `Private Room`,
+  "house": `House`,
+  "hotel": `Hotel`
+};
 export const ReviewsSortToCompareFunc = {
   "Date: latest to earliest": (a, b) => new Date(b.date) - new Date(a.date)
 };

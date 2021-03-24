@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {offerTypes} from '../../prop-types/prop-types.jsx';
-import {Class, ReviewsSortToCompareFunc} from '../../const.js';
+import {Class, ReviewsSortToCompareFunc, OfferTypeToOfferProperty} from '../../const.js';
 import getApi, {apiRoute} from '../../api.js';
 
 const REVIEWS_SORT = `Date: latest to earliest`;
@@ -71,7 +71,7 @@ const RoomScreen = ({offer, isAuthorized}) => {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {offer.type}
+                  {OfferTypeToOfferProperty[offer.type]}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {offer.bedrooms} Bedrooms
