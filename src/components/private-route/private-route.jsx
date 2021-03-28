@@ -22,6 +22,7 @@ const PrivateRoute = ({path, exact, render, checkLogin, redirectTo}) => {
       if (!accessDenied) {
         return render(routeProps);
       }
+      return false;
     }}
   />;
 };
