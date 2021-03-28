@@ -13,12 +13,18 @@ const Reviews = ({offerId, isAuthorized}) => {
 
   const [reviews, setReviews] = useState([]);
 
-  const onCommentSubmit = (newReviews) => setReviews(newReviews);
+  const prepareReviews = (reviewsArr) => {
+    return reviewsArr
+    .sort(ReviewsSortToCompareFunc[REVIEWS_SORT])
+    .slice(0, MAX_REVIEWS_COUNT);
+  };
+
+  const onCommentSubmit = (newReviews) => setReviews(prepareReviews(newReviews));
 
   useEffect(() => {
     api.get(apiRoute.get.reviews(offerId))
       .then((response) => {
-        setReviews(response.data.slice(0, MAX_REVIEWS_COUNT));
+        setReviews(prepareReviews(response.data));
       })
       .catch((error) => {
         throw error;
@@ -29,7 +35,7 @@ const Reviews = ({offerId, isAuthorized}) => {
     <h2 className="reviews__title">
       Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
     </h2>
-    <ReviewsList reviews={reviews.sort(ReviewsSortToCompareFunc[REVIEWS_SORT])}/>
+    <ReviewsList reviews={reviews}/>
     {isAuthorized && <CommentForm onCommentSubmit={onCommentSubmit}/>}
   </section>;
 };
