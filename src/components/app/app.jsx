@@ -8,7 +8,7 @@ import MainScreen from '../main-screen/main-screen.jsx';
 import LoginScreen from '../login-screen/login-screen.jsx';
 import FavoritesScreen from '../favorites-screen/favorites-screen.jsx';
 import NotFoundScreen from '../not-found-screen/not-found-screen.jsx';
-import WithRoom from '../../hoc/with-room.jsx';
+import WithRoom from '../../hocs/with-room.jsx';
 
 const App = () => {
 
