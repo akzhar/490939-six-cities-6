@@ -38,7 +38,7 @@ export const ActionCreator = {
       })
       .catch((error) => {
         if (onFail) {
-          onFail();
+          onFail(error);
         }
         throw error;
       });
@@ -73,7 +73,7 @@ export const ActionCreator = {
       .catch((error) => {
         dispatch({type: ActionType.SET_USER_IS_AUTHORIZED, payload: false});
         if (onFail) {
-          onFail();
+          onFail(error);
         }
         throw error;
       });
@@ -92,7 +92,7 @@ export const ActionCreator = {
       })
       .catch((error) => {
         if (onFail) {
-          onFail();
+          onFail(error);
         }
         throw error;
       });

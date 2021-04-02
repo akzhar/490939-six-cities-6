@@ -17,8 +17,8 @@ const store = createStore(
 );
 
 store.dispatch(ActionCreator.checkLogin());
-const onFail = () => {
-  store.dispatch(ActionCreator.showPopup(Message.ERROR.OFFERS_WAS_NOT_LOADED));
+const onFail = (error) => {
+  store.dispatch(ActionCreator.showPopup(`${Message.ERROR.OFFERS_WAS_NOT_LOADED}: ${error.message}`));
 };
 store.dispatch(ActionCreator.updateOffers(null, onFail));
 

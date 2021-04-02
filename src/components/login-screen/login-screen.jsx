@@ -5,6 +5,7 @@ import {ActionCreator} from '../../store/actions.js';
 import {AppRoute, Message} from '../../const.js';
 
 import Header from '../header/header.jsx';
+import Popup from '../popup/popup.jsx';
 
 const LoginScreen = ({login, checkLogin, redirectTo, showPopup, changeActiveCityName}) => {
 
@@ -44,7 +45,7 @@ const LoginScreen = ({login, checkLogin, redirectTo, showPopup, changeActiveCity
     const formData = new FormData(form);
     const user = {email: formData.get(`email`), password: formData.get(`password`)};
     const onSuccess = () => redirectTo(AppRoute.MAIN);
-    const onFail = () => showPopup(Message.ERROR.LOGIN_WAS_FAILED);
+    const onFail = (error) => showPopup(`${Message.ERROR.LOGIN_WAS_FAILED}: ${error.message}`);
     login(user, onSuccess, onFail);
   };
 
@@ -80,6 +81,7 @@ const LoginScreen = ({login, checkLogin, redirectTo, showPopup, changeActiveCity
         </section>
       </div>
     </main>
+    <Popup/>
   </div>;
 };
 
