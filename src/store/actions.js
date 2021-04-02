@@ -5,19 +5,19 @@ import browserHistory from '../browser-history.js';
 const api = getApi();
 
 export const ActionType = {
-  CHANGE_ACTIVECITY_NAME: `change/active/city/name`,
-  CHANGE_ACTIVESORT: `change/active/sort`,
-  CHANGE_ACTIVEOFFER_ID: `change/active/offerId`,
-  SET_OFFERS_IS_LOADED: `set/offers/isLoaded`,
-  UPDATE_OFFERS: `update/offers/items`,
-  GET_OFFER_REVIEWS: `get/offer/reviews`,
-  POST_OFFER_REVIEW: `post/offer/review`,
-  SET_USER_IS_AUTHORIZED: `set/user/isAutorized`,
-  CHANGE_AUTHORIZED_USER_EMAIL: `change/user/email`,
-  CHANGE_AUTHORIZED_USER_AVATAR: `change/user/avatarUrl`,
+  CHANGE_ACTIVECITY_NAME: `active/change/city/name`,
+  CHANGE_ACTIVESORT: `active/change/sort`,
+  CHANGE_ACTIVEOFFER_ID: `active/change/offerId`,
+  SET_OFFERS_IS_LOADED: `offers/set/isLoaded`,
+  UPDATE_OFFERS: `offers/update/items`,
+  GET_OFFER_REVIEWS: `ofer/get/reviews`,
+  POST_OFFER_REVIEW: `offer/post/review`,
+  SET_USER_IS_AUTHORIZED: `user/set/isAutorized`,
+  CHANGE_AUTHORIZED_USER_EMAIL: `user/change/email`,
+  CHANGE_AUTHORIZED_USER_AVATAR: `user/change/avatarUrl`,
   REDIRECT_TO: `history/redirectTo`,
-  SET_POPUP_ISOPEN: `set/popup/isOpen`,
-  CHANGE_POPUP_MESSAGE: `change/popup/message`
+  SET_POPUP_ISOPEN: `popup/set/isOpen`,
+  CHANGE_POPUP_MESSAGE: `popup/change/message`
 };
 
 export const ActionCreator = {
