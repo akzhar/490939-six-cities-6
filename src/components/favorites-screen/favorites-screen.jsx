@@ -26,5 +26,4 @@ const mapStateToProps = (state) => ({
   hasFavorites: getHasFavorites(state)
 });
 
-export {FavoritesList};
 export default connect(mapStateToProps, null)(FavoritesScreen);

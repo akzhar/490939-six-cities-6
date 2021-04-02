@@ -101,5 +101,4 @@ const mapDispatchToProps = (dispatch) => ({
   changeActiveCityName: (newName) => dispatch(ActionCreator.changeActiveCityName(newName))
 });
 
-export {LoginScreen};
 export default connect(null, mapDispatchToProps)(LoginScreen);

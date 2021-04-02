@@ -51,5 +51,4 @@ const mapDispatchToProps = (dispatch) => ({
   bookMarkOffer: (isBookMarked, offerId) => dispatch(ActionCreator.bookMarkOffer(isBookMarked, offerId))
 });
 
-export {ToBookMarksBtn};
 export default connect(mapStateToProps, mapDispatchToProps)(ToBookMarksBtn);

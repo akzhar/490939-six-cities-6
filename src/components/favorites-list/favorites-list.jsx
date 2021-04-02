@@ -64,5 +64,4 @@ const mapDispatchToProps = (dispatch) => ({
   redirectTo: (to) => dispatch(ActionCreator.redirectTo(to))
 });
 
-export {FavoritesList};
 export default connect(mapStateToProps, mapDispatchToProps)(FavoritesList);

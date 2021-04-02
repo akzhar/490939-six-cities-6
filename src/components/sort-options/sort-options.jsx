@@ -59,5 +59,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export {SortOptions};
 export default connect(mapStateToProps, mapDispatchToProps)(SortOptions);

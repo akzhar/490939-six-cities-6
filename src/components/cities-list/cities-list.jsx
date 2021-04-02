@@ -39,5 +39,4 @@ const mapDispatchToProps = (dispatch) => ({
   changeActiveCityName: (newName) => dispatch(ActionCreator.changeActiveCityName(newName))
 });
 
-export {CitiesList};
 export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);

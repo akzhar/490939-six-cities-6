@@ -40,6 +40,5 @@ const mapDispatchToProps = (dispatch) => ({
   redirectTo: (to) => dispatch(ActionCreator.redirectTo(to))
 });
 
-export {PrivateRoute};
 export default connect(null, mapDispatchToProps)(PrivateRoute);
 

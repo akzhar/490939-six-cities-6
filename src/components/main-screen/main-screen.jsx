@@ -49,5 +49,4 @@ const mapStateToProps = (state) => ({
   hasOffers: getHasOffers(state)
 });
 
-export {MainScreen};
 export default connect(mapStateToProps, null)(MainScreen);

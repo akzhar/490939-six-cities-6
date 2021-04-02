@@ -24,5 +24,4 @@ const mapStateToProps = (state) => ({
   activeOfferId: state.active.offerId
 });
 
-export {MainScreenMap};
 export default connect(mapStateToProps, null)(MainScreenMap);

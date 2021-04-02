@@ -52,5 +52,4 @@ const mapStateToProps = (state) => ({
   avatarUrl: state.user.avatarUrl
 });
 
-export {Header};
 export default connect(mapStateToProps, null)(Header);

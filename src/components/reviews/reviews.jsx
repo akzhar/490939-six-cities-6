@@ -49,6 +49,5 @@ const mapStateToProps = (state) => ({
   isAuthorized: state.user.isAuthorized
 });
 
-export {Reviews};
 export default connect(mapStateToProps, null)(Reviews);
 

@@ -19,5 +19,4 @@ const mapStateToProps = (state) => ({
   activeCity: state.active.city.name
 });
 
-export {MainScreenPlacesEmpty};
 export default connect(mapStateToProps, null)(MainScreenPlacesEmpty);
