@@ -10,6 +10,8 @@ export const ActionType = {
   CHANGE_ACTIVEOFFER_ID: `change/active/offerId`,
   SET_OFFERS_IS_LOADED: `set/offers/isLoaded`,
   UPDATE_OFFERS: `update/offers/items`,
+  GET_OFFER_REVIEWS: `get/offer/reviews`,
+  POST_OFFER_REVIEW: `post/offer/review`,
   SET_USER_IS_AUTHORIZED: `set/user/isAutorized`,
   CHANGE_AUTHORIZED_USER_EMAIL: `change/user/email`,
   CHANGE_AUTHORIZED_USER_AVATAR: `change/user/avatarUrl`,
@@ -41,6 +43,41 @@ export const ActionCreator = {
           onFail(error);
         }
         throw error;
+      });
+  },
+  getReviews: (offerId, onSuccess = null, onFail = null) => (dispatch, _getState) => {
+    api.get(apiRoute.get.reviews(offerId))
+      .then((response) => {
+        dispatch({type: ActionType.GET_OFFER_REVIEWS});
+        if (onSuccess) {
+          onSuccess(response.data);
+        }
+      })
+      .catch((error) => {
+        if (onFail) {
+          onFail(error);
+        }
+        throw error;
+      });
+  },
+  postOfferReview: (offerId, newReview, onSuccess = null, onFail = null, onAnyResult = null) => (dispatch, _getState) => {
+    api.post(apiRoute.post.comment(offerId), newReview)
+      .then((response) => {
+        dispatch({type: ActionType.POST_OFFER_REVIEW});
+        if (onSuccess) {
+          onSuccess(response.data);
+        }
+      })
+      .catch((error) => {
+        if (onFail) {
+          onFail(error);
+        }
+        throw error;
+      })
+      .finally(() => {
+        if (onAnyResult) {
+          onAnyResult();
+        }
       });
   },
   bookMarkOffer: (isBookmarked, offerId) => (dispatch, getState) => {

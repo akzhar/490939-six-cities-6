@@ -1,14 +1,11 @@
 import React, {useState, useRef} from 'react';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
-import {RATING_STARS, ROOM_ID_REGEXP, Message, CommentLength, apiRoute} from '../../const.js';
-import getApi from '../../api.js';
+import {RATING_STARS, ROOM_ID_REGEXP, Message, CommentLength} from '../../const.js';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/actions.js';
 
-const api = getApi();
-
-const CommentForm = ({onCommentSubmit, showPopup}) => {
+const CommentForm = ({onCommentSubmit, showPopup, postOfferReview}) => {
 
   const [formIsDisabled, setFormIsDisabled] = useState(false);
 
@@ -57,20 +54,19 @@ const CommentForm = ({onCommentSubmit, showPopup}) => {
     evt.preventDefault();
     disableForm(true);
     const offerId = history.location.pathname.match(ROOM_ID_REGEXP)[0];
-    const url = apiRoute.post.comment(offerId);
-    api.post(url, {comment: getCommentValue(), rating: getRatingValue()})
-      .then((response) => {
-        showPopup(Message.OK.COMMENT_WAS_UPLOADED);
-        onCommentSubmit(response.data);
-      })
-      .catch((error) => {
-        showPopup(Message.ERROR.COMMENT_WAS_NOT_UPLOADED);
-        throw error;
-      })
-      .finally(() => {
-        formRef.current.reset();
-        disableForm(false);
-      });
+    const newReview = {comment: getCommentValue(), rating: getRatingValue()};
+    const onSuccess = (data) => {
+      showPopup(Message.OK.COMMENT_WAS_UPLOADED);
+      onCommentSubmit(data);
+    };
+    const onFail = (error) => {
+      showPopup(`${Message.ERROR.COMMENT_WAS_NOT_UPLOADED}: ${error.message}`);
+    };
+    const onAnyResult = () => {
+      formRef.current.reset();
+      disableForm(false);
+    };
+    postOfferReview(offerId, newReview, onSuccess, onFail, onAnyResult);
   };
 
   return <form className="reviews__form form" action="#" method="post" ref={formRef} onSubmit={handleFormSubmit}>
@@ -116,11 +112,13 @@ const CommentForm = ({onCommentSubmit, showPopup}) => {
 
 CommentForm.propTypes = {
   onCommentSubmit: PropTypes.func.isRequired,
-  showPopup: PropTypes.func.isRequired
+  showPopup: PropTypes.func.isRequired,
+  postOfferReview: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  showPopup: (message) => dispatch(ActionCreator.showPopup(message))
+  showPopup: (message) => dispatch(ActionCreator.showPopup(message)),
+  postOfferReview: (offerId, newReview, onSuccess, onFail, onAnyResult) => dispatch(ActionCreator.postOfferReview(offerId, newReview, onSuccess, onFail, onAnyResult))
 });
 
 export default connect(null, mapDispatchToProps)(CommentForm);

@@ -1,15 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ReviewsSortToCompareFunc, MAX_REVIEWS_COUNT, REVIEWS_SORT, apiRoute} from '../../const.js';
-import getApi from '../../api.js';
-
-const api = getApi();
+import {ReviewsSortToCompareFunc, MAX_REVIEWS_COUNT, REVIEWS_SORT} from '../../const.js';
+import {ActionCreator} from '../../store/actions.js';
 
 import CommentForm from '../comment-form/comment-form.jsx';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
 
-const Reviews = ({offerId, isAuthorized}) => {
+const Reviews = ({offerId, isAuthorized, getReviews}) => {
 
   const [reviews, setReviews] = useState([]);
 
@@ -22,13 +20,10 @@ const Reviews = ({offerId, isAuthorized}) => {
   const onCommentSubmit = (newReviews) => setReviews(prepareReviews(newReviews));
 
   useEffect(() => {
-    api.get(apiRoute.get.reviews(offerId))
-      .then((response) => {
-        setReviews(prepareReviews(response.data));
-      })
-      .catch((error) => {
-        throw error;
-      });
+    const onSuccess = (data) => {
+      setReviews(prepareReviews(data));
+    };
+    getReviews(offerId, onSuccess);
   }, [offerId]);
 
   return <section className="property__reviews reviews">
@@ -42,12 +37,17 @@ const Reviews = ({offerId, isAuthorized}) => {
 
 Reviews.propTypes = {
   offerId: PropTypes.number.isRequired,
-  isAuthorized: PropTypes.bool.isRequired
+  isAuthorized: PropTypes.bool.isRequired,
+  getReviews: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   isAuthorized: state.user.isAuthorized
 });
 
-export default connect(mapStateToProps, null)(Reviews);
+const mapDispatchToProps = (dispatch) => ({
+  getReviews: (offerId, onSuccess, onFail) => dispatch(ActionCreator.getReviews(offerId, onSuccess, onFail))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Reviews);
 
